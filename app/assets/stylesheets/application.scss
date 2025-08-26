@@ -10,3 +10,180 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+
+
+:root {
+  --color-blue-dark: #2779a7;
+  --color-blue: #5680E9;
+  --color-blue-light: #84CEEB;
+  --color-blue-mid: #5AB9EA;
+  --color-lavender: #C1C8E4;
+  --color-violet: #8860D0;
+  --color-pink: #FF9398;
+  --color-black: #000000;
+  --color-white: #ffffff;
+
+  --font-size: 14px;
+  --radius: 0.625rem;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+
+  --gradient-primary: linear-gradient(135deg, var(--color-blue) 0%, var(--color-violet) 100%);
+  --gradient-accent: linear-gradient(135deg, var(--color-blue-light) 0%, var(--color-pink) 100%);
+  --gradient-card: linear-gradient(145deg, var(--color-white) 0%, var(--color-lavender) 100%);
+  --gradient-dark: linear-gradient(135deg, #1c1c1c, #000000);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: var(--font-size);
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+  background: var(--color-white);
+  color: var(--color-black);
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--font-weight-medium);
+  line-height: 1.4;
+  color: var(--color-blue-dark);
+}
+
+h1 { font-size: 2rem; }
+h2 { font-size: 1.75rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+
+p, label, input, button {
+  font-size: 1rem;
+  font-weight: var(--font-weight-normal);
+  color: var(--color-black);
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius);
+  font-weight: var(--font-weight-medium);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.btn-primary {
+  background: var(--gradient-primary);
+  color: var(--color-white);
+}
+
+.btn-primary:hover {
+  background: var(--gradient-accent);
+}
+
+.btn-secondary {
+  background: var(--color-blue-light);
+  color: var(--color-black);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--color-blue);
+  color: var(--color-blue);
+}
+
+.btn-outline:hover {
+  background: var(--color-blue);
+  color: var(--color-white);
+}
+
+.card-dark {
+  background: var(--gradient-dark);
+  color: var(--color-white);
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid var(--color-lavender);
+  border-radius: var(--radius);
+  background: var(--color-white);
+  margin-bottom: 1rem;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--color-blue);
+  outline: none;
+  box-shadow: 0 0 6px var(--color-blue-light);
+}
+
+.navbar {
+  background: var(--gradient-primary);
+  padding: 1rem;
+}
+
+.navbar-brand {
+  color: var(--color-white) !important;
+  font-weight: bold;
+}
+
+.nav-link {
+  color: var(--color-white) !important;
+  margin: 0 0.5rem;
+}
+
+.nav-link:hover {
+  color: var(--color-blue-light) !important;
+}
+
+.section {
+  padding: 2rem 0;
+}
+
+.section-title {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  background: var(--gradient-accent);
+}
+
+
+.badge {
+  display: inline-block;
+  padding: 0.3rem 0.7rem;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.badge-success {
+  background: var(--color-blue-mid);
+  color: var(--color-white);
+}
+
+.badge-warning {
+  background: var(--color-pink);
+  color: var(--color-white);
+}
+
+.badge-dark {
+  background: var(--color-black);
+  color: var(--color-white);
+}
+
+.footer {
+  background: var(--gradient-dark);
+  color: var(--color-white);
+  padding: 1.5rem 0;
+  text-align: center;
+  font-size: 0.9rem;
+}
