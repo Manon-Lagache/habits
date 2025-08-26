@@ -59,6 +59,13 @@ habit_water = Habit.create!(
   category: "Santé"
 )
 
+habit_water = Habit.create!(
+  user: user,
+  name: "Boire plus d'eau pendant l'été",
+  habit_type: habit_type_water,
+  visibility: "public",
+  category: "Santé"
+)
 
 5.times do
   Tracker.create!(
