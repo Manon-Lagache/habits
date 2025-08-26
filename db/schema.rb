@@ -10,9 +10,53 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_08_25_144337) do
+ActiveRecord::Schema[7.1].define(version: 2025_08_25_145020) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "goals", force: :cascade do |t|
+    t.bigint "habit_id", null: false
+    t.string "value"
+    t.string "frequency"
+    t.date "target_day"
+    t.boolean "is_public"
+    t.string "status"
+    t.date "start_date"
+    t.date "end_date"
+    t.integer "progress"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["habit_id"], name: "index_goals_on_habit_id"
+  end
+
+  create_table "habit_types", force: :cascade do |t|
+    t.string "name"
+    t.string "unit"
+    t.string "verb"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "habits", force: :cascade do |t|
+    t.string "name"
+    t.string "category"
+    t.string "habit_type"
+    t.string "visibility"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_habits_on_user_id"
+  end
+
+  create_table "tips", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "habit_id", null: false
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["habit_id"], name: "index_tips_on_habit_id"
+    t.index ["user_id"], name: "index_tips_on_user_id"
+  end
 
   create_table "trackers", force: :cascade do |t|
     t.date "date"
@@ -37,4 +81,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_25_144337) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "goals", "habits"
+  add_foreign_key "habits", "users"
+  add_foreign_key "tips", "habits"
+  add_foreign_key "tips", "users"
 end
