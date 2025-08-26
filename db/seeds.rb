@@ -1,6 +1,7 @@
 User.destroy_all
 HabitType.destroy_all
 Habit.destroy_all
+Tracker.destroy_all
 
 p "started seeding"
 
@@ -21,12 +22,19 @@ p habit_type
 
 habit = Habit.create!(
   user: user,
-  name: "Arrêter de fumer dans 6",
+  name: "Arrêter de fumer dans 6 mois",
   habit_type: habit_type,
   visibility: "public",
   category: "Santé"
 )
-
 p habit
+
+tracker = Tracker.create!(
+  date: Date.today,
+  value: 5,
+  habit: habit
+)
+
+p tracker
 
 p "finished seeding"
