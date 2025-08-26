@@ -1,0 +1,6 @@
+<div class="card", style="height:20rem;">
+  <h1><%= habit.name %></h1>
+  <p>Catégorie : <%= habit.category %></p>
+  <p>Mon objectif : <%= habit.habit_type.verb %></p>
+  <%= link_to "Voir habit", habit_path(habit)  %>
+</div>
