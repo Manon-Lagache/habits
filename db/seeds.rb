@@ -106,4 +106,5 @@ reading_tip = Tip.create!(
 )
 p reading_tip
 
+
 p "finished seeding"
