@@ -10,7 +10,7 @@ class HabitsController < ApplicationController
   end
 
   def new
-    @habit = Habit.new
+    @habit = current_user.habits.build
   end
 
   def create
@@ -18,7 +18,7 @@ class HabitsController < ApplicationController
     if @habit.save
       redirect_to @habit, notice: "Habit créé avec succès."
     else
-      render :new, status: :unprocessable_entity
+      render :new
     end
   end
 
@@ -29,7 +29,7 @@ class HabitsController < ApplicationController
     if @habit.update(habit_params)
       redirect_to @habit, notice: "Habit mis à jour."
     else
-      render :edit, status: :unprocessable_entity
+      render :edit
     end
   end
 
@@ -45,6 +45,6 @@ class HabitsController < ApplicationController
   end
 
   def habit_params
-    params.require(:habit).permit(:name, :category, :habit_type, :visibility)
+    params.require(:habit).permit(:name, :category, :habit_type_id, :visibility)
   end
 end
