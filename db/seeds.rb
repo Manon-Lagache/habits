@@ -87,21 +87,21 @@ end
 
 smoking_tip = Tip.create!(
   content: "Pour arrêter de fumer, remplace la cigarette par une action saine dès que l’envie te prend.",
-  habit: habit,
+  habit: habit_clope,
   user: user
 )
 p smoking_tip
 
 water_tip = Tip.create!(
   content: "Bois un grand verre d’eau dès le réveil et garde ta bouteille toujours avec toi.",
-  habit: habit,
+  habit: habit_water,
   user: user
 )
 p water_tip
 
 reading_tip = Tip.create!(
   content: "Lis chaque jour un peu, même 5 minutes, pour en faire une habitude durable.",
-  habit: habit,
+  habit: habit_read,
   user: user
 )
 p reading_tip
