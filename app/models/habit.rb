@@ -1,5 +1,6 @@
 class Habit < ApplicationRecord
   belongs_to :user
+  belongs_to :habit_type
   has_many :goals, dependent: :destroy
   has_many :trackers, dependent: :destroy
   has_many :tips, dependent: :destroy

@@ -1,7 +1,7 @@
 <h1><%= @habit.name %></h1>
 <p>Catégorie : <%= @habit.category %></p>
-<p>Type : <%= @habit.habit_type %></p>
-<p>Visibilité : <%= @habit.visibility %></p>
+<p>Mon objectif : <%= @habit.habit_type.verb %></p>
+
 
 <%= link_to "Modifier", edit_habit_path(@habit), class: "btn btn-warning" %>
 <%= link_to "Supprimer", habit_path(@habit), data: { turbo_method: :delete, turbo_confirm: "Supprimer ?" }, class: "btn btn-danger" %>
