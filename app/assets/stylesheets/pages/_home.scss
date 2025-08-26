@@ -1,1 +1,57 @@
-// Specific CSS for your home-page
+.card.level-card {
+  background: var(--gradient-primary);
+  color: var(--color-white);
+  font-size: 0.9rem;
+}
+
+.level-card .row > div {
+  flex: 1;
+  text-align: center;
+}
+
+.level-card svg {
+  width: 28px;
+  height: 28px;
+  margin-bottom: 0.25rem;
+}
+
+.progress {
+  height: 6px;
+  border-radius: var(--radius);
+  background-color: var(--color-black);
+  overflow: hidden;
+}
+
+.progress-bar {
+  background: var(--color-white);
+  height: 100%;
+}
+
+.btn-primary {
+  background: var(--gradient-primary);
+  color: var(--color-white);
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+  .card.level-card {
+    font-size: 0.85rem;
+  }
+
+  .card.stats-card {
+    min-height: 100px;
+    font-size: 0.85rem;
+  }
+
+  .card-header {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .row.g-3 > [class*="col-"] {
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+  }
+}
