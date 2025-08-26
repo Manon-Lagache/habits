@@ -15,6 +15,4 @@ Rails.application.routes.draw do
   end
   resources :app_achievements
   resources :user_achievements
-
-  root "habits#index"
 end
