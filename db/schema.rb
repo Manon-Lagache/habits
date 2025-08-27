@@ -49,11 +49,12 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_26_160247) do
   create_table "habits", force: :cascade do |t|
     t.string "name"
     t.string "category"
-    t.string "habit_type"
     t.string "visibility"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "habit_type_id"
+    t.index ["habit_type_id"], name: "index_habits_on_habit_type_id"
     t.index ["user_id"], name: "index_habits_on_user_id"
   end
 
@@ -72,6 +73,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_26_160247) do
     t.float "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "habit_id"
+    t.index ["habit_id"], name: "index_trackers_on_habit_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -97,7 +100,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_26_160247) do
   end
 
   add_foreign_key "goals", "habits"
+<<<<<<< HEAD
   add_foreign_key "habit_types", "categories"
+=======
+  add_foreign_key "habits", "habit_types"
+>>>>>>> master
   add_foreign_key "habits", "users"
   add_foreign_key "tips", "habits"
   add_foreign_key "tips", "users"
