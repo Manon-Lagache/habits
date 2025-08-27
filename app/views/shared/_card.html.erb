@@ -1,6 +1,9 @@
-<div class="card", style="height:20rem;">
-  <h1><%= habit.name %></h1>
-  <p>Catégorie : <%= habit.category %></p>
-  <p>Mon objectif : <%= habit.habit_type.verb %></p>
-  <%= link_to "Voir habit", habit_path(habit)  %>
+<div class="card d-flex justify-content-between", style="min-height:20rem;">
+  <h3 class="fw-bold"><%= habit.name %></h3>
+  <p>Catégorie : <%= habit.category.name %></p>
+  <div class="info-content col-10 bg-white rounded-5 shadow">
+    <i class="fa-solid fa-chart-column"></i>
+    <span><strong>28  </strong>jours consécutifs</span>
+  </div>
+  <%= link_to "Voir habit", habit_path(habit), class:" btn btn-secondary"  %>
 </div>

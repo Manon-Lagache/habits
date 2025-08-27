@@ -25,7 +25,7 @@
   --color-white: #ffffff;
 
   --font-size: 14px;
-  --radius: 0.625rem;
+  --radius: 2rem;
   --font-weight-normal: 400;
   --font-weight-medium: 500;
 
@@ -56,7 +56,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-weight: var(--font-weight-medium);
   line-height: 1.4;
-  color: var(--color-blue-dark);
+  color: var(--color-black);
 }
 
 h1 { font-size: 2rem; }
