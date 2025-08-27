@@ -122,7 +122,7 @@ p "creating habit.."
 
 5.times do
   Habit.create!(
-    name: "carotte navet concombre tomates",
+    name: "Boire de l'eau",
     category: Category.all.sample,
     visibility: "public",
     user_id: user.id,
