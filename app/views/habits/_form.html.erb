@@ -2,6 +2,11 @@
   <div data-controller="habit-form" class="habit-form-modal">
     <div class="habit-form-container">
 
+    <%# stockage en js pour rails %>
+    <%= f.hidden_field :category_id, data: { habit_form_target: "categoryId" } %>
+    <%= f.hidden_field :habit_type_id, data: { habit_form_target: "habitTypeId" } %>
+    <%= f.hidden_field :verb, data: { habit_form_target: "verb" } %>
+
       <%# Step 1 %>
       <div class="habit-form-step active" data-habit-form-target="step1">
         <h5>1. Informations de base</h5>
@@ -75,7 +80,7 @@
 
         <%# temporalité %>
         <div class="mb-3">
-          <label>Quel sera la periode de votre objectif ?</label>
+          <label>Quelle sera la période de votre objectif ?</label>
           <%= select_tag "habit[goal][end_type]",
                 options_for_select([["Indéfini", "indefinite"], ["Définir une période", "period"], ["Définir une date cible", "target_date"]]),
                 prompt: "Choisir un type",
@@ -101,7 +106,7 @@
 
         <div class="d-flex justify-content-between">
           <button type="button" class="btn btn-secondary w-45 h-7" data-action="habit-form#prevStep">Précédent</button>
-          <button type="button" class="btn btn-primary w-45 h-7" data-action="habit-form#nextStep">Suivant</button>
+          <%= f.submit "Valider", class: "btn btn-primary w-45 h-7" %>
         </div>
       </div>
 
