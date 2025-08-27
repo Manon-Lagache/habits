@@ -3,4 +3,18 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   resources :habits, only: [:index, :show, :new, :create]
+  # resources :habits do
+  #   resources :goals
+  #   resources :trackers
+  #   resources :tips
+  # end
+
+  # resources :habit_types
+  # resources :programs
+  # resources :groups do
+  #   resources :group_members
+  # end
+  # resources :app_achievements
+  # resources :user_achievements
+
 end
