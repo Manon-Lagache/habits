@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'trackers/new'
-  get 'trackers/create'
   devise_for :users
   root to: "pages#home"
   resources :habits, only: [:index, :show, :new, :create]
