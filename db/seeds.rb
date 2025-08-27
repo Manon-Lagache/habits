@@ -1,3 +1,6 @@
+User.destroy_all
+HabitType.destroy_all
+Habit.destroy_all
 categories = [
   { name: "Santé", color: "#4CAF50" },
   { name: "Addictions", color: "#F44336" },
@@ -6,11 +9,11 @@ categories = [
   { name: "Productivité", color: "#FF9800" },
   { name: "Nutrition", color: "#795548" }
 ]
-
-categories.each do |attrs|
-  Category.find_or_create_by!(name: attrs[:name]) do |c|
-    c.color = attrs[:color]
-  end
+categories.each do |category|
+  Category.create!(
+    name: category[:name],
+    color: category[:color]
+  )
 end
 
 habit_types = {
@@ -101,11 +104,15 @@ habit_types.each do |category_name, types|
     )
   end
 end
-User.destroy_all
-HabitType.destroy_all
-Habit.destroy_all
-Tracker.destroy_all
-Tip.destroy_all
+p "created #{HabitType.all.count} habit types"
+
+categories.each do |attrs|
+  Category.find_or_create_by!(name: attrs[:name]) do |c|
+    c.color = attrs[:color]
+  end
+end
+
+
 
 p "started seeding"
 
@@ -118,95 +125,64 @@ user = User.create!(
   location: "BDX"
 )
 
-
-habit_type_clope = HabitType.create!(
-  name: "cigarette",
-  unit: "cigarettes",
-  verb: "arrêter"
-)
-
-habit_type_read = HabitType.create!(
-  name: "livre",
-  unit: "pages",
-  verb: "commencer"
-)
-
-habit_type_water = HabitType.create!(
-  name: "eau",
-  unit: "verre",
-  verb: "augmenter"
-)
-
-
-
-habit_clope = Habit.create!(
-  user: user,
-  name: "Arrêter de fumer dans 6 mois",
-  habit_type: habit_type_clope,
-  visibility: "public",
-  category: "Addictions"
-)
-
-habit_read = Habit.create!(
-  user: user,
-  name: "Lire 4 bouquins cette année",
-  habit_type: habit_type_read,
-  visibility: "public",
-  category: "Bien-être"
-)
-
-habit_water = Habit.create!(
-  user: user,
-  name: "Boire plus d'eau pendant l'été",
-  habit_type: habit_type_water,
-  visibility: "public",
-  category: "Santé"
-)
+p "creating habit.."
 
 5.times do
-  Tracker.create!(
-    date: Date.today,
-    value: rand(0..5),
-    habit: habit_clope
+  Habit.create!(
+    name: "carotte navet concombre tomates",
+    category: Category.all.sample,
+    visibility: "public",
+    user_id: user.id,
+    habit_type_id: HabitType.all.sample.id
   )
 end
 
-5.times do
-  Tracker.create!(
-    date: Date.today,
-    value: rand(0..5),
-    habit: habit_read
-  )
-end
+p "created #{Habit.all.count} Habits"
 
-5.times do
-  Tracker.create!(
-    date: Date.today,
-    value: rand(0..5),
-    habit: habit_water
-  )
-end
+# 5.times do
+#   Tracker.create!(
+#     date: Date.today,
+#     value: rand(0..5),
+#     habit: habit_clope
+#   )
+# end
 
-smoking_tip = Tip.create!(
-  content: "Pour arrêter de fumer, remplace la cigarette par une action saine dès que l’envie te prend.",
-  habit: habit_clope,
-  user: user
-)
-p smoking_tip
+# 5.times do
+#   Tracker.create!(
+#     date: Date.today,
+#     value: rand(0..5),
+#     habit: habit_read
+#   )
+# end
 
-water_tip = Tip.create!(
-  content: "Bois un grand verre d’eau dès le réveil et garde ta bouteille toujours avec toi.",
-  habit: habit_water,
-  user: user
-)
-p water_tip
+# 5.times do
+#   Tracker.create!(
+#     date: Date.today,
+#     value: rand(0..5),
+#     habit: habit_water
+#   )
+# end
 
-reading_tip = Tip.create!(
-  content: "Lis chaque jour un peu, même 5 minutes, pour en faire une habitude durable.",
-  habit: habit_read,
-  user: user
-)
-p reading_tip
+# smoking_tip = Tip.create!(
+#   content: "Pour arrêter de fumer, remplace la cigarette par une action saine dès que l’envie te prend.",
+#   habit: habit_clope,
+#   user: user
+# )
+# p smoking_tip
+
+# water_tip = Tip.create!(
+#   content: "Bois un grand verre d’eau dès le réveil et garde ta bouteille toujours avec toi.",
+#   habit: habit_water,
+#   user: user
+# )
+# p water_tip
+
+# reading_tip = Tip.create!(
+#   content: "Lis chaque jour un peu, même 5 minutes, pour en faire une habitude durable.",
+#   habit: habit_read,
+#   user: user
+# )
+# p reading_tip
 
 
 p "finished seeding"
