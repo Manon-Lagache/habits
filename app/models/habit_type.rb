@@ -1,3 +1,7 @@
 class HabitType < ApplicationRecord
-  has_many :habits
+  belongs_to :category
+
+  validates :unit, presence: true
+  validates :name, presence: true
+  validates :verb, presence: true
 end

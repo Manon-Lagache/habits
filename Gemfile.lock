@@ -138,6 +138,7 @@ GEM
     ffi (1.17.2-x86_64-darwin)
     ffi (1.17.2-x86_64-linux-gnu)
     ffi (1.17.2-x86_64-linux-musl)
+    flatpickr (4.6.13.1)
     font-awesome-sass (6.7.2)
       sassc (~> 2.0)
     globalid (1.2.1)
@@ -311,8 +312,6 @@ GEM
       base64
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    wicked (2.0.0)
-      railties (>= 3.0.7)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.7.3)
@@ -337,6 +336,7 @@ DEPENDENCIES
   debug
   devise
   dotenv-rails
+  flatpickr
   font-awesome-sass (~> 6.1)
   importmap-rails
   jbuilder
@@ -351,7 +351,6 @@ DEPENDENCIES
   turbo-rails
   tzinfo-data
   web-console
-  wicked
 
 RUBY VERSION
    ruby 3.3.5p100

@@ -1,20 +1,30 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Habits</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>Habits</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <!-- flatpickr CSS (CDN) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <%= javascript_importmap_tags %>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="manifest" href="<%= asset_path 'manifest.json' %>">
     <%= render 'shared/ios_pwa_links' %>
-  </head>
 
-  <body>
-    <%= yield %>
-  </body>
+  <!-- vos autres styles existants -->
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+
+  <!-- javascript_importmap_tags ou include tags -->
+  <%= javascript_importmap_tags %>
+
+  <!-- flatpickr JS global (CDN). Doit être chargé avant que nos controllers Stimulus utilisent window.flatpickr -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+</head>
+
+<body>
+  <%= yield %>
+</body>
 </html>

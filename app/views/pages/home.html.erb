@@ -3,6 +3,19 @@
     <h1 class="h1 fw-bold">Bonjour  </h1>
     <p class="text-muted">Suivez vos progrès et gérez vos Habits</p>
   </div>
+
+    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#habitFormModal">Créer un habit</button>
+
+    <div class="modal fade" id="habitFormModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-3">
+          <%= render 'habits/form' %>
+        </div>
+      </div>
+    </div>
+
+
+
   <div class="card text-white mb-4" style="background: linear-gradient(90deg, #5680E9, #8860D0);">
     <div class="card-body">
       <div class="row text-center">
@@ -47,7 +60,9 @@
       </div>
     </div>
   </div>
+
   <div class="row g-3 text-center">
+
     <div class="col-6 col-md-3">
       <div class="card stats-card completed p-3">
         <div class="d-flex align-items-center justify-content-center gap-2">

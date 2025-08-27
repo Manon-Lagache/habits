@@ -1,50 +1,36 @@
 class HabitsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_habit, only: [:show, :edit, :update, :destroy]
-
-  def index
-    @habits = current_user.habits
-  end
-
-  def show
-  end
+  before_action :set_collections, only: %i[new create]
 
   def new
-    @habit = current_user.habits.build
+    @habit = Habit.new
   end
 
   def create
-    @habit = current_user.habits.build(habit_params)
+    @habit = current_user.habits.new(habit_params)
     if @habit.save
-      redirect_to @habit, notice: "Habit créé avec succès."
+      redirect_to root_path, notice: "Habitude créée avec succès !"
     else
       render :new
     end
   end
 
-  def edit
-  end
-
-  def update
-    if @habit.update(habit_params)
-      redirect_to @habit, notice: "Habit mis à jour."
-    else
-      render :edit
-    end
-  end
-
-  def destroy
-    @habit.destroy
-    redirect_to habits_path, notice: "Habit supprimé."
+  def home
+    @habit = Habit.new
+    @categories = Category.all
+    @habit_types = HabitType.all
   end
 
   private
 
-  def set_habit
-    @habit = current_user.habits.find(params[:id])
+  def habit_params
+    params.require(:habit).permit(
+      :name, :habit_type_id, :action, :goal_value, :frequency, :end_date, :visibility,
+      notification_attributes: %i[enabled time notification_type]
+    )
   end
 
-  def habit_params
-    params.require(:habit).permit(:name, :category, :habit_type_id, :visibility)
+  def set_collections
+    @categories = Category.all
+    @habit_types = HabitType.all
   end
 end
