@@ -100,11 +100,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_26_160247) do
   end
 
   add_foreign_key "goals", "habits"
-<<<<<<< HEAD
   add_foreign_key "habit_types", "categories"
-=======
   add_foreign_key "habits", "habit_types"
->>>>>>> master
   add_foreign_key "habits", "users"
   add_foreign_key "tips", "habits"
   add_foreign_key "tips", "users"
