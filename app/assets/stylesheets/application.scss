@@ -86,10 +86,6 @@ p, label, input, button {
   color: var(--color-white);
 }
 
-.btn-primary:hover {
-  background: var(--gradient-accent);
-}
-
 .btn-secondary {
   background: var(--color-blue-light);
   color: var(--color-black);
@@ -106,11 +102,6 @@ p, label, input, button {
   color: var(--color-white);
 }
 
-.card-dark {
-  background: var(--gradient-dark);
-  color: var(--color-white);
-}
-
 input, select, textarea {
   width: 100%;
   padding: 0.6rem;
@@ -124,66 +115,4 @@ input:focus, select:focus, textarea:focus {
   border-color: var(--color-blue);
   outline: none;
   box-shadow: 0 0 6px var(--color-blue-light);
-}
-
-.navbar {
-  background: var(--gradient-primary);
-  padding: 1rem;
-}
-
-.navbar-brand {
-  color: var(--color-white) !important;
-  font-weight: bold;
-}
-
-.nav-link {
-  color: var(--color-white) !important;
-  margin: 0 0.5rem;
-}
-
-.nav-link:hover {
-  color: var(--color-blue-light) !important;
-}
-
-.section {
-  padding: 2rem 0;
-}
-
-.section-title {
-  font-size: 1.75rem;
-  margin-bottom: 1rem;
-  text-align: center;
-  background: var(--gradient-accent);
-}
-
-
-.badge {
-  display: inline-block;
-  padding: 0.3rem 0.7rem;
-  border-radius: 50px;
-  font-size: 0.9rem;
-  font-weight: bold;
-}
-
-.badge-success {
-  background: var(--color-blue-mid);
-  color: var(--color-white);
-}
-
-.badge-warning {
-  background: var(--color-pink);
-  color: var(--color-white);
-}
-
-.badge-dark {
-  background: var(--color-black);
-  color: var(--color-white);
-}
-
-.footer {
-  background: var(--gradient-dark);
-  color: var(--color-white);
-  padding: 1.5rem 0;
-  text-align: center;
-  font-size: 0.9rem;
 }

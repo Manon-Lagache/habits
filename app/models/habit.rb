@@ -1,11 +1,5 @@
 class Habit < ApplicationRecord
   belongs_to :user
-  has_many :goals, dependent: :destroy
-  has_many :trackers, dependent: :destroy
-  has_many :tips, dependent: :destroy
-
-  validates :name, presence: true
-  validates :category, presence: true
-  validates :habit_type, presence: true
-  validates :visibility, inclusion: { in: %w[private public friends] }
+  belongs_to :category
+  has_one :goal
 end

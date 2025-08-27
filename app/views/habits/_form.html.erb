@@ -1,0 +1,111 @@
+<%= form_with(model: @habit, local: true) do |f| %>
+  <div data-controller="habit-form" class="habit-form-modal">
+    <div class="habit-form-container">
+
+      <%# Step 1 %>
+      <div class="habit-form-step active" data-habit-form-target="step1">
+        <h5>1. Informations de base</h5>
+
+        <div class="mb-3">
+          <%= f.label :name, "Nom de l'habitude" %>
+          <%= f.text_field :name, class: "form-control" %>
+        </div>
+
+        <div class="categories-container">
+          <% @categories.each do |c| %>
+            <div class="category-card"
+                 style="background-color: <%= c.color %>; color: white;"
+                 data-category-id="<%= c.id %>"
+                 data-action="click->habit-form#selectCategory">
+              <%= c.name %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <%# Step 2 %>
+      <div class="habit-form-step" data-habit-form-target="step2">
+        <h5>2. Choix de l'habitude</h5>
+
+        <div data-habit-form-target="habitTypeList" class="habit-type-list scrollable">
+          <% @habit_types.each do |ht| %>
+            <div class="habit-type-item"
+                 data-category-id="<%= ht.category_id %>"
+                 data-habit-type-id="<%= ht.id %>"
+                 data-verbs="<%= ht.verb %>"
+                 data-unit="<%= ht.unit %>"
+                 data-action="click->habit-form#selectHabitType">
+              <%= ht.name %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="mb-3 mt-2">
+          <%= select_tag "habit[verb]",
+                nil,
+                prompt: "Choisir une action",
+                class: "form-control",
+                data: { habit_form_target: "verbSelect",
+                        action: "change->habit-form#verbSelected" } %>
+        </div>
+      </div>
+
+      <%# Step 3 %>
+      <div class="habit-form-step" data-habit-form-target="step3">
+        <h5>3. Objectifs</h5>
+
+        <%# valeur %>
+        <div class="mb-3 goal-field">
+          <%= number_field_tag "habit[goal][value]", nil,
+                placeholder: "Valeur cible",
+                class: "form-control goal-value-input",
+                data: { habit_form_target: "goalValue" } %>
+          <span class="unit-display" data-habit-form-target="unitDisplay">Unit</span>
+        </div>
+
+        <%# frequence %>
+        <div class="mb-3">
+          <%= select_tag "habit[goal][frequency]",
+                options_for_select([["Quotidien", "daily"], ["Hebdomadaire", "weekly"], ["Mensuel", "monthly"]]),
+                prompt: "Selectionnez la fréquence de votre objectif",
+                class: "form-control",
+                data: { habit_form_target: "frequencySelect",
+                        action: "change->habit-form#frequencyChanged" } %>
+        </div>
+
+        <%# temporalité %>
+        <div class="mb-3">
+          <label>Quel sera la periode de votre objectif ?</label>
+          <%= select_tag "habit[goal][end_type]",
+                options_for_select([["Indéfini", "indefinite"], ["Définir une période", "period"], ["Définir une date cible", "target_date"]]),
+                prompt: "Choisir un type",
+                class: "form-control",
+                data: { habit_form_target: "endTypeSelect",
+                        action: "change->habit-form#endTypeChanged" } %>
+        </div>
+
+        <%# date periode %>
+        <div class="mb-3" data-habit-form-target="dateContainer"></div>
+
+        <div class="d-flex justify-content-between">
+          <button type="button" class="btn btn-secondary w-45 h-7" data-action="habit-form#prevStep">Précédent</button>
+          <button type="button" class="btn btn-primary w-45 h-7" data-action="habit-form#nextStep">Suivant</button>
+        </div>
+      </div>
+
+      <%# Step 4 %>
+      <div class="habit-form-step" data-habit-form-target="step4">
+        <h5>4. Configuration du suivi</h5>
+
+        <div class="mb-3" data-habit-form-target="trackerSetup"></div>
+
+        <div class="d-flex justify-content-between">
+          <button type="button" class="btn btn-secondary w-45 h-7" data-action="habit-form#prevStep">Précédent</button>
+          <button type="button" class="btn btn-primary w-45 h-7" data-action="habit-form#nextStep">Suivant</button>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<% end %>

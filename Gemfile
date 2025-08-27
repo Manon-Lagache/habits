@@ -50,7 +50,7 @@ gem "font-awesome-sass", "~> 6.1"
 gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
 gem "devise"
-gem "wicked"
+gem 'flatpickr'
 
 group :development, :test do
   gem "dotenv-rails"
