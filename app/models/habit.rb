@@ -8,7 +8,6 @@ class Habit < ApplicationRecord
   has_many :tips, dependent: :destroy
 
   validates :name, presence: true
-  validates :verb, presence: true
   validates :category, presence: true
   validates :habit_type, presence: true
   validates :visibility, inclusion: { in: %w[private public friends] }
