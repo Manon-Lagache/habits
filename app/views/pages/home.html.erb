@@ -1,67 +1,17 @@
 <main class="container py-4">
-  <div class="text-center mb-4">
-    <h1 class="h1 fw-bold">Bonjour  </h1>
-    <p class="text-muted">Suivez vos progrès et gérez vos Habits</p>
+  <div class="mb-4">
+    <h1 class="h1 fw-bold">Bonjour</h1>
+    <h5 class="text-muted">Suivez vos progrès et gérez vos Habits</h5>
   </div>
-
-    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#habitFormModal">Créer un habit</button>
-
-    <div class="modal fade" id="habitFormModal" tabindex="-1">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content p-3">
-          <%= render 'habits/form' %>
-        </div>
-      </div>
-    </div>
-
-
-
-  <div class="card text-white mb-4" style="background: linear-gradient(90deg, #5680E9, #8860D0);">
-    <div class="card-body">
-      <div class="row text-center">
-        <div class="col-3">
-          <svg class="mb-2" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z"></path>
-            <path d="M5 21h14"></path>
-          </svg>
-          <div class="fw-bold">Niveau 2</div>
-          <div class="small">Apprenti</div>
-        </div>
-        <div class="col-3">
-          <svg class="mb-2" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path>
-          </svg>
-          <div class="fw-bold">150</div>
-          <div class="small">XP Total</div>
-        </div>
-        <div class="col-3">
-          <svg class="mb-2" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M10 14.66v1.626a2 2 0 0 1-.976 1.696A5 5 0 0 0 7 21.978"></path>
-          </svg>
-          <div class="fw-bold">2</div>
-          <div class="small">Achievements</div>
-        </div>
-        <div class="col-3">
-          <svg class="mb-2" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="8" r="6"></circle>
-          </svg>
-          <div class="fw-bold">3</div>
-          <div class="small">Badges</div>
-        </div>
-      </div>
-      <div class="mt-3">
-        <div class="d-flex justify-content-between small mb-1">
-          <span>Progression vers le niveau suivant</span>
-          <span>200 XP</span>
-        </div>
-        <div class="progress" style="height: 8px;">
-          <div class="progress-bar bg-light" role="progressbar" style="width: <%= 150 / 200 * 100 %>;" aria-valuenow="<%= 150 %>" aria-valuemin="0" aria-valuemax="<%= 200 %>"></div>
-        </div>
+  <div class="modal fade" id="habitFormModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content p-3">
+        <%= render 'habits/form' %>
       </div>
     </div>
   </div>
-
-  <div class="row g-3 text-center">
+  <%= render 'shared/achievement' %>
+  <%# <div class="row g-3 text-center">
 
     <div class="col-6 col-md-3">
       <div class="card stats-card completed p-3">
@@ -121,16 +71,18 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> %>
   <div id="carouselExampleIndicators" class="carousel slide">
-    <div class="carousel-inner mb-4 gap-4">
+    <div class="carousel-inner">
       <% @habits.each_slice(2).with_index do |habits, index| %>
         <div class="carousel-item <%= "active" if index.zero? %>">
           <div class="row">
             <% habits.each do |habit| %>
+              <%= link_to habit_path(habit), remote: true do %>
               <div class="col-6">
                 <%= render 'shared/card', habit: habit %>
               </div>
+              <% end %>
             <% end %>
           </div>
         </div>
@@ -145,7 +97,10 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-  <div class="row g-3 mb-4">
+<div class="dashboard-bottom d-flex justify-content-center">
+  <button class="btn btn-primary">Mettre à jour</button>
+</div>
+  <%# <div class="row g-3 mb-4">
     <div class="col-12 col-lg-6">
       <div class="card">
         <div class="card-header d-flex align-items-center">
@@ -159,15 +114,16 @@
     <div class="col-12 col-lg-6">
       <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
-          <span>Mes Objectifs Personnels</span>
-          <%# <%= link_to "Nouvel objectif", new_goal_path, class: "btn btn-primary btn-sm" %>
-        </div>
+          <span>Mes Objectifs Personnels</span> %>
+  <%# <%= link_to "Nouvel objectif", new_goal_path, class: "btn btn-primary btn-sm" %>
+  <%# </div>
         <div class="card-body text-center">
-          <p class="text-muted">Définissez vos objectifs</p>
-          <%# <%= link_to "Créer un objectif", new_goal_path, class: "btn btn-primary btn-sm mt-2" %>
-        </div>
+          <p class="text-muted">Définissez vos objectifs</p> %>
+  <%# <%= link_to "Créer un objectif", new_goal_path, class: "btn btn-primary btn-sm mt-2" %>
+  <%# </div>
       </div>
     </div>
-  </div>
+  </div> %>
   <%= link_to "Log out", destroy_user_session_path, class: "dropdown-item", data: {turbo_method: :delete} %>
+  <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#habitFormModal">Créer un habit</button>
 </main>

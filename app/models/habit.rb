@@ -1,10 +1,9 @@
 class Habit < ApplicationRecord
   belongs_to :user
-
   belongs_to :category
-  has_one :goal
   belongs_to :habit_type
-  has_many :goals, dependent: :destroy
+
+  has_one :goal, dependent: :destroy
   has_many :trackers, dependent: :destroy
   has_many :tips, dependent: :destroy
 
@@ -13,4 +12,5 @@ class Habit < ApplicationRecord
   validates :habit_type, presence: true
   validates :visibility, inclusion: { in: %w[private public friends] }
 
+  serialize :goal, JSON
 end

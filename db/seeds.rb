@@ -1,6 +1,7 @@
 User.destroy_all
 HabitType.destroy_all
 Habit.destroy_all
+Category.destroy_all
 categories = [
   { name: "Santé", color: "#4CAF50" },
   { name: "Addictions", color: "#F44336" },
@@ -99,20 +100,12 @@ habit_types.each do |category_name, types|
     HabitType.create!(
       name: ht[:name],
       unit: ht[:unit],
-      verb: verbs.join(","),
+      verb: verbs.sample,
       category: category
     )
   end
 end
 p "created #{HabitType.all.count} habit types"
-
-categories.each do |attrs|
-  Category.find_or_create_by!(name: attrs[:name]) do |c|
-    c.color = attrs[:color]
-  end
-end
-
-
 
 p "started seeding"
 
@@ -129,7 +122,7 @@ p "creating habit.."
 
 5.times do
   Habit.create!(
-    name: "carotte navet concombre tomates",
+    name: "Boire de l'eau",
     category: Category.all.sample,
     visibility: "public",
     user_id: user.id,

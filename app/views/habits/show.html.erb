@@ -1,1 +1,21 @@
-<h1>It works</h1>
+<h2><%= @habit.name %></h2>
+
+<p><strong>Catégorie :</strong> <%= @habit.category.name %></p>
+<p><strong>Type :</strong> <%= @habit.habit_type.name %></p>
+<p><strong>Action :</strong> <%= @habit.verb %></p>
+
+<h4>Objectifs :</h4>
+<ul>
+  <li>Valeur cible : <%= @habit.goal["value"] %> <%= @habit.habit_type.unit %></li>
+  <li>Fréquence : <%= @habit.goal["frequency"] %></li>
+  <li>Type de fin : <%= @habit.goal["end_type"] %></li>
+  <% if @habit.goal["start_date"].present? %>
+    <li>Début : <%= @habit.goal["start_date"] %></li>
+  <% end %>
+  <% if @habit.goal["end_date"].present? %>
+    <li>Fin : <%= @habit.goal["end_date"] %></li>
+  <% end %>
+  <% if @habit.goal["target_date"].present? %>
+    <li>Date cible : <%= @habit.goal["target_date"] %></li>
+  <% end %>
+</ul>

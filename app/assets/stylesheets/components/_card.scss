@@ -1,11 +1,17 @@
 .card {
-  background: var(--gradient-card);
+  background: var(--color-blue-mid);
   border-radius: var(--radius);
   padding: 1.5rem;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   margin-bottom: 1.5rem;
   color: var(--color-black);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-content {
+  margin: 0;
+  padding: 0.5rem 1rem;
+  align-items: center;
 }
 
 .card.stats-card {
