@@ -1,8 +1,9 @@
 <header class="site-header">
   <div class="container py-3 header">
-    <%= link_to root_path do %>
-      <%= image_tag("logo-habits.png", class:"logo")%>
-    <% end %>
+      <%= link_to root_path, class:"logo" do %>
+        <%= image_tag("logo-habits.png", class:"img-logo")%>
+        <h1 class="gradient-text text-logo" style="margin: 0;">Habits</h1>
+      <% end %>
       <%= image_tag("icons/profile-user.png", class:"profil-btn")%>
   </div>
 </header>

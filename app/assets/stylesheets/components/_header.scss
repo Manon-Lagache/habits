@@ -13,8 +13,28 @@
 }
 
 .logo {
-  height : 40px;
+ display: flex;
+ align-items: center;
+ gap: 10px;
+}
+
+.img-logo {
+  height : 35px;
   width: auto;
+}
+
+.text-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.gradient-text {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  background-clip: text;
+  color: transparent;
 }
 
 .profil-btn {
