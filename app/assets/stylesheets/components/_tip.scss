@@ -1,0 +1,17 @@
+.tip {
+  background: var(--color-blue-light);
+  border-radius: 1rem;
+  padding: 0.5rem;
+  box-shadow: 0 7px 14px rgba(0,0,0,0.15);
+  margin-bottom: 1rem;
+  color: var(--color-black);
+  font-size: 0.8rem;
+
+  i {
+    background: var(--gradient-primary);
+    border-radius: 30%;
+    color: var(--color-white);
+    box-shadow: 0 7px 14px rgba(0,0,0,0.15);
+    font-size: 1.2rem;
+  }
+}

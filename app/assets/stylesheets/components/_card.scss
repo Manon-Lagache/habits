@@ -2,10 +2,14 @@
   background: var(--color-blue-mid);
   border-radius: var(--radius);
   padding: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  margin-bottom: 1.5rem;
+  box-shadow: 0 7px 14px rgba(0,0,0,0.15);
+  margin-bottom: 1rem;
   color: var(--color-black);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  h3 {
+    line-height: 1.5rem;
+  }
 }
 
 .info-content {
