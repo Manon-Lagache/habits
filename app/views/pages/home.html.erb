@@ -1,7 +1,7 @@
 <main class="container py-4">
-  <div class="mb-4">
-    <h1 class="h1 fw-bold">Bonjour</h1>
-    <h5 class="text-muted">Suivez vos progrès et gérez vos Habits</h5>
+  <div class="head-text mb-3">
+    <h1 class="h1 fw-bold m-0">Bonjour</h1>
+    <h5 class="text-muted m-0">Suivez vos progrès et gérez vos Habits !</h5>
   </div>
   <div class="modal fade" id="habitFormModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
@@ -79,9 +79,9 @@
           <div class="row">
             <% habits.each do |habit| %>
               <div class="col-6">
-              <%= link_to habit_path(habit), remote: true do %>
-                <%= render 'shared/card-content', habit: habit %>
-              <% end %>
+                <%= link_to habit_path(habit), remote: true do %>
+                  <%= render 'shared/card-content', habit: habit %>
+                <% end %>
               </div>
             <% end %>
           </div>
@@ -97,9 +97,16 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-<div class="dashboard-bottom d-flex justify-content-center">
-  <button class="btn btn-primary px-4 py-2">Mettre à jour</button>
-</div>
+  <div class="button d-flex justify-content-center">
+    <button class="btn btn-primary px-4 py-2">Mettre à jour</button>
+  </div>
+  <div class="dashboard-bottom d-flex justify-content-center">
+    <div class="tip-section mt-3">
+      <% @tips.each do |tip| %>
+        <%= render 'shared/tip', tip: tip %>
+      <% end %>
+    </div>
+  </div>
   <%# <div class="row g-3 mb-4">
     <div class="col-12 col-lg-6">
       <div class="card">
