@@ -78,11 +78,11 @@
         <div class="carousel-item <%= "active" if index.zero? %>">
           <div class="row">
             <% habits.each do |habit| %>
-              <%= link_to habit_path(habit), remote: true do %>
               <div class="col-6">
-                <%= render 'shared/card', habit: habit %>
-              </div>
+              <%= link_to habit_path(habit), remote: true do %>
+                <%= render 'shared/card-content', habit: habit %>
               <% end %>
+              </div>
             <% end %>
           </div>
         </div>
@@ -98,7 +98,7 @@
     </button>
   </div>
 <div class="dashboard-bottom d-flex justify-content-center">
-  <button class="btn btn-primary">Mettre à jour</button>
+  <button class="btn btn-primary px-4 py-2">Mettre à jour</button>
 </div>
   <%# <div class="row g-3 mb-4">
     <div class="col-12 col-lg-6">

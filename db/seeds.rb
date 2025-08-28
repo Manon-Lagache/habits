@@ -1,6 +1,6 @@
 User.destroy_all
-HabitType.destroy_all
 Habit.destroy_all
+HabitType.destroy_all
 Category.destroy_all
 categories = [
   { name: "Santé", color: "#4CAF50" },
@@ -92,6 +92,14 @@ habit_types = {
   ]
 }
 
+user = User.create!(
+  pseudo: "toto",
+  email: "tata@tot.fr",
+  age: 30,
+  location: "Bordeaux",
+  avatar: "0000",
+  password: "123456"
+)
 verbs = ["Suivre", "Augmenter", "Diminuer", "Arrêter"]
 
 habit_types.each do |category_name, types|
@@ -109,14 +117,6 @@ p "created #{HabitType.all.count} habit types"
 
 p "started seeding"
 
-user = User.create!(
-  email: "tata@tot.fr",
-  password: "123456",
-  pseudo: "tata",
-  avatar: "oooo",
-  age: 30,
-  location: "BDX"
-)
 
 p "creating habit.."
 
@@ -156,26 +156,12 @@ p "created #{Habit.all.count} Habits"
 #   )
 # end
 
-# smoking_tip = Tip.create!(
-#   content: "Pour arrêter de fumer, remplace la cigarette par une action saine dès que l’envie te prend.",
-#   habit: habit_clope,
-#   user: user
-# )
-# p smoking_tip
-
-# water_tip = Tip.create!(
-#   content: "Bois un grand verre d’eau dès le réveil et garde ta bouteille toujours avec toi.",
-#   habit: habit_water,
-#   user: user
-# )
-# p water_tip
-
-# reading_tip = Tip.create!(
-#   content: "Lis chaque jour un peu, même 5 minutes, pour en faire une habitude durable.",
-#   habit: habit_read,
-#   user: user
-# )
-# p reading_tip
-
+3.times do
+  Tip.create!(
+    user: user,
+    habit_id: Habit.all.sample.id,
+    content: "Pense à garder une bouteille d'eau près de ton lit"
+  )
+end
 
 p "finished seeding"
