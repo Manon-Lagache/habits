@@ -78,9 +78,11 @@
         <div class="carousel-item <%= "active" if index.zero? %>">
           <div class="row">
             <% habits.each do |habit| %>
+              <%= link_to habit_path(habit), remote: true do %>
               <div class="col-6">
                 <%= render 'shared/card', habit: habit %>
               </div>
+              <% end %>
             <% end %>
           </div>
         </div>

@@ -99,7 +99,7 @@ habit_types.each do |category_name, types|
     HabitType.create!(
       name: ht[:name],
       unit: ht[:unit],
-      verb: verbs.join(","),
+      verb: verbs.sample,
       category: category
     )
   end
