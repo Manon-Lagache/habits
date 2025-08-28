@@ -2,6 +2,17 @@ User.destroy_all
 Habit.destroy_all
 HabitType.destroy_all
 Category.destroy_all
+Verb.destroy_all
+
+user = User.create!(
+  pseudo: "toto",
+  email: "tata@tot.fr",
+  age: 30,
+  location: "Bordeaux",
+  avatar: "0000",
+  password: "123456"
+)
+
 categories = [
   { name: "Santé", color: "#4CAF50" },
   { name: "Addictions", color: "#F44336" },
@@ -92,28 +103,27 @@ habit_types = {
   ]
 }
 
-user = User.create!(
-  pseudo: "toto",
-  email: "tata@tot.fr",
-  age: 30,
-  location: "Bordeaux",
-  avatar: "0000",
-  password: "123456"
-)
-verbs = ["Suivre", "Augmenter", "Diminuer", "Arrêter"]
 
 habit_types.each do |category_name, types|
   category = Category.find_by!(name: category_name)
   types.each do |ht|
-    HabitType.create!(
+    habit_type = HabitType.create!(
       name: ht[:name],
       unit: ht[:unit],
-      verb: verbs.sample,
       category: category
     )
   end
 end
-p "created #{HabitType.all.count} habit types"
+
+verbs = ["Suivre", "Augmenter", "Diminuer", "Arrêter"]
+verbs.each do |v|
+  Verb.create!(name: v)
+end
+
+
+p "created #{HabitType.count} habit types"
+p "created #{Verb.count} verbs"
+
 
 p "started seeding"
 

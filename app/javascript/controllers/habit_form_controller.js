@@ -14,8 +14,11 @@ export default class extends Controller {
     this.selectedUnit = null;
     this.selectedFrequency = null;
 
-    this.updateStep4();
+    if (this.hasFrequencySelectTarget) {
+      this.updateStep4();
+    }
   }
+
 
   // step 1
   selectCategory(event) {
@@ -75,22 +78,21 @@ export default class extends Controller {
       this.unitDisplayTarget.textContent = this.selectedUnit || "Unit";
     }
 
-    const verbsCSV = item.dataset.verbs || "";
-    const verbs = verbsCSV.split(",").map(v => v.trim()).filter(Boolean);
-
-    if (this.hasVerbSelectTarget) {
+    const verbs = ["Suivre", "Augmenter", "Diminuer", "Arrêter"];
       this.verbSelectTarget.innerHTML = "";
       const promptOption = document.createElement("option");
       promptOption.text = "Choisir une action";
       promptOption.value = "";
       this.verbSelectTarget.add(promptOption);
+
       verbs.forEach(v => {
         const option = document.createElement("option");
         option.value = v;
         option.text = v;
         this.verbSelectTarget.add(option);
       });
-    }
+
+
   }
 
   verbSelected(event) {
@@ -223,3 +225,6 @@ export default class extends Controller {
     }
   }
 }
+
+
+

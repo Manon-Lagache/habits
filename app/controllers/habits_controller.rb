@@ -3,7 +3,8 @@ class HabitsController < ApplicationController
   before_action :set_habit, only: [:show]
 
   def new
-    @habit = Habit.new
+    @habit = current_user.habits.new
+    @habit.build_goal
     @categories = Category.all
     @habit_types = HabitType.all
   end
@@ -11,7 +12,7 @@ class HabitsController < ApplicationController
   def create
     @habit = current_user.habits.new(habit_params)
     if @habit.save
-      redirect_to root_path, notice: "Habitude créée avec succès !"
+      redirect_to root_path, notice: "Habit créé !"
     else
       @categories = Category.all
       @habit_types = HabitType.all
@@ -19,38 +20,20 @@ class HabitsController < ApplicationController
     end
   end
 
-  def home
-    @habit = Habit.new
-    @categories = Category.all
-    @habit_types = HabitType.all
-  end
-
-  def show
-  end
-
   private
-
-  def set_habit
-    @habit = Habit.find(params[:id])
-  end
 
   def habit_params
     params.require(:habit).permit(
       :name,
       :category_id,
       :habit_type_id,
-      :verb,
+      :verb_id,
       :reminder,
       :reminder_time,
-      :weekly_days => [],
-      :monthly_days => [],
-      :monthly_count => [],
-      goal: [:value, :frequency, :end_type, :start_date, :end_date, :target_date]
+      weekly_days: [],
+      monthly_days: [],
+      monthly_count: [],
+      goal_attributes: [:value, :frequency, :end_type, :start_date, :end_date, :target_date, :period]
     )
-  end
-
-  def set_collections
-    @categories = Category.all
-    @habit_types = HabitType.all
   end
 end
