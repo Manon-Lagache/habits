@@ -1,0 +1,31 @@
+.site-header {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.logo {
+  height : 40px;
+  width: auto;
+}
+
+.profil-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  height: 30px;
+  width: auto;
+}
+
+.profil-btn:hover {
+  opacity: 0.8;
+}

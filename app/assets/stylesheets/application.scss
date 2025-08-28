@@ -10,7 +10,7 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
-
+@import "components/header";
 
 
 :root {
@@ -47,16 +47,22 @@ html {
 }
 
 body {
-  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
   background: var(--color-white);
   color: var(--color-black);
   line-height: 1.5;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-weight: var(--font-weight-medium);
+  font-weight: $headers-font;
   line-height: 1.4;
   color: var(--color-black);
+}
+
+p {
+  font-family: $body-font;
+  margin-bottom: 1rem;
+  color: var(--color-black);
+  letter-spacing: -1px;
 }
 
 h1 { font-size: 2rem; }
