@@ -3,5 +3,4 @@ class HabitType < ApplicationRecord
 
   validates :unit, presence: true
   validates :name, presence: true
-  validates :verb, presence: true
 end
