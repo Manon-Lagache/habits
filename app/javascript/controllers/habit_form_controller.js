@@ -2,8 +2,8 @@ import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
   static targets = [
-    "step1", "step2", "step3", "step4",
-    "habitTypeList", "verbSelect", "unitDisplay",
+    "step1", "step2", "step3", "step4", "categoryId", "habitTypeId",
+    "habitTypeList", "verbSelect", "unitDisplay", "verbId",
     "goalValue", "reminderToggle", "reminderDetails",
     "frequencySelect", "endTypeSelect", "dateContainer", "trackerSetup"
   ];
@@ -27,12 +27,13 @@ export default class extends Controller {
     const card = event.currentTarget;
     card.classList.add("selected");
     this.selectedCategoryId = String(card.dataset.categoryId);
+    this.categoryIdTarget.value = String(card.dataset.categoryId);
     this.filterHabitTypes();
 
     if (this.hasStep2Target) {
       this.showStep(this.step2Target);
     } else {
-      console.error("step2Target introuvable !");
+      console.error("step2Target erreur");
     }
   }
 
@@ -72,11 +73,14 @@ export default class extends Controller {
     item.classList.add("selected");
 
     this.selectedHabitTypeId = item.dataset.habitTypeId;
+    this.habitTypeIdTarget.value = String(item.dataset.habitTypeId);
     this.selectedUnit = item.dataset.unit || null;
 
     if (this.hasUnitDisplayTarget) {
       this.unitDisplayTarget.textContent = this.selectedUnit || "Unit";
+      this.unitDisplayTarget.value = String(this.selectedUnit);
     }
+
 
     const verbs = ["Suivre", "Augmenter", "Diminuer", "Arrêter"];
       this.verbSelectTarget.innerHTML = "";
@@ -96,11 +100,27 @@ export default class extends Controller {
   }
 
   verbSelected(event) {
-    const selectedVerb = event.currentTarget.value;
-    if (selectedVerb && this.selectedHabitTypeId) {
-      if (this.hasStep3Target) this.showStep(this.step3Target);
-    }
+  const selectedVerb = event.target.value
+
+  const verbMap = {
+    "Arrêter": 1,
+    "Commencer": 2,
+    "Suivre": 3,
+    "Réduire": 4
   }
+
+  this.verbIdTarget.value = verbMap[selectedVerb] || ""
+
+  if (this.hasStep3Target) {
+    this.step3Target.classList.add("active")
+    this.element.querySelectorAll(".habit-form-step").forEach(step => {
+      if (step !== this.step3Target) step.classList.remove("active")
+    })
+  }
+}
+
+
+
 
   // step 3
   frequencyChanged(event) {

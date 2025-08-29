@@ -8,5 +8,6 @@ class PagesController < ApplicationController
     @user = current_user
     @tips = Tip.all
     @habit = Habit.new
+    @habit.build_goal
   end
 end

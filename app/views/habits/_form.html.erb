@@ -5,7 +5,8 @@
 
     <%= f.hidden_field :category_id, data: { habit_form_target: "categoryId" } %>
     <%= f.hidden_field :habit_type_id, data: { habit_form_target: "habitTypeId" } %>
-    <%= f.hidden_field :verb_id, data: { habit_form_target: "verb" } %>
+    <%= f.hidden_field :verb_id, data: { habit_form_target: "verbId" } %>
+
 
       <%# Step 1 %>
       <div class="habit-form-step active" data-habit-form-target="step1">
@@ -49,12 +50,12 @@
         </div>
 
         <div class="mb-3 mt-2">
-          <%= select_tag "habit[verb]",
-                nil,
-                prompt: "Choisir une action",
-                class: "form-control",
-                data: { habit_form_target: "verbSelect",
-                        action: "change->habit-form#verbSelected" } %>
+          <%= f.select :verb_id,
+            Verb.all.collect { |v| [v.name, v.id] },
+            { prompt: "Choisir une action" },
+            class: "form-control",
+            data: { habit_form_target: "verbSelect",
+                    action: "change->habit-form#verbSelected" } %>
         </div>
       </div>
 
