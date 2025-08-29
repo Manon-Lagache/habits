@@ -6,5 +6,6 @@ class PagesController < ApplicationController
     @categories = Category.all
     @habit_types = HabitType.all
     @user = current_user
+
   end
 end
