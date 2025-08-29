@@ -173,13 +173,13 @@ Goal.create!(
 #   )
 # end
 
-# 5.times do
-#   Tracker.create!(
-#     date: Date.today,
-#     value: rand(0..5),
-#     habit: habit_water
-#   )
-# end
+5.times do
+  Tracker.create!(
+    date: Date.today,
+    value: rand(0..5),
+    habit: habit_water
+  )
+end
 
 3.times do
   Tip.create!(

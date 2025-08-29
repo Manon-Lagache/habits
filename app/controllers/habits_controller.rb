@@ -10,7 +10,22 @@ class HabitsController < ApplicationController
   def create
     @habit = current_user.habits.new(habit_params)
     @habit.save!
-    raise @habit.inspect 
+    if @habit.save
+      redirect_to root_path, notice: "Habitude créée avec succès !"
+    else
+      render :new
+    end
+  end
+
+  def home
+    @habit = Habit.new
+    @categories = Category.all
+    @habit_types = HabitType.all
+  end
+
+  def show
+    @habit = Habit.find(params[:id])
+    @tips = @habit.tips
   end
 
   private

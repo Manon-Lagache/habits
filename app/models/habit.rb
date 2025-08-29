@@ -16,4 +16,19 @@ class Habit < ApplicationRecord
   validates :habit_type, presence: true
   validates :visibility, inclusion: { in: %w[private public friends] }
 
+  def chart_data
+    start_date = Date.today - 7.days
+    end_date = Date.today
+
+    data_by_date = trackers.where("date >= ?", start_date)
+                           .group("DATE(date)")
+                           .sum(:value)
+
+    (start_date..end_date).map do |date|
+      [
+        date.strftime("%Y-%m-%d"),
+        data_by_date[date] || 0
+      ]
+    end
+  end
 end
