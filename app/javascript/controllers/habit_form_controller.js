@@ -81,45 +81,16 @@ export default class extends Controller {
       this.unitDisplayTarget.value = String(this.selectedUnit);
     }
 
-
-    const verbs = ["Suivre", "Augmenter", "Diminuer", "Arrêter"];
-      this.verbSelectTarget.innerHTML = "";
-      const promptOption = document.createElement("option");
-      promptOption.text = "Choisir une action";
-      promptOption.value = "";
-      this.verbSelectTarget.add(promptOption);
-
-      verbs.forEach(v => {
-        const option = document.createElement("option");
-        option.value = v;
-        option.text = v;
-        this.verbSelectTarget.add(option);
-      });
-
-
   }
 
   verbSelected(event) {
-  const selectedVerb = event.target.value
-
-  const verbMap = {
-    "Arrêter": 1,
-    "Commencer": 2,
-    "Suivre": 3,
-    "Réduire": 4
+    if (this.hasStep3Target) {
+      this.step3Target.classList.add("active")
+      this.element.querySelectorAll(".habit-form-step").forEach(step => {
+        if (step !== this.step3Target) step.classList.remove("active")
+      })
+    }
   }
-
-  this.verbIdTarget.value = verbMap[selectedVerb] || ""
-
-  if (this.hasStep3Target) {
-    this.step3Target.classList.add("active")
-    this.element.querySelectorAll(".habit-form-step").forEach(step => {
-      if (step !== this.step3Target) step.classList.remove("active")
-    })
-  }
-}
-
-
 
 
   // step 3
@@ -179,25 +150,22 @@ export default class extends Controller {
 
     trackerSetup.innerHTML = "";
 
+
+    const reminderToggleHTML = `
+      <div class="mb-3">
+        <label>Voulez-vous recevoir un rappel ?</label>
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox"
+                name="habit[goal][tracking_config][reminder]"
+                data-action="change->habit-form#toggleReminder"
+                value="true">
+          <label class="form-check-label">Oui / Non</label>
+        </div>
+      </div>
+    `;
+
     if (frequency === "daily") {
-      trackerSetup.innerHTML = `
-        <div class="mb-3">
-          <label>Voulez-vous recevoir un rappel ?</label>
-          <div class="form-check form-switch">
-            // <input class="form-check-input" type="checkbox"
-            //        data-action="change->habit-form#toggleReminder">
-            // <label class="form-check-label">Oui / Non</label>
-            // <input class="form-check-input" type="checkbox" name="habit[reminder]" data-action="change->habit-form#toggleReminder" value="true">
-            <input class="form-check-input" type="checkbox" name="habit[goal][tracking_config][reminder]" data-action="change->habit-form#toggleReminder" value="true">
-            <label class="form-check-label">Oui / Non</label>
-          </div>
-        </div>
-        <div class="mb-3 reminder-time" style="display: none;">
-          <label>Heure du rappel :</label>
-          // <input type="time" name="habit[reminder_time]" class="form-control">
-          <input type="time" name="habit[goal][tracking_config][reminder_time]" class="form-control">
-        </div>
-      `;
+      trackerSetup.innerHTML = reminderToggleHTML;
     }
 
     if (frequency === "weekly") {
@@ -214,20 +182,7 @@ export default class extends Controller {
             `).join("")}
           </div>
         </div>
-
-        <div class="mb-3">
-          <label>Voulez-vous recevoir un rappel ?</label>
-          <div class="form-check form-switch">
-            // <input class="form-check-input" type="checkbox" name="habit[reminder]" data-action="change->habit-form#toggleReminder" value="true">
-            <input class="form-check-input" type="checkbox" name="habit[goal][tracking_config][reminder]" data-action="change->habit-form#toggleReminder" value="true">
-            <label class="form-check-label">Oui / Non</label>
-          </div>
-        </div>
-        <div class="mb-3 reminder-time" style="display: none;">
-          <label>Heure du rappel :</label>
-          // <input type="time" name="habit[reminder_time]" class="form-control">
-          <input type="time" name="habit[goal][tracking_config][reminder_time]" class="form-control">
-        </div>
+        ${reminderToggleHTML}
       `;
     }
 
@@ -235,8 +190,6 @@ export default class extends Controller {
       trackerSetup.innerHTML = `
         <div class="mb-3">
           <label>Combien de fois par mois ?</label>
-          // <input type="number" min="1" max="30" name="habit[monthly_count]" class="form-control">
-          // <input type="number" name="habit[monthly_count]" min="1" max="30" class="form-control">
           <input type="number" name="habit[goal][tracking_config][monthly_count]" min="1" max="30" class="form-control">
         </div>
 
@@ -252,15 +205,14 @@ export default class extends Controller {
             `).join("")}
           </div>
         </div>
+        ${reminderToggleHTML}
       `;
     }
 
   }
 
   toggleReminder(event) {
-    const checkbox = event.target;
-    const reminderTime = checkbox.closest(".form-check").parentElement.querySelector(".reminder-time");
-    if (reminderTime) reminderTime.style.display = checkbox.checked ? "block" : "none";
+    console.log("Reminder toggled:", event.target.checked);
   }
 }
 

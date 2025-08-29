@@ -5,7 +5,6 @@
 
     <%= f.hidden_field :category_id, data: { habit_form_target: "categoryId" } %>
     <%= f.hidden_field :habit_type_id, data: { habit_form_target: "habitTypeId" } %>
-    <%= f.hidden_field :verb_id, data: { habit_form_target: "verbId" } %>
 
 
       <%# Step 1 %>
@@ -98,6 +97,15 @@
       <%# Step 4 %>
       <div class="habit-form-step" data-habit-form-target="step4">
         <h5>4. Configuration du suivi</h5>
+
+        <div class="mb-3">
+          <%= f.label :visibility, "Visibilité" %>
+          <%= f.select :visibility, 
+                options_for_select([["Privé", "private"], ["Public", "public"], ["Amis", "friends"]], @habit.visibility), 
+                { prompt: "Choisir une visibilité" }, 
+                class: "form-select" %>
+        </div>
+
 
         <div class="mb-3" data-habit-form-target="trackerSetup"></div>
 

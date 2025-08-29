@@ -9,8 +9,8 @@ class HabitsController < ApplicationController
 
   def create
     @habit = current_user.habits.new(habit_params)
-    raise @habit.inspect
     @habit.save!
+    raise @habit.inspect 
   end
 
   private
@@ -21,6 +21,7 @@ class HabitsController < ApplicationController
       :category_id,
       :habit_type_id,
       :verb_id,
+      :visibility,
       goal_attributes: [
         :value, :frequency, :end_type, :start_date, :end_date, :target_day,
         tracking_config: {}
