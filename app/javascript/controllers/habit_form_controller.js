@@ -3,7 +3,7 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
   static targets = [
     "step1", "step2", "step3", "step4", "categoryId", "habitTypeId",
-    "habitTypeList", "verbSelect", "unitDisplay", "verbId",
+    "habitTypeList", "verbSelect", "unitDisplay",
     "goalValue", "reminderToggle", "reminderDetails",
     "frequencySelect", "endTypeSelect", "dateContainer", "trackerSetup"
   ];
