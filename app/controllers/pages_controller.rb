@@ -7,5 +7,6 @@ class PagesController < ApplicationController
     @habit_types = HabitType.all
     @user = current_user
     @tips = Tip.all
+    @habit = Habit.new
   end
 end

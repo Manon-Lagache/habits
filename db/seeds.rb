@@ -135,12 +135,27 @@ p "creating habit.."
     name: "Boire de l'eau",
     category: Category.all.sample,
     visibility: "public",
-    user_id: user.id,
-    habit_type_id: HabitType.all.sample.id
+    user: user,
+    verb: Verb.all.sample,
+    habit_type: HabitType.all.sample
   )
 end
 
 p "created #{Habit.all.count} Habits"
+
+
+Goal.create!(
+  habit: Habit.all.sample,
+  value: rand(1..10),
+  frequency: ["daily", "weekly", "monthly"].sample,
+  target_day: Date.today + rand(1..30).days,
+  is_public: [true, false].sample,
+  status: ["active", "completed", "archived"].sample,
+  start_date: Date.today,
+  end_date: Date.today + rand(1..30).days,
+  end_type: ["fixed", "ongoing"].sample,
+  progress: rand(0..100)
+)
 
 # 5.times do
 #   Tracker.create!(
