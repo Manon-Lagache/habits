@@ -1,11 +1,11 @@
-<%= form_with(model: @habit, local: true) do |f| %>
+<%= form_with(model: habit, local: true) do |f| %>
   <div data-controller="habit-form" class="habit-form-modal">
     <div class="habit-form-container">
 
-    <%# stockage en js pour rails %>
+
     <%= f.hidden_field :category_id, data: { habit_form_target: "categoryId" } %>
     <%= f.hidden_field :habit_type_id, data: { habit_form_target: "habitTypeId" } %>
-    <%= f.hidden_field :verb, data: { habit_form_target: "verb" } %>
+
 
       <%# Step 1 %>
       <div class="habit-form-step active" data-habit-form-target="step1">
@@ -22,12 +22,15 @@
                  style="background-color: <%= c.color %>; color: white;"
                  data-category-id="<%= c.id %>"
                  data-action="click->habit-form#selectCategory">
-              <%= c.name %>
+              
+              <%= f.label :category_id, c.name %>
+              
             </div>
           <% end %>
+
         </div>
       </div>
-
+      
       <%# Step 2 %>
       <div class="habit-form-step" data-habit-form-target="step2">
         <h5>2. Choix de l'habitude</h5>
@@ -46,12 +49,12 @@
         </div>
 
         <div class="mb-3 mt-2">
-          <%= select_tag "habit[verb]",
-                nil,
-                prompt: "Choisir une action",
-                class: "form-control",
-                data: { habit_form_target: "verbSelect",
-                        action: "change->habit-form#verbSelected" } %>
+          <%= f.select :verb_id,
+            Verb.all.collect { |v| [v.name, v.id] },
+            { prompt: "Choisir une action" },
+            class: "form-control",
+            data: { habit_form_target: "verbSelect",
+                    action: "change->habit-form#verbSelected" } %>
         </div>
       </div>
 
@@ -59,35 +62,27 @@
       <div class="habit-form-step" data-habit-form-target="step3">
         <h5>3. Objectifs</h5>
 
-        <%# valeur %>
-        <div class="mb-3 goal-field">
-          <%= number_field_tag "habit[goal][value]", nil,
-                placeholder: "Valeur cible",
-                class: "form-control goal-value-input",
-                data: { habit_form_target: "goalValue" } %>
-          <span class="unit-display" data-habit-form-target="unitDisplay">Unit</span>
-        </div>
+        <%= f.fields_for :goal do |g| %>
+          <div class="mb-3 goal-field">
+            <%= g.number_field :value, placeholder: "Valeur cible", class: "form-control goal-value-input", data: { habit_form_target: "goalValue" } %>
+            <span class="unit-display" data-habit-form-target="unitDisplay">Unit</span>
+          </div>
 
-        <%# frequence %>
-        <div class="mb-3">
-          <%= select_tag "habit[goal][frequency]",
-                options_for_select([["Quotidien", "daily"], ["Hebdomadaire", "weekly"], ["Mensuel", "monthly"]]),
-                prompt: "Selectionnez la fréquence de votre objectif",
-                class: "form-control",
-                data: { habit_form_target: "frequencySelect",
-                        action: "change->habit-form#frequencyChanged" } %>
-        </div>
+          <div class="mb-3">
+            <%= g.select :frequency, [["Quotidien", "daily"], ["Hebdomadaire", "weekly"], ["Mensuel", "monthly"]],
+                        { prompt: "Sélectionnez la fréquence de votre objectif" },
+                        class: "form-control",
+                        data: { habit_form_target: "frequencySelect", action: "change->habit-form#frequencyChanged" } %>
+          </div>
 
-        <%# temporalité %>
-        <div class="mb-3">
-          <label>Quelle sera la période de votre objectif ?</label>
-          <%= select_tag "habit[goal][end_type]",
-                options_for_select([["Indéfini", "indefinite"], ["Définir une période", "period"], ["Définir une date cible", "target_date"]]),
-                prompt: "Choisir un type",
-                class: "form-control",
-                data: { habit_form_target: "endTypeSelect",
-                        action: "change->habit-form#endTypeChanged" } %>
-        </div>
+          <div class="mb-3">
+            <%= g.select :end_type, [["Indéfini", "indefinite"], ["Définir une période", "period"], ["Définir une date cible", "target_date"]],
+                        { prompt: "Choisir un type" },
+                        class: "form-control",
+                        data: { habit_form_target: "endTypeSelect", action: "change->habit-form#endTypeChanged" } %>
+          </div>
+        <% end %>
+
 
         <%# date periode %>
         <div class="mb-3" data-habit-form-target="dateContainer"></div>
@@ -98,9 +93,19 @@
         </div>
       </div>
 
+
       <%# Step 4 %>
       <div class="habit-form-step" data-habit-form-target="step4">
         <h5>4. Configuration du suivi</h5>
+
+        <div class="mb-3">
+          <%= f.label :visibility, "Visibilité" %>
+          <%= f.select :visibility, 
+                options_for_select([["Privé", "private"], ["Public", "public"], ["Amis", "friends"]], @habit.visibility), 
+                { prompt: "Choisir une visibilité" }, 
+                class: "form-select" %>
+        </div>
+
 
         <div class="mb-3" data-habit-form-target="trackerSetup"></div>
 
