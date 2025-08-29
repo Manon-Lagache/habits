@@ -10,12 +10,12 @@
       </div>
     </div>
   </div>
-  <div class="modal fade" id="trackerFormModal">
+  <%# <div class="modal fade" id="trackerFormModal">
     <div class="modal-dialog modal-dialog-centered">
         <%= render 'trackers/form' %>
-      </div>
+      <%# </div>
     </div>
-  </div>
+  </div> %>
   <div class="achievements">
     <%= render 'shared/achievement' %>
   </div>
@@ -98,6 +98,7 @@
 <div class="dashboard-bottom d-flex justify-content-center">
   <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#trackerFormModal">Mettre à jour</button>
 </div>
+<%= render 'trackers/form', trackers: @trackers %>
   <div class="dashboard-bottom d-flex">
     <div class="tip-section mt-3 container-fluid">
       <% @tips.each do |tip| %>
