@@ -76,4 +76,5 @@ Rails.application.configure do
 
   config.hosts << /.*\.ngrok\.io$/
   config.hosts << /.*\.ngrok-free\.app$/
+  config.hosts.clear
 end

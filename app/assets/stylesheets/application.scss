@@ -11,6 +11,9 @@
 @import "components/index";
 @import "pages/index";
 @import "components/header";
+@import "components/footer";
+@import "components/btn";
+@import "components/tip";
 
 
 :root {
@@ -24,7 +27,7 @@
   --color-black: #000000;
   --color-white: #ffffff;
 
-  --font-size: 14px;
+  --font-size: 15px;
   --radius: 2rem;
   --font-weight-normal: 400;
   --font-weight-medium: 500;
@@ -50,6 +53,10 @@ body {
   background: var(--color-white);
   color: var(--color-black);
   line-height: 1.5;
+
+  a {
+    text-decoration: none;
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {

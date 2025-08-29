@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :habits, only: [:index, :show, :new, :create]
   resources :trackers, only: [:new, :create, :show]
 
+
+  resources :pages, only: :home
   # resources :habits do
   #   resources :goals
   #   resources :tips
