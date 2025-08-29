@@ -1,1 +1,32 @@
-<h1>coder le form ici</h1>
+<%= form_with url: trackers_path, local: true do |f| %>
+  <div data-controller="tracker-form" class="habit-form-modal">
+    <div class="habit-form-container">
+      <h2 class="text-center">Tes habits du jour</h2>
+      <div class="form-container">
+
+         <% trackers.each_with_index do |tracker, index| %>
+          <%= f.fields_for :trackers, tracker, index: index do |hf| %>
+            <div class="d-flex justify-content-center">
+              <%= tracker.habit.name %>
+            </div>
+            <div class="d-flex justify-content-center fs-2">
+              <button class="btn btn-primary btn-tracker">
+                <%= image_tag("icons/minus.png", class:"add-btn")%>
+              </button>
+              <%= hf.hidden_field :habit_id, value: tracker.habit.id  %>
+
+              <%= hf.number_field :value, value: tracker.habit.goal&.value || '1' %>
+              <%= tracker.habit.habit_type&.unit %>
+              <button class="btn btn-primary btn-tracker">
+              <%= image_tag("icons/add.png", class:"add-btn")%>
+              </button>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="dashboard-bottom d-flex justify-content-center">
+      <%= f.submit "Valider", class: "btn btn-primary w-45 h-7" %>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -130,7 +130,6 @@ p "started seeding"
 
 p "creating habit.."
 
-5.times do
   Habit.create!(
     name: "Boire de l'eau",
     category: Category.all.sample,
@@ -139,7 +138,33 @@ p "creating habit.."
     verb: Verb.all.sample,
     habit_type: HabitType.all.sample
   )
+
+
+ Habit.create!(
+    name: "Arrêter de fumer",
+    category: Category.all.sample,
+    visibility: "public",
+    user_id: user.id,
+    habit_type_id: HabitType.all.sample.id
+  )
+
+
+User.first.habits.each do |habit|
+  Goal.create(
+    habit: habit,
+    value: rand(10)
+  )
 end
+
+# 5.times do
+#   Habit.create!(
+#     name: "Boire de l'eau",
+#     category: Category.all.sample,
+#     visibility: "public",
+#     user_id: user.id,
+#     habit_type_id: HabitType.all.sample.id
+#   )
+# end
 
 p "created #{Habit.all.count} Habits"
 
