@@ -1,14 +1,24 @@
 class TrackersController < ApplicationController
 
   def new
-    
+
   end
 
   def create
-    raise
+    trackers = tracker_params
+    trackers.each do |tracker|
+      Tracker.create(value: tracker.last.require(:value), habit_id: tracker.last.require(:habit_id))
+    end
+    redirect_to home_path
   end
 
   def show
 
+  end
+
+  private
+
+  def tracker_params
+    params.require("[trackers]").permit!
   end
 end
