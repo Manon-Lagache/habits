@@ -26,14 +26,14 @@ export default class extends Controller {
     this.step1Target.querySelectorAll(".category-card").forEach(card => card.classList.remove("selected"));
     const card = event.currentTarget;
     card.classList.add("selected");
+
     this.selectedCategoryId = String(card.dataset.categoryId);
     this.categoryIdTarget.value = String(card.dataset.categoryId);
+
     this.filterHabitTypes();
 
     if (this.hasStep2Target) {
       this.showStep(this.step2Target);
-    } else {
-      console.error("step2Target erreur");
     }
   }
 
@@ -144,27 +144,38 @@ export default class extends Controller {
       container.appendChild(input);
     } else if (type === "period") {
       const label = document.createElement("label");
-      label.textContent = "Choisir la période";
-      const wrapper = document.createElement("div");
-      wrapper.setAttribute("data-controller", "flatpickr");
-      const input = document.createElement("input");
-      input.type = "text";
-      input.name = "habit[goal][period]";
-      input.className = "form-control";
-      input.setAttribute("data-flatpickr-target", "input");
+      label.textContent = "Période";
+      // const wrapper = document.createElement("div");
+      const inputStart = document.createElement("input");
+      // wrapper.setAttribute("data-controller", "flatpickr");
+      // const input = document.createElement("input");
+      // input.type = "text";
+      // input.name = "habit[goal][period]";
+      inputStart.type = "date";
+      inputStart.name = "habit[goal][start_date]";
+      inputStart.className = "form-control";
+      const inputEnd = document.createElement("input");
+      inputEnd.type = "date";
+      inputEnd.name = "habit[goal][end_date]";
+      inputEnd.className = "form-control";
+      // input.className = "form-control";
+      // input.setAttribute("data-flatpickr-target", "input");
 
-      wrapper.appendChild(input);
+      // wrapper.appendChild(input);
+      // container.appendChild(label);
+      // container.appendChild(wrapper);
       container.appendChild(label);
-      container.appendChild(wrapper);
-    } else {
+      container.appendChild(inputStart);
+      container.appendChild(inputEnd);
     }
   }
 
   // Step 4
   updateStep4() {
+    
     if (!this.hasTrackerSetupTarget) return;
-    const frequency = this.frequencySelectTarget?.value;
     const trackerSetup = this.trackerSetupTarget;
+    const frequency = this.frequencySelectTarget?.value;
 
     trackerSetup.innerHTML = "";
 
@@ -173,14 +184,18 @@ export default class extends Controller {
         <div class="mb-3">
           <label>Voulez-vous recevoir un rappel ?</label>
           <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox"
-                   data-action="change->habit-form#toggleReminder">
+            // <input class="form-check-input" type="checkbox"
+            //        data-action="change->habit-form#toggleReminder">
+            // <label class="form-check-label">Oui / Non</label>
+            // <input class="form-check-input" type="checkbox" name="habit[reminder]" data-action="change->habit-form#toggleReminder" value="true">
+            <input class="form-check-input" type="checkbox" name="habit[goal][tracking_config][reminder]" data-action="change->habit-form#toggleReminder" value="true">
             <label class="form-check-label">Oui / Non</label>
           </div>
         </div>
         <div class="mb-3 reminder-time" style="display: none;">
           <label>Heure du rappel :</label>
-          <input type="time" name="habit[reminder_time]" class="form-control">
+          // <input type="time" name="habit[reminder_time]" class="form-control">
+          <input type="time" name="habit[goal][tracking_config][reminder_time]" class="form-control">
         </div>
       `;
     }
@@ -188,11 +203,12 @@ export default class extends Controller {
     if (frequency === "weekly") {
       trackerSetup.innerHTML = `
         <div class="mb-3">
-          <label>Quels jours de la semaine ?</label>
+          <label>Quels jour(s) ?</label>
           <div class="d-flex flex-wrap gap-2">
             ${["Lun","Mar","Mer","Jeu","Ven","Sam","Dim"].map(day => `
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="habit[days][]" value="${day}">
+                // <input class="form-check-input" type="checkbox" name="habit[days][]" value="${day}">
+                <input class="form-check-input" type="checkbox" name="habit[goal][tracking_config][weekly_days][]" value="${day}">
                 <label class="form-check-label">${day}</label>
               </div>
             `).join("")}
@@ -202,14 +218,15 @@ export default class extends Controller {
         <div class="mb-3">
           <label>Voulez-vous recevoir un rappel ?</label>
           <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox"
-                   data-action="change->habit-form#toggleReminder">
+            // <input class="form-check-input" type="checkbox" name="habit[reminder]" data-action="change->habit-form#toggleReminder" value="true">
+            <input class="form-check-input" type="checkbox" name="habit[goal][tracking_config][reminder]" data-action="change->habit-form#toggleReminder" value="true">
             <label class="form-check-label">Oui / Non</label>
           </div>
         </div>
         <div class="mb-3 reminder-time" style="display: none;">
           <label>Heure du rappel :</label>
-          <input type="time" name="habit[reminder_time]" class="form-control">
+          // <input type="time" name="habit[reminder_time]" class="form-control">
+          <input type="time" name="habit[goal][tracking_config][reminder_time]" class="form-control">
         </div>
       `;
     }
@@ -218,7 +235,9 @@ export default class extends Controller {
       trackerSetup.innerHTML = `
         <div class="mb-3">
           <label>Combien de fois par mois ?</label>
-          <input type="number" min="1" max="30" name="habit[monthly_count]" class="form-control">
+          // <input type="number" min="1" max="30" name="habit[monthly_count]" class="form-control">
+          // <input type="number" name="habit[monthly_count]" min="1" max="30" class="form-control">
+          <input type="number" name="habit[goal][tracking_config][monthly_count]" min="1" max="30" class="form-control">
         </div>
 
         <div class="mb-3">
@@ -226,7 +245,8 @@ export default class extends Controller {
           <div class="d-flex flex-wrap gap-2">
             ${["Lun","Mar","Mer","Jeu","Ven","Sam","Dim"].map(day => `
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="habit[monthly_days][]" value="${day}">
+                // <input class="form-check-input" type="checkbox" name="habit[monthly_days][]" value="${day}">
+                <input class="form-check-input" type="checkbox" name="habit[goal][tracking_config][monthly_days][]" value="${day}">
                 <label class="form-check-label">${day}</label>
               </div>
             `).join("")}
@@ -240,9 +260,7 @@ export default class extends Controller {
   toggleReminder(event) {
     const checkbox = event.target;
     const reminderTime = checkbox.closest(".form-check").parentElement.querySelector(".reminder-time");
-    if (reminderTime) {
-      reminderTime.style.display = checkbox.checked ? "block" : "none";
-    }
+    if (reminderTime) reminderTime.style.display = checkbox.checked ? "block" : "none";
   }
 }
 
