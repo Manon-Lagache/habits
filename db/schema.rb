@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_08_29_151039) do
+ActiveRecord::Schema[7.1].define(version: 2025_08_29_180010) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,7 +41,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_29_151039) do
   create_table "habit_types", force: :cascade do |t|
     t.string "name"
     t.string "unit"
-    t.string "verb"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "category_id", null: false
@@ -56,6 +55,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_29_151039) do
     t.datetime "updated_at", null: false
     t.bigint "habit_type_id"
     t.bigint "category_id"
+    t.bigint "verb_id"
     t.index ["category_id"], name: "index_habits_on_category_id"
     t.index ["habit_type_id"], name: "index_habits_on_habit_type_id"
     t.index ["user_id"], name: "index_habits_on_user_id"
