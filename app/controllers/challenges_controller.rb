@@ -1,5 +1,5 @@
 class ChallengesController < ApplicationController
   def index
-    @challenges = Challenge.all
+    @challenges = current_user.available_challenges
   end
 end
