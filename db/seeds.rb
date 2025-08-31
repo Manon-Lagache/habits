@@ -1,15 +1,18 @@
-User.destroy_all
 Habit.destroy_all
 HabitType.destroy_all
 Category.destroy_all
 Verb.destroy_all
+Challenge.destroy_all
+Group.destroy_all
+GroupMembership.destroy_all
+User.destroy_all
 
 user = User.create!(
   pseudo: "toto",
   email: "tata@tot.fr",
   age: 30,
   location: "Bordeaux",
-  avatar: "0000",
+  avatar: Faker::Avatar.image,
   password: "123456"
 )
 
@@ -133,3 +136,97 @@ Habit.create!(
   verb: Verb.all.sample,
   habit_type: HabitType.all.sample
 )
+
+
+#Challenges seeding
+
+puts "Seeding users..."
+
+# Create users
+20.times do
+  User.create!(
+    email: Faker::Internet.unique.email,
+    password: "password", # default password for all
+    pseudo: Faker::Games::Pokemon.name, # fun pseudonym
+    avatar: Faker::Avatar.image,        # random avatar url
+    age: rand(18..60),
+    location: Faker::Address.city
+  )
+end
+
+users = User.all
+
+puts "Users created: #{User.count}"
+
+puts "Seeding challenges..."
+
+challenges_data = [
+  { name: "La Quête des 2 Litres", informations: "Boire 2L d'eau par jour avec l'équipe.", duration: 30 },
+  { name: "La Guilde des Lecteurs", informations: "Lire 10 pages par jour et partager vos découvertes.", duration: 21 },
+  { name: "La Bataille des Pas", informations: "Faire 10 000 pas quotidiens. Classement à la clé !", duration: 14 },
+  { name: "Les Chroniqueurs du Journal", informations: "Écrire une pensée quotidienne et la partager.", duration: 15 },
+  { name: "L'Ordre du Réveil", informations: "Se lever à 6h30 chaque jour sans exception.", duration: 30 },
+  { name: "La Méditation des Mages", informations: "10 minutes de méditation collective par jour.", duration: 21 },
+  { name: "Mission Sans Sucre", informations: "30 jours sans sucre ajouté, ensemble !", duration: 30 },
+  { name: "L'Arène du Sport", informations: "20 minutes de sport par jour, tout type d'activité accepté.", duration: 30 },
+  { name: "Défi Polyglottes", informations: "Apprendre 5 mots par jour d'une langue étrangère.", duration: 21 },
+  { name: "La Confrérie des Écrans Éteints", informations: "Pas d'écrans 1h avant le coucher.", duration: 15 }
+]
+
+challenges_data.each do |challenge_data|
+  Challenge.create!(
+    name: challenge_data[:name],
+    informations: challenge_data[:informations],
+    duration: challenge_data[:duration],
+    user: users.sample
+  )
+end
+
+puts "Challenges created: #{Challenge.count}"
+
+puts "Creating groups..."
+
+# Create one group for each challenge
+
+Challenge.all.each do |challenge|
+  group = Group.create!(
+    challenge: challenge
+  )
+
+  puts "Created group for challenge: #{challenge.name} (created by: #{challenge.user.pseudo})"
+end
+
+puts "Groups created: #{Group.count}"
+
+puts "Adding members to groups..."
+
+
+
+# Add multiple users to each group via GroupMemberships
+
+Group.all.each do |group|
+  members_count = rand(3..8)
+
+  selected_members = users.sample(members_count)
+  selected_members.each do |user|
+    GroupMembership.create!(
+      group: group,
+      user: user
+    )
+  end
+
+  puts "#{group.challenge.name}: #{group.users.count} members"
+end
+
+puts "Groups created: #{Group.count}"
+puts "Users: #{User.count}"
+puts "Challenges: #{Challenge.count}"
+puts "Groups: #{Group.count}"
+puts "Group Memberships: #{GroupMembership.count}"
+
+Challenge.all.each do |challenge|
+  group = challenge.group
+  puts "#{challenge.name}: #{group.users.count} participants (created by #{challenge.user.pseudo})"
+end
+
+puts "\nSeeding completed successfully! 🎉"
