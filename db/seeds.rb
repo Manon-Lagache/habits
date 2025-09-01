@@ -17,13 +17,14 @@ user = User.create!(
 )
 
 categories = [
-  { name: "Santé", color: "#4CAF50" },
-  { name: "Addictions", color: "#F44336" },
-  { name: "Sport & Fitness", color: "#2196F3" },
-  { name: "Bien-être Mental", color: "#9C27B0" },
-  { name: "Productivité", color: "#FF9800" },
-  { name: "Nutrition", color: "#795548" }
+  { name: "Santé", color: "#2779A7" },
+  { name: "Addictions", color: "#5680E9" },
+  { name: "Sport & Fitness", color: "#84CEEB" },
+  { name: "Bien-être Mental", color: "#C1C8E4" },
+  { name: "Productivité", color: "#8860D0" },
+  { name: "Nutrition", color: "#FF9398" }
 ]
+
 categories.each do |category|
   Category.create!(
     name: category[:name],
@@ -106,7 +107,6 @@ habit_types = {
   ]
 }
 
-
 habit_types.each do |category_name, types|
   category = Category.find_by!(name: category_name)
   types.each do |ht|
@@ -123,10 +123,8 @@ verbs.each do |v|
   Verb.create!(name: v)
 end
 
-
 p "created #{HabitType.count} habit types"
 p "created #{Verb.count} verbs"
-
 
 Habit.create!(
   name: "Boire de l'eau",
