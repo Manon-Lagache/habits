@@ -7,6 +7,15 @@ class Goal < ApplicationRecord
 
   store_accessor :tracking_config, :weekly_days, :monthly_days, :monthly_count, :reminder
 
+  def translate_frequency
+    case self.frequency
+    when "daily"
+      "par jour"
+    when "weekly"
+      "par semaine"
+    when "monthly"
+      "par mois"
+      
   def period_display
     case end_type
     when "indefinite"

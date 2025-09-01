@@ -126,14 +126,7 @@ end
 p "created #{HabitType.count} habit types"
 p "created #{Verb.count} verbs"
 
-Habit.create!(
-  name: "Boire de l'eau",
-  category: Category.all.sample,
-  visibility: "public",
-  user: user,
-  verb: Verb.all.sample,
-  habit_type: HabitType.all.sample
-)
+
 
 
 #Challenges seeding
@@ -228,3 +221,4 @@ Challenge.all.each do |challenge|
 end
 
 puts "\nSeeding completed successfully! 🎉"
+
