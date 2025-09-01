@@ -60,7 +60,7 @@
       <%= image_tag "icons/reminder.png", class: "me-3 icon-show", alt: "Catégories" %>
       <span data-habit-form-target="reminderStatus">
       <strong class="fs-6">Rappel</strong><br>
-   Désactivé
+      <%= @habit.reminder_enabled? ? "Activé" : "Désactivé" %>
       </span>
     </div>
   </div>

@@ -115,7 +115,13 @@
         </div>
 
 
-        <div class="mb-3" data-habit-form-target="trackerSetup"></div>
+        <div class="mb-3" data-habit-form-target="trackerSetup">
+          <%= f.label :reminder_enabled, "Rappel", class: "form-label" %>
+          <%= f.select :reminder_enabled,
+                [["Activé", "true"], ["Désactivé", "false"]],
+                {},
+                class: "form-select" %>
+        </div>
 
         <div class="d-flex justify-content-between">
           <button type="button" class="btn btn-secondary w-45 h-7" data-action="habit-form#prevStep">Précédent</button>
