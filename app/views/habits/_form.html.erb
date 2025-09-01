@@ -23,15 +23,15 @@
                  style="background-color: <%= c.color %>; color: white;"
                  data-category-id="<%= c.id %>"
                  data-action="click->habit-form#selectCategory">
-              
+
               <%= f.label :category_id, c.name %>
-              
+
             </div>
           <% end %>
 
         </div>
       </div>
-      
+
       <%# Step 2 %>
       <div class="habit-form-step" data-habit-form-target="step2">
         <h5>2. Choix de l'habitude</h5>
@@ -108,14 +108,20 @@
 
         <div class="mb-3">
           <%= f.label :visibility, "Visibilité" %>
-          <%= f.select :visibility, 
-                options_for_select([["Privé", "private"], ["Public", "public"], ["Amis", "friends"]], @habit.visibility), 
-                { prompt: "Choisir une visibilité" }, 
+          <%= f.select :visibility,
+                options_for_select([["Privé", "private"], ["Public", "public"], ["Amis", "friends"]], @habit.visibility),
+                { prompt: "Choisir une visibilité" },
                 class: "form-select" %>
         </div>
 
 
-        <div class="mb-3" data-habit-form-target="trackerSetup"></div>
+        <div class="mb-3" data-habit-form-target="trackerSetup">
+          <%= f.label :reminder_enabled, "Rappel", class: "form-label" %>
+          <%= f.select :reminder_enabled,
+                [["Activé", "true"], ["Désactivé", "false"]],
+                {},
+                class: "form-select" %>
+        </div>
 
         <div class="d-flex justify-content-between">
           <button type="button" class="btn btn-secondary w-45 h-7" data-action="habit-form#prevStep">Précédent</button>

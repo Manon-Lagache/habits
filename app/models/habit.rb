@@ -1,4 +1,6 @@
 class Habit < ApplicationRecord
+  before_save :cast_reminder_enabled
+
   belongs_to :user
   belongs_to :category
   belongs_to :habit_type
@@ -30,5 +32,9 @@ class Habit < ApplicationRecord
         data_by_date[date] || 0
       ]
     end
+  end
+
+  def cast_reminder_enabled
+    self.reminder_enabled = ActiveModel::Type::Boolean.new.cast(reminder_enabled)
   end
 end

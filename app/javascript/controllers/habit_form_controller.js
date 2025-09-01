@@ -5,7 +5,7 @@ export default class extends Controller {
     "step1", "step2", "step3", "step4", "categoryId", "habitTypeId",
     "habitTypeList", "verbSelect", "unitDisplay", "verbId",
     "goalValue", "reminderToggle", "reminderDetails",
-    "frequencySelect", "endTypeSelect", "dateContainer", "trackerSetup"
+    "frequencySelect", "endTypeSelect", "dateContainer", "trackerSetup", "reminderStatus"
   ];
 
   connect() {
@@ -223,9 +223,8 @@ export default class extends Controller {
   }
 
   toggleReminder(event) {
-    console.log("Reminder toggled:", event.target.checked);
+    const isActive = event.target.checked
+    this.reminderStatusTarget.innerHTML =
+    `<strong class="fs-6">Rappel</strong><br>${isActive ? "Activé" : "Désactivé"}`
   }
 }
-
-
-
