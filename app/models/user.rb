@@ -22,7 +22,4 @@ class User < ApplicationRecord
   def display_challenges
     unavailable_challenges
   end
-
-  def display_challenge_users
-  end
 end
