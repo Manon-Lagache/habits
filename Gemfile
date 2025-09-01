@@ -52,6 +52,7 @@ gem "sassc-rails"
 gem "devise"
 gem 'flatpickr'
 gem "chartkick"
+gem "faker"
 
 group :development, :test do
   gem "dotenv-rails"

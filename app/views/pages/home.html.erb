@@ -86,7 +86,7 @@
         <div class="habits-scroll-container">
           <% @habits.each do |habit| %>
             <div class="habit-wrapper">
-              <%= link_to habit_path(habit), remote: true, class: "habit-link" do %>
+              <%= link_to habit_path(habit), remote: true do %>
                 <%= render 'shared/card-content', habit: habit %>
               <% end %>
             </div>

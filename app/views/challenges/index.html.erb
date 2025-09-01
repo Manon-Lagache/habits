@@ -1,0 +1,20 @@
+<div class="container py-2">
+  <h5>Rejoins nos challenges collectifs !</h5>
+  <% @challenges.each do |challenge| %>
+    <%= link_to challenge_path(challenge), remote: true, class: "challenge-link" do %>
+      <div class="card d-flex ">
+        <h5><%= challenge.name %></h5>
+        <p><%= challenge.informations %></p>
+        <div class="card-challenges flex-wrap py-4">
+          <% challenge.group.users.each do |user| %>
+            <div class="px-2">
+              <img src="<%= user.avatar %>" alt="<%= user.pseudo %>" class="avatar-bordered">
+              <%= user.pseudo %>
+            </div>
+          <% end %>
+        </div>
+        <span class="mt-2">Durée: <%= challenge.duration %> jours</span>
+      </div>
+    <% end %>
+  <% end %>
+</div>
