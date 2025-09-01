@@ -6,18 +6,19 @@
       <div class="habit-type-list scrollable">
         <% trackers.each_with_index do |tracker, index| %>
           <%= f.fields_for :trackers, tracker, index: index do |hf| %>
+
             <div class="tracker-card d-flex flex-column mb-2 p-2">
 
               <div class="d-flex justify-content-between align-items-center mb-1 w-100">
                 <p class="fw-bold mb-0"><%= tracker.habit.name %></p>
                 <div class="d-flex gap-1">
                   <button type="button"
-                          class="btn-tracker btn-decrement"
+                          class="btn-tracker"
                           data-action="click->tracker-form#decrement">
                     -
                   </button>
                   <button type="button"
-                          class="btn-tracker btn-increment"
+                          class="btn-tracker"
                           data-action="click->tracker-form#increment">
                     +
                   </button>
@@ -29,9 +30,8 @@
                 <%= hf.hidden_field :habit_id, value: tracker.habit.id %>
                 <%= hf.number_field :value, value: tracker.value || tracker.habit.goal&.value || 1,
                       class: "tracker-input text-center me-2",
-                      style: "background: transparent; border: none; font-size: 18px; width: 50px; padding: 2px 0; line-height: 1;",
-                      data: { tracker_form_target: "input" } %>
-                <span class="unit-display" style="line-height: 1; font-size: 16px;"><%= tracker.habit.habit_type&.unit %></span>
+                      style: "background: transparent; border: none; font-size: 18px; width: 50px; padding: 2px 0; line-height: 1;" %>
+                <span class="unit-display" style="line-height: 1; font-size: 16px;"> <%= tracker.habit.habit_type&.unit %></span>
               </div>
 
 
