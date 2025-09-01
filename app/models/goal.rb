@@ -15,7 +15,9 @@ class Goal < ApplicationRecord
       "par semaine"
     when "monthly"
       "par mois"
-      
+    end
+  end
+
   def period_display
     case end_type
     when "indefinite"
