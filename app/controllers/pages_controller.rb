@@ -6,9 +6,9 @@ class PagesController < ApplicationController
     @habits = current_user.habits
     @user = current_user
     @tips = Tip.all
-    @habits = current_user.habits
     @trackers = @habits.map{|h| h.trackers.build}
     @habit = Habit.new
     @habit.build_goal
+    @challenges = current_user.display_challenges
   end
 end

@@ -1,4 +1,4 @@
-ActiveRecord::Schema[7.1].define(version: 2025_08_31_101506) do
+ActiveRecord::Schema[7.1].define(version: 2025_09_01_133545) do
   enable_extension "plpgsql"
 
   create_table "categories", force: :cascade do |t|
@@ -69,6 +69,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_31_101506) do
     t.bigint "habit_type_id"
     t.bigint "category_id"
     t.bigint "verb_id"
+    t.boolean "reminder_enabled"
     t.index ["category_id"], name: "index_habits_on_category_id"
     t.index ["habit_type_id"], name: "index_habits_on_habit_type_id"
     t.index ["user_id"], name: "index_habits_on_user_id"
