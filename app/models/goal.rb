@@ -15,6 +15,17 @@ class Goal < ApplicationRecord
       "par semaine"
     when "monthly"
       "par mois"
+      
+  def period_display
+    case end_type
+    when "indefinite"
+      "Indéfinie"
+    when "target_day"
+      "Jusqu'au #{target_day&.strftime("%d/%m/%Y")}"
+    when "period"
+      "Du #{start_date&.strftime("%d/%m/%Y")} au #{end_date&.strftime("%d/%m/%Y")}"
+    else
+      "Période inconnue"
     end
   end
 end
