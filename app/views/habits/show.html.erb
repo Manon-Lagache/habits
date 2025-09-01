@@ -29,28 +29,35 @@
      <div class="row m-0">
   <div class="col-6">
     <div class="info-content blue-bg rounded-5 shadow d-flex align-items-center p-2">
-      <i class="fa-solid fa-chart-column me-3"></i>
-      <span><strong class="fs-6">Catégorie</strong><br>santé</span>
+      <%= image_tag "icons/categories.png", class: "me-3 icon-show", alt: "Catégories" %>
+      <span><strong class="fs-6">Catégorie</strong><br>
+      <%= @habit.category.name %>
+      </span>
     </div>
   </div>
 
   <div class="col-6">
     <div class="info-content blue-bg rounded-5 shadow d-flex align-items-center p-2">
-      <i class="fa-solid fa-chart-column me-3"></i>
-      <span><strong class="fs-6">Objectif</strong><br>1.5 litres</span>
+      <%= image_tag "icons/goal.png", class: "me-3 icon-show", alt: "Catégories" %>
+      <span><strong class="fs-6">Objectif</strong><br>
+      <%= @goal.value %>
+      <%= @habit.habit_type.unit %>
+      </span>
     </div>
   </div>
 
   <div class="col-6 mt-3">
     <div class="info-content blue-bg rounded-5 shadow d-flex align-items-center p-2">
-      <i class="fa-solid fa-chart-column me-3"></i>
-      <span><strong class="fs-6">Période</strong><br>indéfinie</span>
+      <%= image_tag "icons/calendar.png", class: "me-3 icon-show", alt: "Catégories" %>
+      <span><strong class="fs-6">Période</strong><br>
+      <%= @goal.period_display %>
+      </span>
     </div>
   </div>
 
   <div class="col-6 mt-3">
     <div class="info-content blue-bg rounded-5 shadow d-flex align-items-center p-2">
-      <i class="fa-solid fa-chart-column me-3"></i>
+      <%= image_tag "icons/reminder.png", class: "me-3 icon-show", alt: "Catégories" %>
       <span><strong class="fs-6">Rappel</strong><br>activé</span>
     </div>
   </div>

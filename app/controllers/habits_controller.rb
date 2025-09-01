@@ -26,6 +26,7 @@ class HabitsController < ApplicationController
   def show
     @habit = Habit.find(params[:id])
     @tips = @habit.tips
+    @goal = Goal.find_by(habit: @habit)
   end
 
   private
@@ -37,6 +38,7 @@ class HabitsController < ApplicationController
       :habit_type_id,
       :verb_id,
       :visibility,
+      :goal,
       goal_attributes: [
         :value, :frequency, :end_type, :start_date, :end_date, :target_day,
         tracking_config: {}
