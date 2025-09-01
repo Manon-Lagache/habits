@@ -30,8 +30,8 @@
                 <%= hf.hidden_field :habit_id, value: tracker.habit.id %>
                 <%= hf.number_field :value, value: tracker.value || tracker.habit.goal&.value || 1,
                       class: "tracker-input text-center me-2",
-                      style: "background: transparent; border: none; font-size: 18px; width: 50px; padding: 2px 0; line-height: 1;"
-                <span class="unit-display" style="line-height: 1; font-size: 16px;"><%= tracker.habit.habit_type&.unit %></span>
+                      style: "background: transparent; border: none; font-size: 18px; width: 50px; padding: 2px 0; line-height: 1;" %>
+                <span class="unit-display" style="line-height: 1; font-size: 16px;"> <%= tracker.habit.habit_type&.unit %></span>
               </div>
 
 
