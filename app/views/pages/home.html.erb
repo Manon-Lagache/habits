@@ -3,13 +3,7 @@
     <h1 class="h1 fw-bold m-0">Bonjour <%= @user.pseudo %>,</h1>
     <h5 class="text-muted m-0">Suis tes progrès et gères tes Habits !</h5>
   </div>
-  <div class="modal fade" id="habitFormModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content p-3">
-        <%= render 'habits/form', habit: @habit %>
-      </div>
-    </div>
-  </div>
+  <%= render 'habits/form', habit: @habit %>
   <div class="modal" id="trackerFormModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">

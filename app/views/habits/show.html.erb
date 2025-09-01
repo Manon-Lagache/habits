@@ -54,7 +54,6 @@
       </span>
     </div>
   </div>
-
   <div class="col-6 mt-3">
     <div class="info-content blue-bg rounded-5 shadow d-flex align-items-center p-2">
       <%= image_tag "icons/reminder.png", class: "me-3 icon-show", alt: "Catégories" %>
@@ -75,3 +74,6 @@
     </div>
   </div>
 </div>
+
+<!-- Pour afficher le formulaire du create -->
+<%= render 'habits/form', habit: @habit_new %>
