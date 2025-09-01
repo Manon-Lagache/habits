@@ -10,9 +10,11 @@
       </div>
     </div>
   </div>
-  <div class="modal fade" id="trackerFormModal">
+  <div class="modal" id="trackerFormModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-      <%= render 'trackers/form', trackers: @trackers %>
+      <div class="modal-content">
+        <%= render 'trackers/form', trackers: @trackers %>
+      </div>
     </div>
   </div>
 </div>
