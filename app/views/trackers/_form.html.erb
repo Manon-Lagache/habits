@@ -1,33 +1,53 @@
 <%= form_with url: trackers_path, local: true do |f| %>
   <div data-controller="tracker-form" class="habit-form-modal">
-    <div class="habit-form-container">
-      <h2 class="text-center">Tes habits du jour</h2>
-      <div class="form-container">
+    <div class="habit-form-container" data-action="click->tracker-form#stopPropagation">
+      <h2 class="text-center mb-4">Tes habits du jour</h2>
 
-         <% trackers.each_with_index do |tracker, index| %>
+      <div class="habit-type-list scrollable">
+        <% trackers.each_with_index do |tracker, index| %>
           <%= f.fields_for :trackers, tracker, index: index do |hf| %>
-            <div class="d-flex justify-content-center">
-              <%= tracker.habit.name %>
-            </div>
-            <div class="d-flex justify-content-center fs-2">
-              <button class="btn btn-primary btn-tracker"
-                data-action="tracker-form#decrement">
-                <%= image_tag("icons/minus.png", class:"add-btn")%>
-              </button>
-              <%= hf.hidden_field :habit_id, value: tracker.habit.id  %>
 
-              <%= hf.number_field :value, value: tracker.habit.goal&.value || '1' %>
-              <%= tracker.habit.habit_type&.unit %>
-              <button class="btn btn-primary btn-tracker"
-                data-action="tracker-form#increment">
-                <%= image_tag("icons/add.png", class:"add-btn")%>
-              </button>
+            <div class="tracker-card d-flex flex-column mb-2 p-2">
+
+              <div class="d-flex justify-content-between align-items-center mb-1 w-100">
+                <p class="fw-bold mb-0"><%= tracker.habit.name %></p>
+                <div class="d-flex gap-1">
+                  <button type="button"
+                          class="btn-tracker"
+                          data-action="click->tracker-form#decrement">
+                    -
+                  </button>
+                  <button type="button"
+                          class="btn-tracker"
+                          data-action="click->tracker-form#increment">
+                    +
+                  </button>
+                </div>
+              </div>
+
+
+              <div class="d-flex align-items-center mb-1">
+                <%= hf.hidden_field :habit_id, value: tracker.habit.id %>
+                <%= hf.number_field :value, value: tracker.value || tracker.habit.goal&.value || 1,
+                      class: "tracker-input text-center me-2",
+                      style: "background: transparent; border: none; font-size: 18px; width: 50px; padding: 2px 0; line-height: 1;"
+                <span class="unit-display" style="line-height: 1; font-size: 16px;"><%= tracker.habit.habit_type&.unit %></span>
+              </div>
+
+
+              <hr class="tracker-separator" />
+
+              <div class="text-center">
+                <%= link_to "Suivi de mon habit", habit_path(tracker.habit), class: "tracker-show-link" %>
+              </div>
+
             </div>
           <% end %>
         <% end %>
       </div>
-      <div class="dashboard-bottom d-flex justify-content-center">
-      <%= f.submit "Valider", class: "btn btn-primary w-45 h-7" %>
+
+      <div class="text-center mt-3">
+        <%= f.submit "Valider", class: "btn btn-primary w-50" %>
       </div>
     </div>
   </div>

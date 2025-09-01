@@ -4,7 +4,7 @@ export default class extends Controller {
 
   decrement(event) {
     event.preventDefault();
-    const input = event.currentTarget.closest(".d-flex").querySelector("input[type='number']");
+    const input = event.currentTarget.closest(".tracker-card").querySelector("input[type='number']");
     input.stepDown();
   }
 
@@ -12,7 +12,7 @@ export default class extends Controller {
 
   increment(event) {
     event.preventDefault();
-    const input = event.currentTarget.closest(".d-flex").querySelector("input[type='number']");
+    const input = event.currentTarget.closest(".tracker-card").querySelector("input[type='number']");
     input.stepUp();
   }
 }
