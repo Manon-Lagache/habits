@@ -227,4 +227,14 @@ Challenge.all.each do |challenge|
   puts "#{challenge.name}: #{group.users.count} participants (created by #{challenge.user.pseudo})"
 end
 
+Habit.all.each do |habit|
+  habit.trackers.destroy_all
+  8.times do |index|
+    Tracker.create(
+      date: Date.today - index.days,
+      value: habit.goal&.value&.to_i.nil? ? rand(3..10) : rand(3..10) + habit.goal&.value&.to_i,
+      habit: habit)
+  end
+end
+
 puts "\nSeeding completed successfully! 🎉"
