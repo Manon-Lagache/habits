@@ -9,7 +9,7 @@ class TrackersController < ApplicationController
     trackers.each do |tracker|
       Tracker.create(value: tracker.last.require(:value), habit_id: tracker.last.require(:habit_id))
     end
-    redirect_to home_path
+    redirect_to root_path
   end
 
   def show
