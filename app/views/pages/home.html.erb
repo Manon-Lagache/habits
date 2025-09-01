@@ -13,13 +13,13 @@
   <div class="modal fade" id="trackerFormModal">
     <div class="modal-dialog modal-dialog-centered">
       <%= render 'trackers/form', trackers: @trackers %>
-      </div>
     </div>
   </div>
-  <div class="achievements">
-    <%= render 'shared/achievement' %>
-  </div>
-  <%# <div class="row g-3 text-center">
+</div>
+<div class="achievements">
+  <%= render 'shared/achievement' %>
+</div>
+<%# <div class="row g-3 text-center">
 
     <div class="col-6 col-md-3">
       <div class="card stats-card completed p-3">
@@ -80,32 +80,39 @@
       </div>
     </div>
   </div> %>
-  <div id="carouselExampleIndicators" class="carousel slide">
-    <div class="carousel-inner">
-      <div class="habits-carousel">
-        <div class="habits-scroll-container">
-          <% @habits.each do |habit| %>
-            <div class="habit-wrapper">
-              <%= link_to habit_path(habit), remote: true do %>
-                <%= render 'shared/card-content', habit: habit %>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
+<div id="carouselExampleIndicators" class="carousel slide">
+  <div class="carousel-inner">
+    <div class="habits-carousel">
+      <div class="habits-scroll-container">
+        <% @habits.each do |habit| %>
+          <div class="habit-wrapper">
+            <%= link_to habit_path(habit), remote: true do %>
+              <%= render 'shared/card-content', habit: habit %>
+            <% end %>
+          </div>
+        <% end %>
+        <% @user.display_challenges.each do |challenge| %>
+          <div class="habit-wrapper">
+            <%= link_to challenge_path(challenge), remote: true do %>
+              <%= render 'shared/challenge', challenge: challenge %>
+            <% end %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
+</div>
 <div class="dashboard-bottom d-flex justify-content-center">
   <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#trackerFormModal">Mettre à jour</button>
 </div>
-  <div class="dashboard-bottom d-flex">
-    <div class="tip-section mt-3 container-fluid">
-      <% @tips.each do |tip| %>
-        <%= render 'shared/tip', tip: tip %>
-      <% end %>
-    </div>
+<div class="dashboard-bottom">
+  <div class="tip-section mt-3 container-fluid">
+    <% @tips.each do |tip| %>
+      <%= render 'shared/tip', tip: tip %>
+    <% end %>
   </div>
-  <%# <div class="row g-3 mb-4">
+</div>
+<%# <div class="row g-3 mb-4">
     <div class="col-12 col-lg-6">
       <div class="card">
         <div class="card-header d-flex align-items-center">
@@ -120,14 +127,14 @@
       <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
           <span>Mes Objectifs Personnels</span> %>
-  <%# <%= link_to "Nouvel objectif", new_goal_path, class: "btn btn-primary btn-sm" %>
-  <%# </div>
+<%# <%= link_to "Nouvel objectif", new_goal_path, class: "btn btn-primary btn-sm" %>
+<%# </div>
         <div class="card-body text-center">
           <p class="text-muted">Définissez vos objectifs</p> %>
-  <%# <%= link_to "Créer un objectif", new_goal_path, class: "btn btn-primary btn-sm mt-2" %>
-  <%# </div>
+<%# <%= link_to "Créer un objectif", new_goal_path, class: "btn btn-primary btn-sm mt-2" %>
+<%# </div>
       </div>
     </div>
   </div> %>
-  <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete} %>
+<%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete} %>
 </main>
