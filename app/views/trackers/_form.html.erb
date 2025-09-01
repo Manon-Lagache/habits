@@ -10,15 +10,17 @@
               <%= tracker.habit.name %>
             </div>
             <div class="d-flex justify-content-center fs-2">
-              <button class="btn btn-primary btn-tracker">
+              <button class="btn btn-primary btn-tracker"
+                data-action="tracker-form#decrement">
                 <%= image_tag("icons/minus.png", class:"add-btn")%>
               </button>
               <%= hf.hidden_field :habit_id, value: tracker.habit.id  %>
 
               <%= hf.number_field :value, value: tracker.habit.goal&.value || '1' %>
               <%= tracker.habit.habit_type&.unit %>
-              <button class="btn btn-primary btn-tracker">
-              <%= image_tag("icons/add.png", class:"add-btn")%>
+              <button class="btn btn-primary btn-tracker"
+                data-action="tracker-form#increment">
+                <%= image_tag("icons/add.png", class:"add-btn")%>
               </button>
             </div>
           <% end %>
