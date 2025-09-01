@@ -3,7 +3,7 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
   static targets = [
     "step1", "step2", "step3", "step4", "categoryId", "habitTypeId",
-    "habitTypeList", "verbSelect", "unitDisplay",
+    "habitTypeList", "verbSelect", "unitDisplay", "verbId",
     "goalValue", "reminderToggle", "reminderDetails",
     "frequencySelect", "endTypeSelect", "dateContainer", "trackerSetup"
   ];
@@ -15,7 +15,7 @@ export default class extends Controller {
     this.selectedFrequency = null;
 
     if (this.hasFrequencySelectTarget) {
-      this.updateStep4();
+      this.updateStep5();
     }
   }
 
@@ -81,22 +81,33 @@ export default class extends Controller {
       this.unitDisplayTarget.value = String(this.selectedUnit);
     }
 
+        if (this.hasStep3Target) {
+      this.showStep(this.step3Target);
+    }
+
   }
 
-  verbSelected(event) {
-    if (this.hasStep3Target) {
-      this.step3Target.classList.add("active")
-      this.element.querySelectorAll(".habit-form-step").forEach(step => {
-        if (step !== this.step3Target) step.classList.remove("active")
-      })
+  // step 3
+    selectVerb(event) {
+    const card = event.currentTarget;
+
+    this.step3Target.querySelectorAll(".verb-card").forEach(c => c.classList.remove("selected"));
+
+    card.classList.add("selected");
+
+    const verbId = card.dataset.verbId;
+    this.verbIdTarget.value = verbId;
+
+    if (this.hasStep4Target) {
+      this.showStep(this.step4Target);
     }
   }
 
 
-  // step 3
+  // step 4
   frequencyChanged(event) {
     this.selectedFrequency = event.currentTarget.value;
-    this.updateStep4();
+    this.updateStep5();
   }
 
   endTypeChanged(event) {
@@ -141,9 +152,9 @@ export default class extends Controller {
     }
   }
 
-  // Step 4
-  updateStep4() {
-    
+  // Step 5
+  updateStep5() {
+
     if (!this.hasTrackerSetupTarget) return;
     const trackerSetup = this.trackerSetupTarget;
     const frequency = this.frequencySelectTarget?.value;
