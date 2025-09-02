@@ -37,6 +37,12 @@ class HabitsController < ApplicationController
     @habit_new.build_goal
   end
 
+  def destroy
+    @habit = Habit.find(params[:id])
+    @habit.destroy
+    redirect_to root_path, status: :see_other
+  end
+
   private
 
   def normalize_goal_params
@@ -52,7 +58,7 @@ class HabitsController < ApplicationController
     end
   end
 
-     
+
   def goal_params
     permitted = params.require(:habit).permit(
       goal: [:start_date, :end_date, :target_day],

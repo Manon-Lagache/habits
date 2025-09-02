@@ -8,7 +8,9 @@
           <%= image_tag("icons/return.png", class: "icon-return") %>
         <% end %>
         <h2 class="title-white"><%= @habit.name %></h2>
-        <%= image_tag("icons/parameters.png", class: "icon-parameters") %>
+        <%= link_to habit_path(@habit), data: { turbo_method: :delete } do%>
+          <i class="fa-regular fa-trash-can"></i>
+        <% end %>
       </div>
 
       <!-- Chart section -->
