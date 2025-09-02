@@ -12,7 +12,6 @@
 
         <% if @habits_by_date[day].present? %>
           <div class="habit-indicators">
-            <% # show one dot per category (unique by category) %>
             <% @habits_by_date[day].uniq { |h| h.category_id }.each do |habit| %>
               <span class="indicator" style="background-color:<%= habit.category.color %>"></span>
             <% end %>
