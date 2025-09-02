@@ -29,7 +29,6 @@ class HabitsController < ApplicationController
     @tips = @habit.tips
     @goal = Goal.find_by(habit: @habit)
 
-    # Création coquille vide pour controller
     @habit_new = Habit.new
     @categories = Category.all
     @habit_types = HabitType.all
@@ -40,13 +39,26 @@ class HabitsController < ApplicationController
 
   private
 
+  def normalize_goal_params
+    return unless params[:habit].present?
+
+    if params[:habit][:goal].present?
+      params[:habit][:goal_attributes] ||= {}
+      params[:habit][:goal].each do |k, v|
+        key = (k.to_s == "target_date" ? "target_day" : k)
+        params[:habit][:goal_attributes][key] = v
+      end
+      params[:habit].delete(:goal)
+    end
+  end
+
+     
   def goal_params
     permitted = params.require(:habit).permit(
       goal: [:start_date, :end_date, :target_day],
       goal_attributes: [:value, :frequency, :end_type, :start_date, :end_date]
     )
 
-    # merge `goal` into `goal_attributes` if it exists
     if permitted[:goal].present?
       permitted[:goal_attributes] ||= {}
       permitted[:goal_attributes].merge!(permitted.delete(:goal))
