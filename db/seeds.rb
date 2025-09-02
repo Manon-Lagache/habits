@@ -20,7 +20,7 @@ categories = [
   { name: "Santé", color: "#2779A7" },
   { name: "Addictions", color: "#5680E9" },
   { name: "Sport & Fitness", color: "#84CEEB" },
-  { name: "Bien-être Mental", color: "#C1C8E4" },
+  { name: "Bien-être", color: "#C1C8E4" },
   { name: "Productivité", color: "#8860D0" },
   { name: "Nutrition", color: "#FF9398" }
 ]
@@ -93,7 +93,7 @@ habit_types = {
     { name: "Sports collectifs", unit: "heures" },
     { name: "Pilates", unit: "minutes" }
   ],
-  "Bien-être Mental" => [
+  "Bien-être" => [
     { name: "Méditation", unit: "minutes" },
     { name: "Journal", unit: "pages" },
     { name: "Respiration", unit: "minutes" },

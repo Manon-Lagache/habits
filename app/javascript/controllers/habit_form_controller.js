@@ -28,6 +28,49 @@ export default class extends Controller {
 
     this._boundKeydown = this._onKeydown.bind(this);
     document.addEventListener("keydown", this._boundKeydown);
+
+    this.element.querySelectorAll(".form-control").forEach(input => {
+      input.addEventListener("input", () => {
+        if (input.value) {
+          input.classList.add("filled");
+        } else {
+          input.classList.remove("filled");
+        }
+      });
+    });
+    
+    const goalFields = this.element.querySelectorAll(".goal-field");
+    goalFields.forEach(field => {
+      field.style.justifyContent = "center";
+      field.style.alignItems = "center";
+    });
+
+    if (this.hasFrequencySelectTarget) {
+      this.frequencySelectTarget.querySelectorAll(".card-option").forEach(card => {
+        card.addEventListener("click", () => {
+          this.frequencySelectTarget.querySelectorAll(".card-option").forEach(c => c.classList.remove("selected"));
+          card.classList.add("selected");
+
+          const input = card.querySelector('input[type="radio"]');
+          if (input) input.checked = true;
+          input?.dispatchEvent(new Event('change', { bubbles: true }));
+        });
+      });
+    }
+
+    if (this.hasEndTypeSelectTarget) {
+      this.endTypeSelectTarget.querySelectorAll(".card-option").forEach(card => {
+        card.addEventListener("click", () => {
+          this.endTypeSelectTarget.querySelectorAll(".card-option").forEach(c => c.classList.remove("selected"));
+          card.classList.add("selected");
+
+          const input = card.querySelector('input[type="radio"]');
+          if (input) input.checked = true;
+          input?.dispatchEvent(new Event('change', { bubbles: true }));
+        });
+      });
+    }
+
   }
 
   disconnect() {
@@ -188,6 +231,7 @@ export default class extends Controller {
     }
   }
 
+
   updateStep5() {
     if (!this.hasTrackerSetupTarget) return;
     const trackerSetup = this.trackerSetupTarget;
@@ -196,6 +240,13 @@ export default class extends Controller {
     const frequency = frequencyRadio ? frequencyRadio.value : null;
 
     trackerSetup.innerHTML = "";
+
+    const reminderDiv = trackerSetup.querySelector(".form-check.form-switch");
+    if (reminderDiv) {
+      reminderDiv.style.width = "180px";
+      reminderDiv.style.margin = "0 1rem";
+      reminderDiv.parentElement.style.justifyContent = "center";
+    }
 
     const reminderToggleHTML = `
       <div class="mb-3 text-center">
@@ -219,8 +270,16 @@ export default class extends Controller {
       trackerSetup.innerHTML = `
         <div class="mb-3">
           <label>Quels jour(s) ?</label>
-          <div class="weekdays-container">
-            ${["Lun","Mar","Mer","Jeu","Ven","Sam","Dim"].map(day => `
+          <div class="weekdays-grid-4">
+            ${["Lun","Mar","Mer","Jeu"].map(day => `
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="habit[goal][tracking_config][weekly_days][]" value="${day}">
+                <label class="form-check-label">${day}</label>
+              </div>
+            `).join("")}
+          </div>
+          <div class="weekdays-grid-7 mt-2">
+            ${["Ven","Sam","Dim"].map(day => `
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" name="habit[goal][tracking_config][weekly_days][]" value="${day}">
                 <label class="form-check-label">${day}</label>
