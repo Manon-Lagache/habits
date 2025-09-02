@@ -29,7 +29,6 @@ class HabitsController < ApplicationController
     @tips = @habit.tips
     @goal = Goal.find_by(habit: @habit)
 
-    # Création coquille vide pour controller
     @habit_new = Habit.new
     @categories = Category.all
     @habit_types = HabitType.all
@@ -43,12 +42,9 @@ class HabitsController < ApplicationController
   def normalize_goal_params
     return unless params[:habit].present?
 
-    # si le JS a envoyé habit[:goal] (map provenant du block JS), on le transforme
     if params[:habit][:goal].present?
       params[:habit][:goal_attributes] ||= {}
-      # params[:habit][:goal] peut être un HashWithIndifferentAccess
       params[:habit][:goal].each do |k, v|
-        # accepter target_date ou target_day du front et normaliser en target_day
         key = (k.to_s == "target_date" ? "target_day" : k)
         params[:habit][:goal_attributes][key] = v
       end
@@ -56,24 +52,13 @@ class HabitsController < ApplicationController
     end
   end
 
-  def habit_params
-    params.require(:habit).permit(
-      :name,
-      :category_id,
-      :habit_type_id,
-      :verb_id,
-      :visibility,
-      goal_attributes: [
-        :value, :frequency, :end_type, :start_date, :end_date, :target_day,
-        tracking_config: {}
-      ]
+     
   def goal_params
     permitted = params.require(:habit).permit(
       goal: [:start_date, :end_date, :target_day],
       goal_attributes: [:value, :frequency, :end_type, :start_date, :end_date]
     )
 
-    # merge `goal` into `goal_attributes` if it exists
     if permitted[:goal].present?
       permitted[:goal_attributes] ||= {}
       permitted[:goal_attributes].merge!(permitted.delete(:goal))
