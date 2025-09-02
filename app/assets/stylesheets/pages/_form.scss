@@ -44,6 +44,7 @@
 .category-card.selected {
   transform: scale(1.05);
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  background-color: var(--color-violet);
 }
 
 .habit-type-list {
@@ -66,17 +67,10 @@
   text-align: left;
   min-height: 50px;
   display: flex; align-items: center;
-  transition: background-color 0.2s, transform 0.2s;
-}
-
-.habit-type-item:hover {
-  transform: scale(1.02);
-  background-color: #e0e0e0;
 }
 
 .habit-type-item.selected {
-  background-color: #007bff;
-  color: white;
+  background-color: var(--color-violet);
 }
 
 .goal-field {
@@ -105,7 +99,112 @@
 }
 
 .verb-card.selected {
-  background-color: var(--color-blue-mid);
+  background-color: var(--color-violet);
   color: white;
   font-weight: bold;
+}
+
+.habit-form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 6px;
+  position: sticky;
+  top: 0;
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(2px);
+  z-index: 30;
+}
+
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid #d8d8d8;
+  background: none;
+  color: #8b8b8b;
+  padding: 0;
+  cursor: pointer;
+}
+
+.btn-close-form {
+  background: none;
+  border: none;
+  color: #9a9a9a;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.habit-form-modal.hidden {
+  display: none !important;
+}
+
+.btn-group-cards {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.card-option {
+  flex: 1;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 14px;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s ease;
+}
+
+.card-option:active {
+  transform: scale(0.96);
+  background-color: #f0f0f0;
+}
+
+.card-option input:checked + span,
+.card-option:has(input:checked) {
+  border-color: #007bff;
+  background-color: #eaf3ff;
+  color: #007bff;
+  font-weight: 600;
+}
+
+
+.form-control {
+  border-radius: 12px;
+  border: 2px solid #000;
+  background-color: #fff;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.form-control:focus,
+.form-control:valid {
+  background-color: #cce5ff;
+  border-color: #0d6efd;
+  outline: none;
+}
+
+.form-check.form-switch {
+  width: 90px;
+  height: 32px;
+  margin: 0 0.5rem;
+  position: relative;
+}
+
+.weekdays-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.weekdays-container .form-check {
+  flex: 0 0 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

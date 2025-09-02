@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   resources :habits, only: [:index, :show, :new, :create]
   resources :trackers
   resources :challenges, only: [:index, :show]
+  resources :calendar, only: [:index]
+
 end
