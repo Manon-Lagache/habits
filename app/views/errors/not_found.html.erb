@@ -1,0 +1,9 @@
+<% content_for :title, "Page Not Found" %>
+<div class="error-page container text-center">
+  <%= image_tag("error_img") %>
+  <div class = "mt-4">
+    <h1>Oups! Page introuvable</h1>
+    <h5>On te rassure, ce n'est pas dans nos habitudes !</h5>
+  </div>
+  <%= link_to "Go Home", root_path, class: "btn btn-primary" %>
+</div>
