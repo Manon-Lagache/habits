@@ -4,7 +4,10 @@ Rails.application.routes.draw do
   resources :pages, only: :home
   resources :habits, only: [:index, :show, :new, :create]
   resources :trackers
-  resources :challenges, only: [:index, :show]
+  resources :challenges, only: [:index, :show] do
+    member do
+      post :join
+    end
+  end
   resources :calendar, only: [:index]
-
 end

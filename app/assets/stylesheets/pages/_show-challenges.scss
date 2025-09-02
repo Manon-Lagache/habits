@@ -1,0 +1,27 @@
+.content-center {
+  text-align: center;
+}
+
+.detail-item {
+  margin-bottom: 1rem
+}
+
+.chevauche-container {
+  position: absolute;
+  top: 80px; /* ajuste selon ton design */
+  left: 0;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  z-index: 10;
+  pointer-events: none; /* optionnel, pour ne pas bloquer les clics */
+}
+
+.chevauche-img {
+  max-width: 100px; /* ajuste selon besoin */
+  width: 100%;
+  height: auto;
+  z-index: 11;
+  border-radius: 25px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

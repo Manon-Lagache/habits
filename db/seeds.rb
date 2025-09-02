@@ -152,16 +152,16 @@ puts "Users created: #{User.count}"
 puts "Seeding challenges..."
 
 challenges_data = [
-  { name: "La Quête des 2 Litres", informations: "Boire 2L d'eau par jour avec l'équipe.", duration: 30 },
-  { name: "La Guilde des Lecteurs", informations: "Lire 10 pages par jour et partager vos découvertes.", duration: 21 },
-  { name: "La Bataille des Pas", informations: "Faire 10 000 pas quotidiens. Classement à la clé !", duration: 14 },
-  { name: "Les Chroniqueurs du Journal", informations: "Écrire une pensée quotidienne et la partager.", duration: 15 },
-  { name: "L'Ordre du Réveil", informations: "Se lever à 6h30 chaque jour sans exception.", duration: 30 },
-  { name: "La Méditation des Mages", informations: "10 minutes de méditation collective par jour.", duration: 21 },
-  { name: "Mission Sans Sucre", informations: "30 jours sans sucre ajouté, ensemble !", duration: 30 },
-  { name: "L'Arène du Sport", informations: "20 minutes de sport par jour, tout type d'activité accepté.", duration: 30 },
-  { name: "Défi Polyglottes", informations: "Apprendre 5 mots par jour d'une langue étrangère.", duration: 21 },
-  { name: "La Confrérie des Écrans Éteints", informations: "Pas d'écrans 1h avant le coucher.", duration: 15 }
+  { name: "La Quête des 2 Litres", informations: "Boire 2L d'eau par jour avec l'équipe.", duration: 30, image: "logo-habits.png"},
+  { name: "La Guilde des Lecteurs", informations: "Lire 10 pages par jour et partager vos découvertes.", duration: 21, image: "logo-habits.png" },
+  { name: "La Bataille des Pas", informations: "Faire 10 000 pas quotidiens. Classement à la clé !", duration: 14, image: "logo-habits.png" },
+  { name: "Les Chroniqueurs du Journal", informations: "Écrire une pensée quotidienne et la partager.", duration: 15, image: "logo-habits.png" },
+  { name: "L'Ordre du Réveil", informations: "Se lever à 6h30 chaque jour sans exception.", duration: 30, image: "logo-habits.png" },
+  { name: "La Méditation des Mages", informations: "10 minutes de méditation collective par jour.", duration: 21, image: "logo-habits.png" },
+  { name: "Mission Sans Sucre", informations: "30 jours sans sucre ajouté, ensemble !", duration: 30, image: "logo-habits.png" },
+  { name: "L'Arène du Sport", informations: "20 minutes de sport par jour, tout type d'activité accepté.", duration: 30, image: "logo-habits.png" },
+  { name: "Défi Polyglottes", informations: "Apprendre 5 mots par jour d'une langue étrangère.", duration: 21, image: "logo-habits.png" },
+  { name: "La Confrérie des Écrans Éteints", informations: "Pas d'écrans 1h avant le coucher.", duration: 15, image: "logo-habits.png" }
 ]
 
 challenges_data.each do |challenge_data|
@@ -169,7 +169,8 @@ challenges_data.each do |challenge_data|
     name: challenge_data[:name],
     informations: challenge_data[:informations],
     duration: challenge_data[:duration],
-    user: users.sample
+    user: users.sample,
+    image: challenge_data[:image]
   )
 end
 
@@ -231,4 +232,3 @@ Habit.all.each do |habit|
 end
 
 puts "\nSeeding completed successfully! 🎉"
-
