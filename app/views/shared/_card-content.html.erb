@@ -10,6 +10,10 @@
     <%# Appliquer la couleur différente si tracker du jour rempli %>
   </div>
   <div class="checkbox text-end">
-    <i class="fa-regular fa-circle-check fs-1 px-2"></i>
+    <% if habit.trackers.where(date: Date.today).present? %>
+      <i class="fa-regular fa-circle-check fs-1 px-2"></i>
+    <% else %>
+      <i class="fa-regular fa-circle-xmark fs-1 px-2"></i>
+    <% end %>
+    </div>
   </div>
-</div>
