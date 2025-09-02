@@ -3,13 +3,7 @@
     <h1 class="h1 fw-bold m-0">Bonjour <%= @user.pseudo %>,</h1>
     <h5 class="text-muted m-0">Suis tes progrès et gères tes Habits !</h5>
   </div>
-  <div class="modal fade" id="habitFormModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content p-3">
-        <%= render 'habits/form', habit: @habit %>
-      </div>
-    </div>
-  </div>
+  <%= render 'habits/form', habit: @habit %>
   <div class="modal" id="trackerFormModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -17,10 +11,11 @@
       </div>
     </div>
   </div>
-  <div class="achievements">
-    <%= render 'shared/achievement' %>
-  </div>
-  <%# <div class="row g-3 text-center">
+</div>
+<div class="achievements">
+  <%= render 'shared/achievement' %>
+</div>
+<%# <div class="row g-3 text-center">
 
     <div class="col-6 col-md-3">
       <div class="card stats-card completed p-3">
@@ -81,32 +76,39 @@
       </div>
     </div>
   </div> %>
-  <div id="carouselExampleIndicators" class="carousel slide">
-    <div class="carousel-inner">
-      <div class="habits-carousel">
-        <div class="habits-scroll-container">
-          <% @habits.each do |habit| %>
-            <div class="habit-wrapper">
-              <%= link_to habit_path(habit), remote: true do %>
-                <%= render 'shared/card-content', habit: habit %>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
+<div id="carouselExampleIndicators" class="carousel slide">
+  <div class="carousel-inner">
+    <div class="habits-carousel">
+      <div class="habits-scroll-container">
+        <% @habits.each do |habit| %>
+          <div class="habit-wrapper">
+            <%= link_to habit_path(habit), remote: true do %>
+              <%= render 'shared/card-content', habit: habit %>
+            <% end %>
+          </div>
+        <% end %>
+        <% @user.display_challenges.each do |challenge| %>
+          <div class="habit-wrapper">
+            <%= link_to challenge_path(challenge), remote: true do %>
+              <%= render 'shared/challenge', challenge: challenge %>
+            <% end %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
+</div>
 <div class="dashboard-bottom d-flex justify-content-center">
   <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#trackerFormModal">Mettre à jour</button>
 </div>
-  <div class="dashboard-bottom d-flex">
-    <div class="tip-section mt-3 container-fluid">
-      <% @tips.each do |tip| %>
-        <%= render 'shared/tip', tip: tip %>
-      <% end %>
-    </div>
+<div class="dashboard-bottom">
+  <div class="tip-section mt-3 container-fluid">
+    <% @tips.each do |tip| %>
+      <%= render 'shared/tip', tip: tip %>
+    <% end %>
   </div>
-  <%# <div class="row g-3 mb-4">
+</div>
+<%# <div class="row g-3 mb-4">
     <div class="col-12 col-lg-6">
       <div class="card">
         <div class="card-header d-flex align-items-center">
@@ -121,14 +123,14 @@
       <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
           <span>Mes Objectifs Personnels</span> %>
-  <%# <%= link_to "Nouvel objectif", new_goal_path, class: "btn btn-primary btn-sm" %>
-  <%# </div>
+<%# <%= link_to "Nouvel objectif", new_goal_path, class: "btn btn-primary btn-sm" %>
+<%# </div>
         <div class="card-body text-center">
           <p class="text-muted">Définissez vos objectifs</p> %>
-  <%# <%= link_to "Créer un objectif", new_goal_path, class: "btn btn-primary btn-sm mt-2" %>
-  <%# </div>
+<%# <%= link_to "Créer un objectif", new_goal_path, class: "btn btn-primary btn-sm mt-2" %>
+<%# </div>
       </div>
     </div>
   </div> %>
-  <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete} %>
+<%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete} %>
 </main>

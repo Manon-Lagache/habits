@@ -1,5 +1,5 @@
 .card {
-  background: var(--color-blue-mid);
+  background: var(--color-blue-light);
   border-radius: var(--radius);
   padding: 1rem;
   box-shadow: 0 7px 10px rgba(0,0,0,0.10);
@@ -50,6 +50,27 @@
   margin-bottom: 0.25rem;
 }
 
+
+.card-challenge {
+  background: var(--color-lavender);
+  border-radius: var(--radius);
+  padding: 0.9rem 1rem;
+  box-shadow: 0 7px 10px rgba(0,0,0,0.10);
+  margin-bottom: 1rem;
+  color: var(--color-black);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+  h3 {
+    line-height: 1.5rem;
+  }
+
+  img {
+  height: 2.5rem;
+  width: 2.5rem;
+  margin-right: 1rem;
+  opacity: 0.8;
+  }
+}
 
 .card-challenges {
   display: flex;

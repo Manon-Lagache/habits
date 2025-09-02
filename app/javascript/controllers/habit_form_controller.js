@@ -253,6 +253,8 @@ export default class extends Controller {
   }
 
   toggleReminder(event) {
-    console.log("Reminder toggled:", event.target.checked);
+    const isActive = event.target.checked
+    this.reminderStatusTarget.innerHTML =
+    `<strong class="fs-6">Rappel</strong><br>${isActive ? "Activé" : "Désactivé"}`
   }
 }
