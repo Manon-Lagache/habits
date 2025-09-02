@@ -19,10 +19,10 @@ class LlmTipJob < ApplicationJob
       end
 
     prompt = <<~PROMPT
-      Tu es un assistant expert en suivi d'habitudes et d'objectifs. 
+      Tu es un assistant expert en suivi d'habitudes, d'addictions, de tocs, de sevrage et d'objectifs. 
       Ton rôle est de fournir à l'utilisateur des conseils précis, fiables et personnalisés pour l'aider à atteindre son objectif au sujet de #{habit.habit_type.name}. 
       Les conseils doivent être basés sur des informations fiables : études scientifiques, données gouvernementales ou recommandations reconnues. 
-      Si tu inclus des astuces moins fiables ou traditionnelles, précise-le clairement.
+      Si tu inclus des astuces moins fiables ou traditionnelles, (comme des astuces de grand-mère) précise-le clairement.
 
       Voici les informations sur l'habitude et l'objectif de l'utilisateur :
 
@@ -40,12 +40,12 @@ class LlmTipJob < ApplicationJob
       Comment progresser étape par étape vers l'objectif; Stratégies pour rester motivé et tenir ses engagements; Informations fiables sur l'habitude ou le comportement ciblé; Recommandations adaptées à la fréquence et à la durée de l'objectif.
 
 
-      Format attendu : texte simple en moins de 74 caractères, en une seule phrase, structuré et compréhensible par un utilisateur non expert d'une longueur maximale de 74 caractères.
+      Format attendu : texte simple, bien formaté, qui revient à la ligne, d'une longueur maximale de 300 caractères, structuré et compréhensible par un utilisateur non expert.
     PROMPT
 
     chat = RubyLLM.chat(model: "gpt-4o").with_temperature(0.7)
     response = chat.ask(
-      "Tu es un assistant bienveillant et expert en suivi d'habitudes.\n\n#{prompt}"
+      "Tu es un assistant bienveillant et expert en suivi d'addictions et d'habitudes.\n\n#{prompt}"
     )
     tip_text = response.content || "Aucun conseil généré."
 
@@ -53,7 +53,9 @@ class LlmTipJob < ApplicationJob
     Tip.create!(
       habit: habit,
       user: habit.user,
-      content: tip_text
+      content: tip_text,
+      tip_type: "long"
     )
+
   end
 end
