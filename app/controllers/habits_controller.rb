@@ -30,6 +30,22 @@ class HabitsController < ApplicationController
 
   private
 
+  def normalize_goal_params
+    return unless params[:habit].present?
+
+    # si le JS a envoyé habit[:goal] (map provenant du block JS), on le transforme
+    if params[:habit][:goal].present?
+      params[:habit][:goal_attributes] ||= {}
+      # params[:habit][:goal] peut être un HashWithIndifferentAccess
+      params[:habit][:goal].each do |k, v|
+        # accepter target_date ou target_day du front et normaliser en target_day
+        key = (k.to_s == "target_date" ? "target_day" : k)
+        params[:habit][:goal_attributes][key] = v
+      end
+      params[:habit].delete(:goal)
+    end
+  end
+
   def habit_params
     params.require(:habit).permit(
       :name,

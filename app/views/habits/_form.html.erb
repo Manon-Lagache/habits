@@ -1,6 +1,30 @@
 <%= form_with(model: habit, local: true) do |f| %>
   <div data-controller="habit-form" class="habit-form-modal">
     <div class="habit-form-container">
+      <div class="habit-form-header">
+        <button type="button"
+                class="btn-back"
+                data-action="click->habit-form#prevStep"
+                data-habit-form-target="backButton"
+                aria-label="Retour">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 8l-4 4 4 4"></path>
+          </svg>
+        </button>
+
+        <button type="button"
+                class="btn-close-form"
+                data-action="click->habit-form#closeForm"
+                data-habit-form-target="closeButton"
+                aria-label="Fermer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 6L6 18"></path>
+            <path d="M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
 
 
     <%= f.hidden_field :category_id, data: { habit_form_target: "categoryId" } %>
@@ -10,7 +34,7 @@
 
       <%# Step 1 %>
       <div class="habit-form-step active" data-habit-form-target="step1">
-        <h5>1. Informations de base</h5>
+        <h5>1. Crée ta nouvelle habit</h5>
 
         <div class="mb-3">
           <%= f.label :name, "Nom de l'habitude" %>
@@ -20,7 +44,7 @@
         <div class="categories-container">
           <% @categories.each do |c| %>
             <div class="category-card"
-                 style="background-color: <%= c.color %>; color: white;"
+                 style="color: white; border: 2px solid var(--color-violet);"
                  data-category-id="<%= c.id %>"
                  data-action="click->habit-form#selectCategory">
               
@@ -77,30 +101,40 @@
           </div>
 
           <div class="mb-3">
-            <%= g.select :frequency, [["Quotidien", "daily"], ["Hebdomadaire", "weekly"], ["Mensuel", "monthly"]],
-                        { prompt: "Sélectionnez la fréquence de votre objectif" },
-                        class: "form-control",
-                        data: { habit_form_target: "frequencySelect", action: "change->habit-form#frequencyChanged" } %>
+            <label class="form-label">Fréquence</label>
+            <div class="btn-group-cards" data-habit-form-target="frequencySelect">
+              <% [["Quotidien", "daily"], ["Hebdomadaire", "weekly"], ["Mensuel", "monthly"]].each do |label, value| %>
+                <label class="card-option">
+                  <%= g.radio_button :frequency, value,
+                        class: "d-none",
+                        data: { action: "change->habit-form#frequencyChanged" } %>
+                  <span><%= label %></span>
+                </label>
+              <% end %>
+            </div>
           </div>
 
           <div class="mb-3">
-            <%= g.select :end_type, [["Indéfini", "indefinite"], ["Définir une période", "period"], ["Définir une date cible", "target_date"]],
-                        { prompt: "Choisir un type" },
-                        class: "form-control",
-                        data: { habit_form_target: "endTypeSelect", action: "change->habit-form#endTypeChanged" } %>
+            <label class="form-label">Durée de l'objectif</label>
+            <div class="btn-group-cards" data-habit-form-target="endTypeSelect">
+              <% [["Indéfini", "indefinite"], ["Période", "period"], ["Date cible", "target_date"]].each do |label, value| %>
+                <label class="card-option">
+                  <%= g.radio_button :end_type, value,
+                        class: "d-none",
+                        data: { action: "change->habit-form#endTypeChanged" } %>
+                  <span><%= label %></span>
+                </label>
+              <% end %>
+            </div>
           </div>
+
+          <div data-habit-form-target="dateContainer"></div>
         <% end %>
 
-
-        <%# date periode %>
-        <div class="mb-3" data-habit-form-target="dateContainer"></div>
-
         <div class="d-flex justify-content-between">
-          <button type="button" class="btn btn-secondary w-45 h-7" data-action="habit-form#prevStep">Précédent</button>
           <button type="button" class="btn btn-primary w-45 h-7" data-action="habit-form#nextStep">Suivant</button>
         </div>
       </div>
-
 
       <%# Step 5 %>
       <div class="habit-form-step" data-habit-form-target="step5">
@@ -108,22 +142,24 @@
 
         <div class="mb-3">
           <%= f.label :visibility, "Visibilité" %>
-          <%= f.select :visibility, 
-                options_for_select([["Privé", "private"], ["Public", "public"], ["Amis", "friends"]], @habit.visibility), 
-                { prompt: "Choisir une visibilité" }, 
-                class: "form-select" %>
+          <div class="btn-group w-100" role="group" aria-label="Choisir une visibilité">
+            <% [["Privé", "private"], ["Public", "public"], ["Amis", "friends"]].each do |label, value| %>
+              <input type="radio" class="btn-check"
+                    name="habit[visibility]"
+                    id="visibility_<%= value %>"
+                    value="<%= value %>"
+                    <%= "checked" if @habit.visibility == value %>>
+              <label class="btn btn-outline-primary" for="visibility_<%= value %>"><%= label %></label>
+            <% end %>
+          </div>
         </div>
-
 
         <div class="mb-3" data-habit-form-target="trackerSetup"></div>
 
         <div class="d-flex justify-content-between">
-          <button type="button" class="btn btn-secondary w-45 h-7" data-action="habit-form#prevStep">Précédent</button>
           <%= f.submit "Valider", class: "btn btn-primary w-45 h-7" %>
         </div>
       </div>
-
-
     </div>
   </div>
 <% end %>
