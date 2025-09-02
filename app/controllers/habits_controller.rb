@@ -28,8 +28,8 @@ class HabitsController < ApplicationController
     @categories = Category.all
     @habit = Habit.find(params[:id])
     @tips = @habit.tips.order(created_at: :desc)
+    @tip = @habit.tips.last
     @goal = Goal.find_by(habit: @habit)
-
     @habit_new = Habit.new
     @categories = Category.all
     @habit_types = HabitType.all

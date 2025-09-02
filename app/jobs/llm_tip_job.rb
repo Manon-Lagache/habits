@@ -4,7 +4,7 @@ class LlmTipJob < ApplicationJob
   def perform(habit_id)
     habit = Habit.find(habit_id)
     goal = habit.goal
-
+  
     start_date = goal.start_date || habit.created_at.to_date
     end_date =
       case goal.end_type
