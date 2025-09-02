@@ -24,9 +24,18 @@ class HabitsController < ApplicationController
   end
 
   def show
+    @categories = Category.all
     @habit = Habit.find(params[:id])
     @tips = @habit.tips
     @goal = Goal.find_by(habit: @habit)
+
+    # Création coquille vide pour controller
+    @habit_new = Habit.new
+    @categories = Category.all
+    @habit_types = HabitType.all
+    @habits = current_user.habits
+    @user = current_user
+    @habit_new.build_goal
   end
 
   private

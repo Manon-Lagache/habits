@@ -1,3 +1,6 @@
+  <div class="modal fade" id="habitFormModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content p-3">
 <%= form_with(model: habit, local: true) do |f| %>
   <div data-controller="habit-form" class="habit-form-modal">
     <div class="habit-form-container">
@@ -133,3 +136,6 @@
     </div>
   </div>
 <% end %>
+      </div>
+    </div>
+  </div>
