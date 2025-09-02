@@ -1,19 +1,36 @@
-<div class="container py-2">
-  <h5>Rejoins nos challenges collectifs !</h5>
+<div class="container py-4">
+  <div class="header-show-challenges d-flex align-items-center justify-content-between mb-4">
+  <div style="width: 40px;">
+    <%= link_to root_path do %>
+      <%= image_tag("icons/return_black.png", class: "icon-return")%>
+    <% end %>
+  </div>
+  <div class="flex-grow-1 text-center">
+    <h2 class="mb-0">Challenges</h2>
+  </div>
+  <div style="width: 40px;"></div>
+</div>
   <% @challenges.each do |challenge| %>
+    <% organizer = challenge.group.users.first %>
     <%= link_to challenge_path(challenge), remote: true, class: "challenge-link" do %>
-      <div class="card d-flex ">
-        <h5><%= challenge.name %></h5>
-        <p><%= challenge.informations %></p>
-        <div class="card-challenges flex-wrap py-4">
-          <% challenge.group.users.each do |user| %>
-            <div class="px-2">
-              <img src="<%= user.avatar %>" alt="<%= user.pseudo %>" class="avatar-bordered">
-              <%= user.pseudo %>
-            </div>
-          <% end %>
+      <div class="card d-flex mb-3">
+        <div class="d-flex align-items-start w-100">
+          <%# Image du challenge en haut à gauche %>
+          <%= image_tag challenge.image, class: "me-3 challenge-list-img", style: " height: 60px; width: auto; object-fit: cover; border-radius: 12px;" if challenge.image.present? %>
+          <%# Contenu à droite %>
+          <div class="challenge-content-card flex-grow-1">
+            <h5><%= challenge.name %></h5>
+            <p class="mb-2">Objectif : <%= challenge.informations %></p>
+            <p>Durée : <%= challenge.duration %> jours</p>
+            <span class="d-flex justify-content-between align-items-center w-100">
+              <span class="d-flex align-items-center gap-2">
+                Par :
+                <img src="<%= organizer.avatar %>" alt="<%= organizer.pseudo %>" class="avatar-bordered w-8 h-8 rounded-full">
+              </span>
+              <button class="btn btn-primary ms-2">Participer</button>
+            </span>
+          </div>
         </div>
-        <span class="mt-2">Durée: <%= challenge.duration %> jours</span>
       </div>
     <% end %>
   <% end %>
