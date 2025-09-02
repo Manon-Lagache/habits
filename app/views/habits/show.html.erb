@@ -8,7 +8,9 @@
           <%= image_tag("icons/return.png", class: "icon-return") %>
         <% end %>
         <h2 class="title-white"><%= @habit.name %></h2>
-        <%= image_tag("icons/parameters.png", class: "icon-parameters") %>
+        <%= link_to habit_path(@habit), data: { turbo_method: :delete } do%>
+          <i class="fa-regular fa-trash-can"></i>
+        <% end %>
       </div>
 
       <!-- Chart section -->
@@ -35,7 +37,14 @@
                       data-action="click->tracker-form#decrement">
               -
               </button>
-              <p class="mb-0">1 unit</p>
+
+              <% if @habit.trackers.where(date:Date.today).present? %>
+                <% value = @habit.trackers.where(date:Date.today).last.value %>
+              <% else %>
+                <% value = @habit.goal.value %>
+              <% end %>
+
+              <p class="mb-0"><%= value %> <%= @habit.habit_type.unit %></p>
               <button type="button"
                       class="btn-tracker"
                       data-action="click->tracker-form#increment">

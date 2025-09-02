@@ -1,4 +1,69 @@
-<h1>It works</h1>
+<div class="gradient-bg">
+  <div class="container-fluid">
+      <div class="container py-4">
+        <div class="header-show">
+        <%= link_to challenges_path do %>
+          <%= image_tag("icons/return.png", class: "icon-return")%>
+        <% end %>
+        </div>
+      </div>
+  </div>
+
+  <div class="chevauche-container">
+    <%= image_tag(@challenge.image, class: "chevauche-img")%>
+  </div>
+
+  <div class="container-fluid white-bg">
+   <div class="container pb-2">
+      <div class="content-center">
+      <h2 class="mb-0" style="padding-top: 60px"><%= @challenge.name %></h2>
+      <p class="mb-0">Courte description du challenge à remplir</p>
+      <p class="d-flex align-items-center gap-2 justify-content-center">
+        Organisé par :
+        <% organizer = @challenge.group.users.first %>
+        <img src="<%= organizer.avatar %>" alt="<%= organizer.pseudo %>" class="avatar-bordered w-8 h-8 rounded-full">
+      </p>
+      <%= link_to "Participer au challenge", join_challenge_path(@challenge), data: { turbo_method: :post }, class: "btn btn-primary" %>
+      </div>
+      <div class="card d-flex mt-4">
+        <div class="detail-item">
+            <%= image_tag "icons/calendar.png", class: "me-3 icon-show", alt: "Calendrier" %>
+            <span>Du 01 septembre au 06 octobre 2025</span>
+        </div>
+        <div class="detail-item">
+            <%= image_tag "icons/goal.png", class: "me-3 icon-show", alt: "Objectif" %>
+            <span>Boire 2 litres d'eau par jour</span>
+        </div>
+        <div>
+            <%= image_tag "icons/trophy_black.png", class: "me-3 icon-show", alt: "Trophée" %>
+            <span>1 badge - 150 XP</span>
+        </div>
+      </div>
+      <div>
+        <h4 class="mt-4">Liste des participants :</h3>
+        <div class="px-4">
+          <% @challenge.group.users.each do |user| %>
+            <div class="d-flex py-2" style="display: flex; justify-content: space-between; align-items: center">
+            <div>
+             <div class="d-flex space-x-2" style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                <img src="<%= user.avatar %>" alt="<%= user.pseudo %>" class="avatar-bordered w-8 h-8 rounded-full">
+                <span><%= user.pseudo %></span>
+              </div>
+            </div>
+            <div>
+             <div class="font-semibold text-gray-700">
+                User XP
+              </div>
+            </div>
+            </div>
+            <hr class="my-2"/>
+          <% end %>
+         </div>
+      </div>
+  </div>
+</div>
+</div>
+
 
 <!-- Pour afficher le formulaire du create -->
 <%= render 'habits/form', habit: @habit %>
