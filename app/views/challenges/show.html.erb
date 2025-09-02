@@ -23,7 +23,7 @@
         <% organizer = @challenge.group.users.first %>
         <img src="<%= organizer.avatar %>" alt="<%= organizer.pseudo %>" class="avatar-bordered w-8 h-8 rounded-full">
       </p>
-      <%= link_to "Rejoindre le challenge", join_challenge_path(@challenge), data: { turbo_method: :post }, class: "btn btn-primary" %>
+      <%= link_to "Participer au challenge", join_challenge_path(@challenge), data: { turbo_method: :post }, class: "btn btn-primary" %>
       </div>
       <div class="card d-flex mt-4">
         <div class="detail-item">
