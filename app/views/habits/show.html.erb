@@ -35,7 +35,14 @@
                       data-action="click->tracker-form#decrement">
               -
               </button>
-              <p class="mb-0">1 unit</p>
+
+              <% if @habit.trackers.where(date:Date.today).present? %>
+                <% value = @habit.trackers.where(date:Date.today).last.value %>
+              <% else %>
+                <% value = @habit.goal.value %>
+              <% end %>
+
+              <p class="mb-0"><%= value %> <%= @habit.habit_type.unit %></p>
               <button type="button"
                       class="btn-tracker"
                       data-action="click->tracker-form#increment">
