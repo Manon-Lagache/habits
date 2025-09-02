@@ -11,6 +11,7 @@ class HabitsController < ApplicationController
     @habit = current_user.habits.new(habit_params)
     @goal = @habit.build_goal(goal_params[:goal_attributes])
     if @habit.save! && @goal.save!
+      LlmTipJob.perform_later(@habit.id)
       redirect_to root_path, notice: "Habitude créée avec succès !"
     else
       render :new, status: :unprocessable_entity
@@ -26,7 +27,7 @@ class HabitsController < ApplicationController
   def show
     @categories = Category.all
     @habit = Habit.find(params[:id])
-    @tips = @habit.tips
+    @tips = @habit.tips.order(created_at: :desc)
     @goal = Goal.find_by(habit: @habit)
 
     @habit_new = Habit.new

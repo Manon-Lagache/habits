@@ -53,6 +53,7 @@ gem "devise"
 gem 'flatpickr'
 gem "chartkick"
 gem "faker"
+gem "ruby_llm"
 
 group :development, :test do
   gem "dotenv-rails"
@@ -76,3 +77,5 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "sidekiq", "~> 8.0"
