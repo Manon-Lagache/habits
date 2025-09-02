@@ -37,4 +37,12 @@ class Habit < ApplicationRecord
   def cast_reminder_enabled
     self.reminder_enabled = ActiveModel::Type::Boolean.new.cast(reminder_enabled)
   end
+
+
+  private
+
+  def enqueue_llm_tip_job
+    LlmTipJob.perform_later(self.id)
+  end
 end
+

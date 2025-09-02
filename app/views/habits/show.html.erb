@@ -63,17 +63,15 @@
       </span>
     </div>
   </div>
-</div>
-      <div class="dashboard-bottom d-flex">
-      <div class="tip-section mt-3 container-fluid">
-        <% @tips.each do |tip| %>
-          <%= render 'shared/tip', tip: tip %>
-        <% end %>
+  <div class="dashboard-bottom d-flex">
+    <div class="tip-section mt-3 container-fluid">
+      <% @tips.each do |tip| %>
+        <%= render 'shared/tip', tip: tip %>
+          <% end %>
+        </div>
       </div>
-    </div>
     </div>
   </div>
 </div>
 
-<!-- Pour afficher le formulaire du create -->
 <%= render 'habits/form', habit: @habit_new %>

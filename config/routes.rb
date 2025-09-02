@@ -1,3 +1,5 @@
+require "sidekiq/web"
+
 Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
@@ -6,5 +8,7 @@ Rails.application.routes.draw do
   resources :trackers
   resources :challenges, only: [:index, :show]
   resources :calendar, only: [:index]
+
+  mount Sidekiq::Web => "/sidekiq"
 
 end
