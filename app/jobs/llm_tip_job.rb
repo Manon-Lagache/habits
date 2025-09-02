@@ -36,14 +36,11 @@ class LlmTipJob < ApplicationJob
       - Date de fin : #{end_date.strftime("%d/%m/%Y") rescue 'indéfinie'}
       - Progression actuelle : #{goal.progress || 'non définie'}
 
-      Tes conseils doivent inclure :
-      1. Comment progresser étape par étape vers l'objectif.
-      2. Stratégies pour rester motivé et tenir ses engagements.
-      3. Informations fiables sur l'habitude ou le comportement ciblé.
-      4. Recommandations adaptées à la fréquence et à la durée de l'objectif.
+      Ton conseil doit inclure des choses comme:
+      Comment progresser étape par étape vers l'objectif; Stratégies pour rester motivé et tenir ses engagements; Informations fiables sur l'habitude ou le comportement ciblé; Recommandations adaptées à la fréquence et à la durée de l'objectif.
 
 
-      Format attendu : texte structuré et compréhensible par un utilisateur non expert d'une longueur maximale de 74 caractères.
+      Format attendu : texte simple en moins de 74 caractères, en une seule phrase, structuré et compréhensible par un utilisateur non expert d'une longueur maximale de 74 caractères.
     PROMPT
 
     chat = RubyLLM.chat(model: "gpt-4o").with_temperature(0.7)

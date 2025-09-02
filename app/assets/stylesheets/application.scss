@@ -59,6 +59,10 @@ body {
   }
 }
 
+main {
+  padding-bottom: 60px;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-weight: $headers-font;
   line-height: 1.4;
