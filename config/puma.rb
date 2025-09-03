@@ -13,6 +13,10 @@ threads min_threads_count, max_threads_count
 
 rails_env = ENV.fetch("RAILS_ENV") { "development" }
 
+if ENV['RAILS_ENV'] == 'development'
+  plugin :solid_queue
+end
+
 if rails_env == "production"
   # If you are running more than 1 thread per process, the workers count
   # should be equal to the number of processors (CPU cores) in production.

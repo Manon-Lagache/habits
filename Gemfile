@@ -78,4 +78,4 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "sidekiq", "~> 8.0"
+gem "solid_queue"
