@@ -1,19 +1,17 @@
 .calendar-page {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 8px 12px;
+
   .calendar-header {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
+    gap: 8px;
 
-    .btn-close {
-      font-size: 24px;
-      color: black;
-      background: none;
-      border: none;
-      cursor: pointer;
-      line-height: 1;
-    }
-
-    .calendar-title { font-weight: bold; font-size: 16px; }
+    .left { justify-self: start; }
+    .center { justify-self: center; }
+    .right { justify-self: end; }
   }
 
   .weekdays {
@@ -27,12 +25,18 @@
   }
 
   .calendar-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
     scroll-snap-type: y mandatory;
+    padding-bottom: 16px;
   }
+
 
   .calendar-month {
     scroll-snap-align: center;
-    margin-bottom: 1.25rem;
+    padding: 4px 0;
+    border-bottom: 1px solid #eee;
   }
 
   .calendar-grid {
@@ -46,20 +50,20 @@
     aspect-ratio: 1 / 1;
     font-size: 13px;
     border-radius: 8px;
-    background: #f5f5f5;
+    background: #f7f7f9;
     text-align: center;
     padding: 6px 0;
     cursor: pointer;
     transition: filter .15s ease;
 
-    &:hover { filter: brightness(.95); }
+    &:hover { filter: brightness(.96); }
     &.is-today {
       outline: 2px solid var(--color-lavender, #7c8cff);
       outline-offset: 2px;
       background: #fafaff;
     }
 
-    .day-number { line-height: 1; }
+    .day-number { line-height: 1; font-weight: 600; }
   }
 
   .empty-day { background: transparent; }
@@ -77,6 +81,7 @@
   .habit-indicators {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 3px;
     margin-top: 4px;
     .indicator {
@@ -86,3 +91,33 @@
     }
   }
 }
+
+.calendar-page {
+  position: relative;
+}
+
+.calendar-header {
+  position: sticky;
+  top: 60px;
+  background: #fff;
+  z-index: 900;
+  padding: 8px 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.weekdays {
+  position: sticky;
+  top: 110px;
+  background: #fff;
+  z-index: 800;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border-bottom: 1px solid #ddd;
+}
+
+.weekday-cell {
+  text-align: center;
+  font-weight: bold;
+  padding: 6px;
+}
+
