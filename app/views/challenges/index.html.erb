@@ -22,13 +22,13 @@
             <h5><%= challenge.name %></h5>
             <p class="mb-2">Objectif : <%= challenge.informations %></p>
             <p>Durée : <%= challenge.duration %> jours</p>
-            <span class="d-flex justify-content-between align-items-center w-100">
-              <span class="d-flex align-items-center gap-2">
-                Par :
+            <div class="d-flex justify-content-between align-items-center w-100">
+              <div class="d-flex align-items-center gap-2">
+                <p class="mb-0">Par :</p>
                 <img src="<%= organizer.avatar %>" alt="<%= organizer.pseudo %>" class="avatar-bordered w-8 h-8 rounded-full">
-              </span>
-              <button class="btn btn-primary ms-2">Participer</button>
-            </span>
+              </div>
+              <%= link_to "Participer", join_challenge_path(challenge), data: { turbo_method: :post }, class: "btn btn-primary ms-2" %>
+            </div>
           </div>
         </div>
       </div>
