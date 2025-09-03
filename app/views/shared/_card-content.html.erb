@@ -5,7 +5,14 @@
   <div class="d-flex bottom-card justify-content-start align-items-end gap-2">
     <div class="info-content col-8 bg-white rounded-5 justify-content-between shadow">
       <i class="fa-solid fa-chart-column"></i>
-      <span><strong class="fs-3">28  </strong>jours consécutifs</span>
+      <span><strong class="fs-3">
+          <%# <%  last_valid_tracker = habit.trackers.where.not(value: [nil, 0])
+                              .where('date <= ?', Date.today)
+                              .order(date: :desc)
+                              .first
+             days_since = (Date.today - last_valid_tracker.date).to_i
+          %>
+          <%# <%= days_since %>7 </strong>jours consécutifs</span>
     </div>
     <%# Appliquer la couleur différente si tracker du jour rempli %>
   </div>
@@ -14,6 +21,6 @@
       <i class="fa-regular fa-circle-check fs-1 px-2" id="check"></i>
     <% else %>
       <i class="fa-solid fa-hourglass-start fs-2 px-2" id="hourglass"></i></i>
-    <% end %>
-    </div>
-  </div>
+  <% end %>
+</div>
+</div>
