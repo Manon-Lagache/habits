@@ -10,7 +10,7 @@
           raise
              days_since = (Date.today - last_valid_tracker.date).to_i
           %>
-         <%# <%= days_since %><%= habit.trackers.count - 1 %> </strong>jours consécutifs</span>
+         <%# <%= days_since %><%= habit.trackers.count %> </strong>jours consécutifs</span>
     </div>
     <%# Appliquer la couleur différente si tracker du jour rempli %>
   </div>
