@@ -11,9 +11,9 @@
   </div>
   <div class="checkbox text-end">
     <% if habit.trackers.where(date: Date.today).present? %>
-      <i class="fa-regular fa-circle-check fs-1 px-2"></i>
+      <i class="fa-regular fa-circle-check fs-1 px-2" id="check"></i>
     <% else %>
-      <i class="fa-regular fa-circle-xmark fs-1 px-2"></i>
+      <i class="fa-solid fa-hourglass-start fs-2 px-2" id="hourglass"></i></i>
     <% end %>
     </div>
   </div>

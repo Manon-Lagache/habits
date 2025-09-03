@@ -15,7 +15,7 @@
 
 .header-show {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
   text-align: center;
 }
@@ -46,4 +46,9 @@
   p {
     font-size: 25px;
   }
+}
+
+#trash {
+  color: var(--color-white);
+  font-size: 1.3rem;
 }
