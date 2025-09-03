@@ -363,7 +363,7 @@ end_date =
   when "target_day"
     goal.target_day.presence || start_date
   when "indefinite"
-    start_date + 5.years
+    start_date + 5.years 
   else
     start_date
   end
