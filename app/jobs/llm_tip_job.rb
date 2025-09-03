@@ -4,7 +4,6 @@ class LlmTipJob < ApplicationJob
   def perform(habit_id)
     habit = Habit.find(habit_id)
     goal = habit.goal
-  
     start_date = goal.start_date || habit.created_at.to_date
     end_date =
       case goal.end_type
@@ -19,6 +18,7 @@ class LlmTipJob < ApplicationJob
       end
 
     prompt = <<~PROMPT
+
       Tu es un assistant expert en suivi d'habitudes, d'addictions, de tocs, de sevrage et d'objectifs. 
       Ton rôle est de fournir à l'utilisateur des conseils précis, fiables et personnalisés pour l'aider à atteindre son objectif au sujet de #{habit.habit_type.name}. 
       Les conseils doivent être basés sur des informations fiables : études scientifiques, données gouvernementales ou recommandations reconnues. 
@@ -36,16 +36,20 @@ class LlmTipJob < ApplicationJob
       - Date de fin : #{end_date.strftime("%d/%m/%Y") rescue 'indéfinie'}
       - Progression actuelle : #{goal.progress || 'non définie'}
 
+
       Ton conseil doit inclure des choses comme:
       Comment progresser étape par étape vers l'objectif; Stratégies pour rester motivé et tenir ses engagements; Informations fiables sur l'habitude ou le comportement ciblé; Recommandations adaptées à la fréquence et à la durée de l'objectif.
 
 
       Format attendu : texte simple, bien formaté, qui revient à la ligne, d'une longueur maximale de 300 caractères, structuré et compréhensible par un utilisateur non expert.
+
     PROMPT
 
     chat = RubyLLM.chat(model: "gpt-4o").with_temperature(0.7)
     response = chat.ask(
+
       "Tu es un assistant bienveillant et expert en suivi d'addictions et d'habitudes.\n\n#{prompt}"
+
     )
     tip_text = response.content || "Aucun conseil généré."
 
@@ -53,6 +57,7 @@ class LlmTipJob < ApplicationJob
     Tip.create!(
       habit: habit,
       user: habit.user,
+
       content: tip_text,
       tip_type: "long"
     )
