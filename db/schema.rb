@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_09_02_103721) do
+ActiveRecord::Schema[7.1].define(version: 2025_09_02_171552) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -95,6 +95,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_02_103721) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "tip_type"
     t.index ["habit_id"], name: "index_tips_on_habit_id"
     t.index ["user_id"], name: "index_tips_on_user_id"
   end

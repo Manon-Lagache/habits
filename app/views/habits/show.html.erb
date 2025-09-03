@@ -114,9 +114,7 @@
       <!-- Tips -->
       <div class="dashboard-bottom d-flex">
         <div class="tip-section mt-3 container-fluid">
-          <% @tips.each do |tip| %>
-            <%= render 'shared/tip', tip: tip %>
-          <% end %>
+           <%= render 'shared/tip', tip: @long_tip %>
         </div>
       </div>
 

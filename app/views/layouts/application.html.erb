@@ -19,13 +19,15 @@
     <!-- flatpickr JS global (CDN). Doit être chargé avant que nos controllers Stimulus utilisent window.flatpickr -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   </head>
-  <body>
-    <% if user_signed_in?%>
+    <body>
+    <% if user_signed_in? %>
       <%= render 'shared/header' %>
     <% end %>
-  <%= yield %>
-  <% if user_signed_in? %>
-    <%= render 'shared/footer' %>
-  <% end %>
-</body>
+    <main>
+      <%= yield %>
+    </main>
+    <% if user_signed_in? %>
+      <%= render 'shared/footer' %>
+    <% end %>
+  </body>
 </html>

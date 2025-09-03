@@ -19,4 +19,5 @@ Rails.application.routes.draw do
   match "/500", to: "errors#internal_server_error", via: :all
 
   mount Sidekiq::Web => "/sidekiq"
+
 end
