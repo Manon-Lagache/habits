@@ -1,11 +1,11 @@
 <div class="card card-challenge justify-content-between" >
   <div class="d-flex justify-content-between">
     <h3 class="col-8 fw-bold"><%= challenge.name %></h3>
-    <%= image_tag('icons/trophy-purple.png') %>
+    <%= image_tag('icons/trophy-purple.png', id: "trophy-icon-purple") %>
   </div>
   <div>
 
-    <span>Objectif: </span><%= challenge.informations %>
+    <span>Objectif : </span><%= challenge.objective %>
   </div>
-  <span class="align-self-end">Par <img src="<%= challenge.creator %>" alt="creator" class="avatar-bordered"></span>
+  <span class="align-self-end">Par : <img src="<%= challenge.creator %>" alt="creator" class="avatar-bordered"></span>
 </div>

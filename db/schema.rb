@@ -23,12 +23,16 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_03_101758) do
 
   create_table "challenges", force: :cascade do |t|
     t.string "name"
-    t.text "informations"
     t.integer "duration"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image"
+    t.text "description"
+    t.string "objective"
+    t.date "start_date"
+    t.date "end_date"
+    t.integer "xp_reward"
     t.index ["user_id"], name: "index_challenges_on_user_id"
   end
 
@@ -242,6 +246,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_03_101758) do
     t.string "avatar"
     t.integer "age"
     t.string "location"
+    t.integer "xp_reward"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
