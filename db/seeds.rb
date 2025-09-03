@@ -141,7 +141,8 @@ puts "Seeding users..."
     pseudo: Faker::Games::Pokemon.name, # fun pseudonym
     avatar: Faker::Avatar.image,        # random avatar url
     age: rand(18..60),
-    location: Faker::Address.city
+    location: Faker::Address.city,
+    xp_reward: 100 + rand(0..900)
   )
 end
 
@@ -152,25 +153,119 @@ puts "Users created: #{User.count}"
 puts "Seeding challenges..."
 
 challenges_data = [
-  { name: "La Quête des 2 Litres", informations: "Boire 2L d'eau par jour avec l'équipe.", duration: 30, image: "logo-habits.png"},
-  { name: "La Guilde des Lecteurs", informations: "Lire 10 pages par jour et partager vos découvertes.", duration: 21, image: "logo-habits.png" },
-  { name: "La Bataille des Pas", informations: "Faire 10 000 pas quotidiens. Classement à la clé !", duration: 14, image: "logo-habits.png" },
-  { name: "Les Chroniqueurs du Journal", informations: "Écrire une pensée quotidienne et la partager.", duration: 15, image: "logo-habits.png" },
-  { name: "L'Ordre du Réveil", informations: "Se lever à 6h30 chaque jour sans exception.", duration: 30, image: "logo-habits.png" },
-  { name: "La Méditation des Mages", informations: "10 minutes de méditation collective par jour.", duration: 21, image: "logo-habits.png" },
-  { name: "Mission Sans Sucre", informations: "30 jours sans sucre ajouté, ensemble !", duration: 30, image: "logo-habits.png" },
-  { name: "L'Arène du Sport", informations: "20 minutes de sport par jour, tout type d'activité accepté.", duration: 30, image: "logo-habits.png" },
-  { name: "Défi Polyglottes", informations: "Apprendre 5 mots par jour d'une langue étrangère.", duration: 21, image: "logo-habits.png" },
-  { name: "La Confrérie des Écrans Éteints", informations: "Pas d'écrans 1h avant le coucher.", duration: 15, image: "logo-habits.png" }
+  {
+    name: "Hydratation maximale",
+    description: "Restez hydraté chaque jour en atteignant votre quota d'eau.",
+    objective: "Boire 2 litres d'eau par jour.",
+    duration: 30,
+    start_date: Date.new(2025, 9, 1),
+    end_date: Date.new(2025, 9, 30),
+    xp_reward: 150,
+    image: "challenges/drink-water.jpg"
+  },
+  {
+    name: "10000 pas, zéro excuses ",
+    description: "Intégrez davantage de mouvement dans votre quotidien.",
+    objective: "Faire au moins 10 000 pas chaque jour.",
+    duration: 21,
+    start_date: Date.new(2025, 9, 5),
+    end_date: Date.new(2025, 9, 25),
+    xp_reward: 200,
+    image: "challenges/walk.jpg"
+  },
+  {
+    name: "Zen restons zen ",
+    description: "Offrez-vous une pause mentale pour réduire le stress.",
+    objective: "Méditer 10 minutes chaque jour.",
+    duration: 14,
+    start_date: Date.new(2025, 9, 10),
+    end_date: Date.new(2025, 9, 24),
+    xp_reward: 100,
+    image: "challenges/meditation.jpg"
+  },
+  {
+    name: "Zéro sucre ajouté ",
+    description: "Prenez soin de votre énergie et de votre santé.",
+    objective: "Éviter les aliments et boissons sucrés.",
+    duration: 21,
+    start_date: Date.new(2025, 9, 15),
+    end_date: Date.new(2025, 10, 5),
+    xp_reward: 250,
+    image: "challenges/no-sugar.jpg"
+  },
+  {
+    name: "Sommeil de champion ",
+    description: "Améliorez la qualité de votre sommeil.",
+    objective: "Se coucher avant 23h chaque soir.",
+    duration: 30,
+    start_date: Date.new(2025, 10, 1),
+    end_date: Date.new(2025, 10, 30),
+    xp_reward: 200,
+    image: "challenges/sleep.jpg"
+  },
+  {
+    name: "Gratitude attitude",
+    description: "Cultivez un état d'esprit positif.",
+    objective: "Écrire 3 choses positives chaque jour.",
+    duration: 21,
+    start_date: Date.new(2025, 10, 5),
+    end_date: Date.new(2025, 10, 25),
+    xp_reward: 120,
+    image: "challenges/journaling.jpg"
+  },
+  {
+    name: "Détox digitale",
+    description: "Reprenez du temps pour vous en réduisant les écrans.",
+    objective: "Maximum 1h/jour sur les réseaux sociaux.",
+    duration: 14,
+    start_date: Date.new(2025, 10, 10),
+    end_date: Date.new(2025, 10, 24),
+    xp_reward: 180,
+    image: "challenges/digital-detox.jpg"
+  },
+  {
+    name: "Matins sportifs",
+    description: "Commencez la journée en pleine énergie.",
+    objective: "Faire 20 minutes d'exercice chaque matin.",
+    duration: 30,
+    start_date: Date.new(2025, 11, 1),
+    end_date: Date.new(2025, 11, 30),
+    xp_reward: 300,
+    image: "challenges/exercise.jpg"
+  },
+  {
+    name: "Littérature quotidienne",
+    description: "Stimulez votre esprit et réduisez le temps d'écran.",
+    objective: "Lire au moins 15 minutes chaque jour.",
+    duration: 21,
+    start_date: Date.new(2025, 11, 5),
+    end_date: Date.new(2025, 11, 25),
+    xp_reward: 150,
+    image: "challenges/read.jpg"
+  },
+  {
+    name: "Défi polyglotte",
+    description: "Progressez chaque jour dans une langue étrangère.",
+    objective: "Pratiquer 15min de langue étrangère par jour.",
+    duration: 14,
+    start_date: Date.new(2025, 11, 10),
+    end_date: Date.new(2025, 11, 24),
+    xp_reward: 120,
+    image: "challenges/study.jpg"
+  }
 ]
 
 challenges_data.each do |challenge_data|
   Challenge.create!(
     name: challenge_data[:name],
-    informations: challenge_data[:informations],
+    description: challenge_data[:description],
+    objective: challenge_data[:objective],
     duration: challenge_data[:duration],
-    user: users.sample,
-    image: challenge_data[:image]
+    start_date: challenge_data[:start_date],
+    end_date: challenge_data[:end_date],
+    xp_reward: challenge_data[:xp_reward],
+    image: challenge_data[:image],
+    user: users.sample
   )
 end
 
