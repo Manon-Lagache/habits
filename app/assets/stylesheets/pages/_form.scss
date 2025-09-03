@@ -242,21 +242,42 @@ label.form-check-label {
   color: white;
 }
 
+
 .flatpickr-calendar {
-  border-radius: 12px;
-  border: 2px solid var(--color-violet);
-  font-family: "Helvetica", sans-serif;
-  background: var(--color-white);
+  background: var(--gradient-primary);
+  border-radius: 1rem;
+  border: none;
+  box-shadow: 0 8px 25px var(--color-black);
+  overflow: hidden;
+  font-family: $body-font;
+  color: white;
+}
+
+.flatpickr-months {
+  background: var(--color-black);
+  padding: 0.5rem 0;
+}
+
+.flatpickr-current-month {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: white;
+}
+
+.flatpickr-weekday {
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
 }
 
 .flatpickr-day {
   border-radius: 50%;
-  transition: all 0.2s;
-}
-
-.flatpickr-day.selected,
-.flatpickr-day.startRange,
-.flatpickr-day.endRange {
-  background: var(--color-violet);
+  transition: all 0.2s ease;
   color: white;
 }
+
+.flatpickr-day.selected {
+  background: var(--color-pink);
+  color: white;
+  font-weight: bold;
+}
+

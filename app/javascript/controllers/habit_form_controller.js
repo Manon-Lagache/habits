@@ -173,29 +173,57 @@ export default class extends Controller {
     const type = event.currentTarget.value;
     const container = this.dateContainerTarget;
     container.innerHTML = "";
+
     if (type === "target_date") {
       const label = document.createElement("label");
       label.textContent = "Date cible";
+
       const input = document.createElement("input");
-      input.type = "date";
+      input.type = "text";
       input.name = "habit[goal][target_day]";
       input.className = "form-control";
+
       container.appendChild(label);
       container.appendChild(input);
+
+      flatpickr(input, {
+        dateFormat: "Y-m-d",
+        allowInput: true,
+        disableMobile: true
+      });
+
     } else if (type === "period") {
       const label = document.createElement("label");
       label.textContent = "Période";
+
+      const inputRange = document.createElement("input");
+      inputRange.type = "text";
+      inputRange.className = "form-control mb-2";
+
       const inputStart = document.createElement("input");
-      inputStart.type = "date";
+      inputStart.type = "hidden";
       inputStart.name = "habit[goal][start_date]";
-      inputStart.className = "form-control mb-2";
+
       const inputEnd = document.createElement("input");
-      inputEnd.type = "date";
+      inputEnd.type = "hidden";
       inputEnd.name = "habit[goal][end_date]";
-      inputEnd.className = "form-control";
+
       container.appendChild(label);
+      container.appendChild(inputRange);
       container.appendChild(inputStart);
       container.appendChild(inputEnd);
+
+      flatpickr(inputRange, {
+        mode: "range",
+        dateFormat: "Y-m-d",
+        allowInput: true,
+        onChange: function(selectedDates) {
+          if (selectedDates.length === 2) {
+            inputStart.value = flatpickr.formatDate(selectedDates[0], "Y-m-d");
+            inputEnd.value = flatpickr.formatDate(selectedDates[1], "Y-m-d");
+          }
+        }
+      });
     }
   }
 
