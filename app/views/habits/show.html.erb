@@ -9,7 +9,7 @@
         <% end %>
         <h2 class="title-white"><%= @habit.name %></h2>
         <%= link_to habit_path(@habit), data: { turbo_method: :delete } do%>
-          <i class="fa-regular fa-trash-can"></i>
+          <i class="fa-regular fa-trash-can" id="trash"></i>
         <% end %>
       </div>
 
