@@ -12,7 +12,7 @@ class HabitsController < ApplicationController
     @goal = @habit.build_goal(goal_params[:goal_attributes])
     if @habit.save! && @goal.save!
       LlmTipJob.perform_later(@habit.id)
-      LlmDailyTipJob.perform_later(@habit.id) 
+      LlmDailyTipJob.perform_later(@habit.id)
 
       redirect_to root_path, notice: "Habitude créée avec succès !"
     else
@@ -26,7 +26,7 @@ class HabitsController < ApplicationController
     @habit_types = HabitType.all
   end
 
-  
+
   def show
 
   @categories = Category.all
