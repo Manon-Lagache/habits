@@ -23,6 +23,9 @@ module Habits
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w(assets tasks))
 
+    # Convertir les dates en français
+    config.i18n.default_locale = :fr
+
     config.active_job.queue_adapter = :sidekiq
 
     # Configuration for the application, engines, and railties goes here.

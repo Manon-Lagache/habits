@@ -16,19 +16,26 @@
   <div class="container-fluid white-bg">
    <div class="container pb-2">
       <div class="content-center">
-      <h2 class="mb-0" style="padding-top: 60px"><%= @challenge.name %></h2>
+      <h2 class="mb-0" style="padding-top: 75px"><%= @challenge.name %></h2>
       <p class="mb-1"><%= @challenge.description %></p>
       <p class="d-flex align-items-center gap-2 justify-content-center">
         Organisé par :
         <% organizer = @challenge.group.users.first %>
-        <img src="<%= organizer.avatar %>" alt="<%= organizer.pseudo %>" class="avatar-bordered w-8 h-8 rounded-full">
+        <img src="<%= organizer.avatar %>" alt="<%= organizer.pseudo %>" class="avatar-bordered">
       </p>
       <%= link_to "Participer au challenge", join_challenge_path(@challenge), data: { turbo_method: :post }, class: "btn btn-primary" %>
       </div>
       <div class="card d-flex mt-4">
         <div class="detail-item">
             <%= image_tag "icons/calendar.png", class: "me-3 icon-show", alt: "Calendrier" %>
-            <span>Du 01 septembre au 06 octobre 2025</span>
+            <span>
+              Du
+              <% if @challenge.start_date.year == @challenge.end_date.year %>
+                <%= l(@challenge.start_date, format: "%d %B") %> au <%= l(@challenge.end_date, format: "%d %B %Y") %>
+              <% else %>
+                <%= l(@challenge.start_date, format: "%d %B %Y") %> au <%= l(@challenge.end_date, format: "%d %B %Y") %>
+              <% end %>
+            </span>
         </div>
         <div class="detail-item">
             <%= image_tag "icons/goal.png", class: "me-3 icon-show", alt: "Objectif" %>
