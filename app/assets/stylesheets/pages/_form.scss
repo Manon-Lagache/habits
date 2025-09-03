@@ -18,7 +18,7 @@
   width: 90%;
   max-width: 400px;
   max-height: 80vh;
-  padding: 20px;
+  padding: 10px;
   overflow-y: auto;
 }
 
@@ -108,7 +108,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 6px;
+  padding: 0px 0px 5px 0px;
   position: sticky;
   top: 0;
   background: rgba(255,255,255,0.9);
@@ -122,8 +122,7 @@
   justify-content: center;
   width: 34px;
   height: 34px;
-  border-radius: 50%;
-  border: 1px solid #d8d8d8;
+  border: 1px transparent;
   background: none;
   color: #8b8b8b;
   padding: 0;
@@ -144,67 +143,120 @@
 
 .btn-group-cards {
   display: flex;
+  justify-content: center;
   gap: 10px;
-  justify-content: space-between;
+  flex-wrap: nowrap;
 }
 
-.card-option {
+.btn-group-cards .card-option {
   flex: 1;
-  text-align: center;
   border: 1px solid #ccc;
   border-radius: 12px;
-  padding: 12px;
-  font-size: 14px;
+  padding: 10px 15px;
+  text-align: center;
   cursor: pointer;
+  transition: all 0.2s;
+  min-width: 80px;
   user-select: none;
-  transition: all 0.2s ease;
 }
 
-.card-option:active {
-  transform: scale(0.96);
-  background-color: #f0f0f0;
-}
-
-.card-option input:checked + span,
-.card-option:has(input:checked) {
-  border-color: #007bff;
-  background-color: #eaf3ff;
-  color: #007bff;
+.btn-group-cards .card-option input:checked + span,
+.btn-group-cards .card-option.selected {
+  background-color: var(--color-violet);
+  border-color: var(--color-violet);
+  color: white;
   font-weight: 600;
 }
 
 
 .form-control {
-  border-radius: 12px;
-  border: 2px solid #000;
   background-color: #fff;
+  border: 2px solid #ccc;
+  border-radius: 12px;
   padding: 0.5rem 1rem;
   transition: background-color 0.3s, border-color 0.3s;
 }
 
-.form-control:focus,
-.form-control:valid {
+.form-control.filled {
   background-color: #cce5ff;
   border-color: #0d6efd;
-  outline: none;
 }
 
 .form-check.form-switch {
-  width: 90px;
-  height: 32px;
-  margin: 0 0.5rem;
-  position: relative;
+  margin: 0; 
 }
 
-.weekdays-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+.form-switch .form-check-input {
+  width: 50px;
+  margin-left: -15px;
 }
 
-.weekdays-container .form-check {
-  flex: 0 0 30px;
+.reminder-label {
+  flex: 0 0 auto;
+  font-size: 0.9rem;
+}
+
+.weekdays-grid-4,
+.weekdays-grid-7 {
+  display: grid;
+  justify-items: center;
+  margin-top: 10px;
+}
+
+.weekdays-grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.weekdays-grid-7 {
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+
+.weekdays-grid-4 .form-check,
+.weekdays-grid-7 .form-check {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0;
+}
+
+label.form-check-label {
+  padding-right: 20px;
+}
+
+.weekdays-grid-4 .form-check input,
+.weekdays-grid-7 .form-check input {
+  margin-bottom: 4px;
+}
+
+.weekdays-grid-7 .form-check:nth-child(1) { grid-column: 3; }
+.weekdays-grid-7 .form-check:nth-child(2) { grid-column: 4; }
+.weekdays-grid-7 .form-check:nth-child(3) { grid-column: 5; }
+
+
+.category-card.selected,
+.habit-type-item.selected,
+.verb-card.selected {
+  background-color: var(--color-violet);
+  color: white;
+}
+
+.flatpickr-calendar {
+  border-radius: 12px;
+  border: 2px solid var(--color-violet);
+  font-family: "Helvetica", sans-serif;
+  background: var(--color-white);
+}
+
+.flatpickr-day {
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.flatpickr-day.selected,
+.flatpickr-day.startRange,
+.flatpickr-day.endRange {
+  background: var(--color-violet);
+  color: white;
 }
