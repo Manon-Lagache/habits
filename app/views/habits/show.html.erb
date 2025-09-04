@@ -17,7 +17,32 @@
       <div>
         <h5 class="title-white pt-2">Cette semaine</h5>
         <div class="card card-chart p-2">
-          <%= area_chart @habit.chart_data, xtitle: "Date", ytitle: @habit.habit_type.unit, height: "200px" %>
+<%= area_chart @habit.chart_data(@goal.value),
+  xtitle: "Date",
+  ytitle: @habit.habit_type.unit.capitalize,
+  height: "200px",
+  colors: ["#8860D0", "#5680E9"],
+  library: {
+    scales: {
+      x: {
+        ticks: { color: "black", font: { size: 12, family: "Work Sans" } },
+        title: { color: "black", font: { size: 16, family: "Work Sans", weight: "bold" } }
+      },
+      y: {
+        ticks: { color: "black", font: { size: 12, family: "Work Sans" } },
+        title: { color: "black", font: { size: 16, family: "Work Sans", weight: "bold" } }
+      }
+    },
+    plugins: {
+      legend: {
+        labels: {
+          color: "black",
+          font: { size: 14, family: "Work Sans" }
+        }
+      }
+    }
+  }
+%>
         </div>
 
         <!-- Info cards row START -->
