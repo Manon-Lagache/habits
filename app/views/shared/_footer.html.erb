@@ -1,6 +1,9 @@
 <footer class="site-footer">
   <div class="container py-3 footer">
     <%= link_to root_path do %>
+      <%= image_tag("icons/community.png", class:"community-btn")%>
+    <% end %>
+    <%= link_to root_path do %>
       <%= image_tag("icons/home.png", class:"footer-btn")%>
     <% end %>
     <button class="btn btn-primary" id="btn-add" data-bs-toggle="modal" data-bs-target="#habitFormModal">
@@ -10,7 +13,7 @@
       <%= image_tag("icons/trophy.png", class:"footer-btn")%>
     <% end %>
     <%= link_to calendar_index_path do %>
-      <%= image_tag("icons/calendar.png", class:"footer-btn")%>
+      <%= image_tag("icons/calendar.png", class:"calendar-btn")%>
     <% end %>
   </div>
 </footer>
