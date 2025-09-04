@@ -8,11 +8,11 @@ GroupMembership.destroy_all
 User.destroy_all
 
 user = User.create!(
-  pseudo: "toto",
-  email: "tata@tot.fr",
+  pseudo: "Guillem",
+  email: "guillem@guillem.fr",
   age: 30,
   location: "Bordeaux",
-  avatar: Faker::Avatar.image,
+  avatar: "",
   password: "123456"
 )
 
@@ -134,17 +134,21 @@ p "created #{Verb.count} verbs"
 puts "Seeding users..."
 
 # Create users
-20.times do
-  User.create!(
+
+Dir.each_child('./app/assets/images/avatars') do |filename|
+  p filename
+  avatar = User.create!(
     email: Faker::Internet.unique.email,
-    password: "password", # default password for all
-    pseudo: Faker::Games::Pokemon.name, # fun pseudonym
-    avatar: Faker::Avatar.image,        # random avatar url
+    password: "password",
+    pseudo: Faker::Games::Pokemon.name,
+    avatar: filename,
     age: rand(18..60),
     location: Faker::Address.city,
     xp_reward: 100 + rand(0..900)
   )
+  p avatar
 end
+
 
 users = User.all
 
