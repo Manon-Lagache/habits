@@ -16,32 +16,32 @@
       <div>
         <h5 class="title-white pt-2">Cette semaine</h5>
         <div class="card card-chart p-2">
-<%= area_chart @habit.chart_data(@goal.value),
-  xtitle: "Date",
-  ytitle: @habit.habit_type.unit.capitalize,
-  height: "200px",
-  colors: ["#8860D0", "#5680E9"],
-  library: {
-    scales: {
-      x: {
-        ticks: { color: "black", font: { size: 12, family: "Work Sans" } },
-        title: { color: "black", font: { size: 16, family: "Work Sans", weight: "bold" } }
-      },
-      y: {
-        ticks: { color: "black", font: { size: 12, family: "Work Sans" } },
-        title: { color: "black", font: { size: 16, family: "Work Sans", weight: "bold" } }
-      }
-    },
-    plugins: {
-      legend: {
-        labels: {
-          color: "black",
-          font: { size: 14, family: "Work Sans" }
-        }
-      }
-    }
-  }
-%>
+        <%= area_chart @habit.chart_data(@goal.value),
+          xtitle: "Date",
+          ytitle: @habit.habit_type.unit.capitalize,
+          height: "200px",
+          colors: ["#8860D0", "#5680E9"],
+          library: {
+            scales: {
+              x: {
+                ticks: { color: "black", font: { size: 12, family: "Work Sans" } },
+                title: { color: "black", font: { size: 16, family: "Work Sans", weight: "bold" } }
+              },
+              y: {
+                ticks: { color: "black", font: { size: 12, family: "Work Sans" } },
+                title: { color: "black", font: { size: 16, family: "Work Sans", weight: "bold" } }
+              }
+            },
+            plugins: {
+              legend: {
+                labels: {
+                  color: "black",
+                  font: { size: 14, family: "Work Sans" }
+                }
+              }
+            }
+          }
+        %>
         </div>
 
         <!-- Info cards row START -->
@@ -96,51 +96,50 @@
 
   <!-- Section blanche en bas -->
   <div class="container-fluid white-bg">
-    <div class="container pb-2">
+    <div class="container">
+
 
       <!-- Infos générales -->
-      <div class="row m-0">
-        <div class="col-6">
-          <div class="info-content blue-bg rounded-5 shadow d-flex align-items-center p-2">
-            <%= image_tag "icons/categories.png", class: "me-3 icon-show", alt: "Catégories" %>
-            <span>
-              <strong class="fs-6">Catégorie</strong><br>
-              <%= @habit.category.name %>
-            </span>
-          </div>
-        </div>
+<div class="row m-0 pt-4">
 
-        <div class="col-6">
-          <div class="info-content blue-bg rounded-5 shadow d-flex align-items-center p-2">
-            <%= image_tag "icons/goal.png", class: "me-3 icon-show", alt: "Objectif" %>
-            <span>
-              <strong class="fs-6">Objectif</strong><br>
-              <%= @goal.value %>
-              <%= @habit.habit_type.unit %>
-            </span>
-          </div>
-        </div>
+  <div class="col-6">
+    <div class="info-content card-details blue-bg rounded-5 shadow">
+      <%= image_tag "icons/categories.png", class: "icon-show", alt: "Catégories" %>
+      <span>
+        <strong><%= @habit.category.name %></strong>
+      </span>
+    </div>
+  </div>
 
-        <div class="col-6 mt-3">
-          <div class="info-content blue-bg rounded-5 shadow d-flex align-items-center p-2">
-            <%= image_tag "icons/calendar.png", class: "me-3 icon-show", alt: "Période" %>
-            <span>
-              <strong class="fs-6">Période</strong><br>
-              <%= @goal.period_display %>
-            </span>
-          </div>
-        </div>
+  <div class="col-6">
+    <div class="info-content card-details blue-bg rounded-5 shadow">
+      <%= image_tag "icons/goal.png", class: "icon-show", alt: "Objectif" %>
+      <span>
+        <strong><%= @goal.value %></strong>
+        <strong><%= @habit.habit_type.unit %></strong>
+      </span>
+    </div>
+  </div>
 
-        <div class="col-6 mt-3">
-          <div class="info-content blue-bg rounded-5 shadow d-flex align-items-center p-2">
-            <%= image_tag "icons/reminder.png", class: "me-3 icon-show", alt: "Rappel" %>
-            <span data-habit-form-target="reminderStatus">
-              <strong class="fs-6">Rappel</strong><br>
-              <%= @habit.reminder_enabled? ? "Activé" : "Désactivé" %>
-            </span>
-          </div>
-        </div>
-      </div>
+  <div class="col-6 mt-3">
+    <div class="info-content card-details blue-bg rounded-5 shadow">
+      <%= image_tag "icons/calendar-2.png", class: "icon-show", alt: "Période" %>
+      <span>
+        <strong><%= @goal.period_display %></strong>
+      </span>
+    </div>
+  </div>
+
+  <div class="col-6 mt-3">
+    <div class="info-content card-details blue-bg rounded-5 shadow">
+      <%= image_tag "icons/reminder.png", class: "icon-show", alt: "Rappel" %>
+      <span>
+        <strong><%= @habit.reminder_enabled? ? "Activé" : "Désactivé" %></strong>
+      </span>
+    </div>
+  </div>
+
+</div>
 
       <!-- Tips -->
       <div class="dashboard-bottom d-flex">

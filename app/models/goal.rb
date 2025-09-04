@@ -21,7 +21,7 @@ class Goal < ApplicationRecord
   def period_display
     case end_type
     when "indefinite"
-      "Indéfinie"
+      "Période permanente"
     when "target_day"
       "Jusqu'au #{target_day&.strftime("%d/%m/%Y")}"
     when "period"
