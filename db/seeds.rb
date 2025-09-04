@@ -13,7 +13,8 @@ user = User.create!(
   age: 30,
   location: "Bordeaux",
   avatar: "aiony-haust-3TLl_97HNJo-unsplash.jpg",
-  password: "123456"
+  password: "123456",
+  xp_reward: 300
 )
 
 categories = [
@@ -280,7 +281,7 @@ puts "Creating groups..."
 # Create one group for each challenge
 
 Challenge.all.each do |challenge|
-  group = Group.create!(
+  Group.create!(
     challenge: challenge
   )
 
@@ -390,11 +391,11 @@ end
 
 habit_cigarette.trackers.destroy_all
 8.times do |index|
-    Tracker.create(
-      date: Date.today - (index.days + 1),
-      value: rand(9..18),
-      habit: habit_cigarette
-    )
+  Tracker.create(
+    date: Date.today - (index.days + 1),
+    value: rand(9..18),
+    habit: habit_cigarette
+  )
 end
 
 
