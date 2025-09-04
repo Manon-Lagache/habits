@@ -23,7 +23,7 @@ class User < ApplicationRecord
     unavailable_challenges
   end
 
-  def gain_xp!(amount = 40)
+  def gain_xp!(amount = 60)
     self.xp_reward += amount
     save!
   end

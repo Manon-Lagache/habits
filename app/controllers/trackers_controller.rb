@@ -5,7 +5,7 @@ class TrackersController < ApplicationController
   end
 
   def create
-
+    @user = current_user
     date_param = params[:date].present? ? Date.parse(params[:date]) : Date.today
     trackers = tracker_params
     trackers.each do |tracker|
@@ -24,9 +24,9 @@ class TrackersController < ApplicationController
           habit_id: tracker.last.require(:habit_id),
           date: date_param
         )
-        # if tracker
-        #   @user.gain_xp!
-        # end
+        if tracker
+          @user.gain_xp!
+        end
       end
     end
 
