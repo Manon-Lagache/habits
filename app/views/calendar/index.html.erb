@@ -1,52 +1,78 @@
-<h1>Calendrier des habitudes</h1>
+<div class="calendar-page"
+     data-controller="calendar"
+     data-calendar-selected-year="<%= @current_month.year %>"
+     data-calendar-selected-month="<%= @current_month.month %>"
+     data-calendar-index-path="<%= calendar_index_path %>">
 
-<div class="calendar-navigation mb-3">
-  <%= link_to "« Mois précédent", calendar_index_path(month: @previous_month.month, year: @previous_month.year) %> |
-  <strong><%= l(@current_month, format: "%B %Y") %></strong> |
-  <%= link_to "Mois suivant »", calendar_index_path(month: @next_month.month, year: @next_month.year) %>
-</div>
+  <div class="calendar-header d-flex justify-content-between align-items-center">
+    <div class="calendar-selects d-flex gap-2">
 
-<div id="calendar-container" data-controller="calendar" 
-     data-calendar-selected-year="<%= @current_month.year %>" 
-     data-calendar-selected-month="<%= @current_month.month %>">
-  <table class="calendar table table-bordered text-center">
-    <thead>
-      <tr>
-        <% I18n.t("date.abbr_day_names").each do |day| %>
-          <th><%= day %></th>
-        <% end %>
-      </tr>
-    </thead>
-    <tbody>
-      <% first_day = (@current_month.beginning_of_month.beginning_of_week(:monday) rescue nil) %>
-      <% last_day  = (@current_month.end_of_month.end_of_week(:sunday) rescue nil) %>
+      <div class="dropdown">
+        <button class="btn btn-sm btn-outline-primary calendar-dropdown"
+                type="button"
+                id="monthDropdown"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                data-calendar-target="monthSelect">
+          <%= I18n.l(Date.new(2000, @current_month.month, 1), format: "%B") %>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-scrollable" aria-labelledby="monthDropdown">
+          <% 1.upto(12) do |m| %>
+            <li>
+              <a class="dropdown-item <%= 'active' if m == @current_month.month %>"
+                 href="#"
+                 data-value="<%= m %>"
+                 data-action="click->calendar#selectMonth">
+                <%= I18n.l(Date.new(2000, m, 1), format: "%B") %>
+              </a>
+            </li>
+          <% end %>
+        </ul>
+      </div>
 
-      <% if first_day && last_day %>
-        <% (first_day..last_day).to_a.in_groups_of(7).each do |week| %>
-          <tr>
-            <% week.each do |day| %>
-              <% if day.present? %>
-                <td class="<%= "outside" if day.month != @current_month.month %>">
-                  <div class="date"><%= day.day %></div>
+      <div class="dropdown">
+        <button class="btn btn-sm btn-outline-primary calendar-dropdown"
+                type="button"
+                id="yearDropdown"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                data-calendar-target="yearSelect">
+          <%= @current_month.year %>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-scrollable" aria-labelledby="yearDropdown">
+          <% ((@current_month.year - 10)..(@current_month.year + 10)).each do |y| %>
+            <li>
+              <a class="dropdown-item <%= 'active' if y == @current_month.year %>"
+                 href="#"
+                 data-value="<%= y %>"
+                 data-action="click->calendar#selectYear">
+                <%= y %>
+              </a>
+            </li>
+          <% end %>
+        </ul>
+      </div>
 
-                  <% if @calendar_habits[day].present? %>
-                    <ul class="habit-list mb-0">
-                      <% @calendar_habits[day].each do |habit| %>
-                        <li><%= habit.name %></li>
-                      <% end %>
-                    </ul>
-                  <% end %>
-                </td>
-              <% else %>
-                <td></td>
-              <% end %>
-            <% end %>
-          </tr>
-        <% end %>
-      <% else %>
-        <tr><td colspan="7">Erreur : mois invalide</td></tr>
+    </div>
+
+    <div class="calendar-actions">
+      <button type="button" class="btn btn-sm btn-outline-primary"
+              data-action="calendar#goToday">Aujourd'hui</button>
+    </div>
+  </div>
+
+  <div class="calendar-body">
+    <div class="weekdays mb-2">
+      <% %w[L M M J V S D].each do |abbr| %>
+        <div class="weekday-cell"><%= abbr %></div>
       <% end %>
+    </div>
 
-    </tbody>
-  </table>
+    <div id="calendar-container" class="calendar-stack"
+         data-calendar-target="container">
+      <%= render partial: "calendar/month", locals: { date: @previous_month } %>
+      <%= render partial: "calendar/month", locals: { date: @current_month } %>
+      <%= render partial: "calendar/month", locals: { date: @next_month } %>
+    </div>
+  </div>
 </div>

@@ -1,5 +1,5 @@
 <div class="calendar-month mb-4" id="<%= "month-#{date.year}-#{format('%02d', date.month)}" %>">
-  <h6 class="text-center fw-bold mb-2"><%= date.strftime("%B %Y") %></h6>
+  <h6 class="text-center fw-bold mb-2"><%= I18n.l(date, format: "%B %Y") %></h6>
 
   <div class="calendar-grid">
     <% start_day = date.beginning_of_month.beginning_of_week(:monday) %>
@@ -13,13 +13,10 @@
         <% if @habits_by_date[day].present? %>
           <div class="habit-indicators">
             <% @habits_by_date[day].uniq { |h| h.category_id }.each do |habit| %>
-              <span class="indicator" style="background-color:<%= habit.category.color %>"></span>
+              <span class="indicator" title="<%= habit.name %>"
+                    style="background-color:<%= habit.category&.color || '#999' %>"></span>
             <% end %>
           </div>
-        <% end %>
-
-        <% if @trackers_by_date[day].present? %>
-          <div class="tracker-dot" title="Trackers enregistrés"></div>
         <% end %>
       </div>
     <% end %>

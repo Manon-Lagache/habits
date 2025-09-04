@@ -42,9 +42,13 @@
   <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#trackerFormModal">Mettre à jour</button>
 </div>
 <div class="dashboard-bottom">
-  <div class="tip-section mt-3 container-fluid">
-    <% @tips.each do |tip| %>
-      <%= render 'shared/tip', tip: tip %>
+  <div class="tip-section mt-3">
+    <% if @daily_tips.any? %>
+      <% @daily_tips.each do |tip| %>
+        <%= render 'shared/tip', tip: tip %>
+      <% end %>
+    <% else %>
+      <p class="text-muted">Aucun conseil quotidien pour le moment.</p>
     <% end %>
   </div>
 </div>

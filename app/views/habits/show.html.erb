@@ -8,7 +8,7 @@
         <% end %>
         <h2 class="title-white"><%= @habit.name %></h2>
         <%= link_to habit_path(@habit), data: { turbo_method: :delete } do%>
-          <i class="fa-regular fa-trash-can"></i>
+          <i class="fa-regular fa-trash-can" id="trash"></i>
         <% end %>
       </div>
 
@@ -16,7 +16,32 @@
       <div>
         <h5 class="title-white pt-2">Cette semaine</h5>
         <div class="card card-chart p-2">
-          <%= area_chart @habit.chart_data, xtitle: "Date", ytitle: @habit.habit_type.unit, height: "200px" %>
+<%= area_chart @habit.chart_data(@goal.value),
+  xtitle: "Date",
+  ytitle: @habit.habit_type.unit.capitalize,
+  height: "200px",
+  colors: ["#8860D0", "#5680E9"],
+  library: {
+    scales: {
+      x: {
+        ticks: { color: "black", font: { size: 12, family: "Work Sans" } },
+        title: { color: "black", font: { size: 16, family: "Work Sans", weight: "bold" } }
+      },
+      y: {
+        ticks: { color: "black", font: { size: 12, family: "Work Sans" } },
+        title: { color: "black", font: { size: 16, family: "Work Sans", weight: "bold" } }
+      }
+    },
+    plugins: {
+      legend: {
+        labels: {
+          color: "black",
+          font: { size: 14, family: "Work Sans" }
+        }
+      }
+    }
+  }
+%>
         </div>
 
         <!-- Info cards row START -->
@@ -24,7 +49,7 @@
           <div class="info-content col-5 bg-white rounded-5 justify-content-between shadow">
             <i class="fa-solid fa-chart-column"></i>
             <span>
-              <strong class="fs-3">28</strong> jours consécutifs
+              <strong class="fs-3"><%= @habit.trackers.count %> </strong> jours consécutifs
             </span>
           </div>
                     <!-- espace -->
@@ -116,9 +141,7 @@
       <!-- Tips -->
       <div class="dashboard-bottom d-flex">
         <div class="tip-section mt-3 container-fluid">
-          <% @tips.each do |tip| %>
-            <%= render 'shared/tip', tip: tip %>
-          <% end %>
+           <%= render 'shared/tip', tip: @long_tip %>
         </div>
       </div>
 
@@ -126,5 +149,4 @@
   </div>
 </div>
 
-<!-- Formulaire de création -->
 <%= render 'habits/form', habit: @habit_new %>
