@@ -10,19 +10,18 @@
 }
 
 .input_tracker input {
-    width:30%;
     background: transparent;
     border: transparent;
 }
 
 .input-show-tracker {
   margin-bottom: 0;
-  width: 67px !important;
+  width: 45px !important;
   font-size: larger;
   font-weight: bold;
   padding-right: 0;
   color: white;
 }
-// .color-white {
-
-// }
+.color-white p {
+  color: white;
+}
