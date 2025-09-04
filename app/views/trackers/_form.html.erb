@@ -1,5 +1,4 @@
-<% date ||= Date.today %>
-<%= form_with url: trackers_path(date: date), local: true do |f| %>
+<%= form_with url: trackers_path, local: true do |f| %>
   <div data-controller="tracker-form" class="habit-form-modal">
     <div class="habit-form-container" data-action="click->tracker-form#stopPropagation">
       <h2 class="text-center mb-4">Tes habits du jour</h2>
