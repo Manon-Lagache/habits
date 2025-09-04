@@ -5,7 +5,8 @@
         <h1 class="gradient-text text-logo" style="margin: 0;">Habits</h1>
       <% end %>
       <% if user_signed_in? %>
-        <%= link_to image_tag(""), destroy_user_session_path, data: {turbo_method: :delete} %>
+        <%= link_to image_tag("avatars/#{@user.avatar}", class:"avatar-bordered w-8 h-8 rounded-full", alt: @user.pseudo,),
+         destroy_user_session_path, data: {turbo_method: :delete} %>
       <% end %>
   </div>
 </header>
