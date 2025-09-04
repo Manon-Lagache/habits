@@ -71,7 +71,7 @@
                 <% end %>
 
                 <%= f.fields_for :trackers,  @habit.trackers.where(date:Date.today).last || Tracker.new, index: 0 do |hf| %>
-                  <p class="mb-0 input_tracker">
+                  <p class="mb-0 input_tracker d-flex justify-content-center align-items-center color-white input-show-tracker">
                     <%= hf.hidden_field :habit_id, value: @habit.id %>
 
                     <%= hf.number_field :value, value: value, class:"input-show-tracker" %>
