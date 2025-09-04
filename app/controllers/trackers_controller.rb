@@ -11,7 +11,7 @@ class TrackersController < ApplicationController
       if habit && habit.has_tracker_for_date?(Date.today)
         @tracker = habit.trackers.where("date = ?", Date.today).first
         @tracker.update(value: tracker.last.require(:value))
-         redirect_to habit_path(habit)
+        #  redirect_to habit_path(habit)
         # respond_to do |format|
         #   format.json { render json: trackers }
         #   format.html { redirect_to habit_path(habit) }

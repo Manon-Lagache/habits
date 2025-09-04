@@ -69,10 +69,13 @@
                 <% end %>
 
                 <%= f.fields_for :trackers,  @habit.trackers.where(date:Date.today).last || Tracker.new, index: 0 do |hf| %>
-                  <p class="mb-0">
+                  <p class="mb-0 input_tracker">
                     <%= hf.hidden_field :habit_id, value: @habit.id %>
 
-                    <%= hf.number_field :value, value: value %> <%= @habit.habit_type.unit %>
+                    <%= hf.number_field :value, value: value %>
+                  </p>
+                  <p>
+                    <%= @habit.habit_type.unit %>
                   </p>
                   <% end %>
 
