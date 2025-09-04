@@ -24,5 +24,7 @@ class ChallengesController < ApplicationController
     @group = @challenge.group
     current_user.groups << @group
     redirect_to root_path, notice: "Challenge rejoint !"
+    @user = current_user
+    @user.gain_xp!(40)
   end
 end

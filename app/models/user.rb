@@ -22,4 +22,17 @@ class User < ApplicationRecord
   def display_challenges
     unavailable_challenges
   end
+
+  def gain_xp!(amount = 60)
+    self.xp_reward += amount
+    save!
+  end
+
+  def xp_progress_percentage(max_xp = 500)
+    if xp_reward >= max_xp
+      100
+    else
+      (xp_reward * 100 /max_xp).round(1)
+    end
+  end
 end

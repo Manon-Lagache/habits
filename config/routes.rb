@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   root to: "pages#home"
   resources :pages, only: :home
   resources :habits, only: [:index, :show, :new, :create, :destroy]
-  resources :trackers
+  resources :trackers 
+
   resources :challenges, only: [:index, :show] do
     member do
       post :join

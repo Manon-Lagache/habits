@@ -4,6 +4,8 @@ class CalendarController < ApplicationController
     month_param = (params[:month] || Date.today.month).to_i
     @current_month = Date.new(year_param, month_param, 1)
 
+    @user = current_user
+    
     @previous_month = @current_month.prev_month
     @next_month     = @current_month.next_month
 

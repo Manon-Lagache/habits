@@ -48,6 +48,10 @@ class Habit < ApplicationRecord
     goal.present? && goal.active_on_date?(date)
   end
 
+  def has_tracker_for_date?(date)
+    self.trackers&.where("date = ?", Date.today).present?
+  end
+
   private
 
   def enqueue_llm_tip_job

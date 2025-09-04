@@ -73,11 +73,17 @@
 }
 
 #hourglass {
-  color: var(--color-red);
+  color: var(--color-violet);
 }
 
 #check {
-  color: var(--color-validate);
+  color: var(--color-blue);
+}
+
+#trophy-icon-purple {
+  color: var(--color-violet);
+  height: 27px;
+  width: auto;
 }
 
 @media (max-width: 768px) {

@@ -52,3 +52,27 @@
   color: var(--color-white);
   font-size: 1.3rem;
 }
+
+.card-details {
+  height: 60px; /* ajuste selon la taille de l’icône et padding */
+  display: flex;
+  align-items: center; /* centre verticalement icône + texte */
+  padding: 0.75rem 1rem; /* ajuste selon ton design */
+  overflow: hidden; /* empêche le texte de dépasser */
+}
+
+/* Icône fixe à gauche */
+.card-details img.icon-show {
+  flex-shrink: 0;
+  margin-right: 0.75rem;
+}
+
+/* Texte à droite, limité à deux lignes sans agrandir la card */
+.card-details span {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* limite à 2 lignes */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+}
