@@ -6,7 +6,8 @@
     <% end %>
     <% if user_signed_in? %>
       <% if @user.avatar.nil? %>
-        <%= link_to image_tag("avatars/aiony-haust-3TLl_97HNJo-unsplash.jpg", class:"avatar-bordered w-8 h-8 rounded-full", alt: "hello")%>
+        <%= link_to image_tag("avatars/aiony-haust-3TLl_97HNJo-unsplash.jpg", class:"avatar-bordered w-8 h-8 rounded-full", alt: "hello"),
+        destroy_user_session_path, data: {turbo_method: :delete} %>
       <% else %>
         <%= link_to image_tag("avatars/#{@user.avatar}", class:"avatar-bordered w-8 h-8 rounded-full", alt: @user.pseudo),
          destroy_user_session_path, data: {turbo_method: :delete} %>
