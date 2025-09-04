@@ -141,7 +141,7 @@ Dir.each_child('./app/assets/images/avatars') do |filename|
   avatar = User.create!(
     email: Faker::Internet.unique.email,
     password: "password",
-    pseudo: Faker::Games::Pokemon.name,
+    pseudo: Faker::Internet.username,
     avatar: filename,
     age: rand(18..60),
     location: Faker::Address.city,
