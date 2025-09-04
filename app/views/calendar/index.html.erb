@@ -1,47 +1,78 @@
-<div class="calendar-page" data-controller="calendar"
+<div class="calendar-page"
+     data-controller="calendar"
      data-calendar-selected-year="<%= @current_month.year %>"
      data-calendar-selected-month="<%= @current_month.month %>"
      data-calendar-index-path="<%= calendar_index_path %>">
 
-  <div class="calendar-header mb-3">
-    <div class="left">
+  <div class="calendar-header d-flex justify-content-between align-items-center">
+    <div class="calendar-selects d-flex gap-2">
+
+      <div class="dropdown">
+        <button class="btn btn-sm btn-outline-primary calendar-dropdown"
+                type="button"
+                id="monthDropdown"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                data-calendar-target="monthSelect">
+          <%= I18n.l(Date.new(2000, @current_month.month, 1), format: "%B") %>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-scrollable" aria-labelledby="monthDropdown">
+          <% 1.upto(12) do |m| %>
+            <li>
+              <a class="dropdown-item <%= 'active' if m == @current_month.month %>"
+                 href="#"
+                 data-value="<%= m %>"
+                 data-action="click->calendar#selectMonth">
+                <%= I18n.l(Date.new(2000, m, 1), format: "%B") %>
+              </a>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+
+      <div class="dropdown">
+        <button class="btn btn-sm btn-outline-primary calendar-dropdown"
+                type="button"
+                id="yearDropdown"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                data-calendar-target="yearSelect">
+          <%= @current_month.year %>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-scrollable" aria-labelledby="yearDropdown">
+          <% ((@current_month.year - 10)..(@current_month.year + 10)).each do |y| %>
+            <li>
+              <a class="dropdown-item <%= 'active' if y == @current_month.year %>"
+                 href="#"
+                 data-value="<%= y %>"
+                 data-action="click->calendar#selectYear">
+                <%= y %>
+              </a>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="calendar-actions">
       <button type="button" class="btn btn-sm btn-outline-primary"
               data-action="calendar#goToday">Aujourd'hui</button>
     </div>
+  </div>
 
-    <div class="center d-flex gap-2 align-items-center">
-      <select class="form-select form-select-sm w-auto"
-              data-action="change->calendar#changeMonth"
-              data-calendar-target="monthSelect">
-        <% 1.upto(12) do |m| %>
-          <option value="<%= m %>" <%= "selected" if m == @current_month.month %>>
-            <%= I18n.l(Date.new(2000, m, 1), format: "%B") %>
-          </option>
-        <% end %>
-      </select>
-
-      <select class="form-select form-select-sm w-auto"
-              data-action="change->calendar#changeYear"
-              data-calendar-target="yearSelect">
-        <% ((@current_month.year - 10)..(@current_month.year + 10)).each do |y| %>
-          <option value="<%= y %>" <%= "selected" if y == @current_month.year %>><%= y %></option>
-        <% end %>
-      </select>
+  <div class="calendar-body">
+    <div class="weekdays mb-2">
+      <% %w[L M M J V S D].each do |abbr| %>
+        <div class="weekday-cell"><%= abbr %></div>
+      <% end %>
     </div>
 
-    <div class="right"></div>
-  </div>
-
-  <div class="weekdays mb-2">
-    <% %w[L M M J V S D].each do |abbr| %>
-      <div class="weekday-cell"><%= abbr %></div>
-    <% end %>
-  </div>
-
-  <div id="calendar-container" class="calendar-stack"
-       data-calendar-target="container">
-    <%= render partial: "calendar/month", locals: { date: @previous_month } %>
-    <%= render partial: "calendar/month", locals: { date: @current_month } %>
-    <%= render partial: "calendar/month", locals: { date: @next_month } %>
+    <div id="calendar-container" class="calendar-stack"
+         data-calendar-target="container">
+      <%= render partial: "calendar/month", locals: { date: @previous_month } %>
+      <%= render partial: "calendar/month", locals: { date: @current_month } %>
+      <%= render partial: "calendar/month", locals: { date: @next_month } %>
+    </div>
   </div>
 </div>
