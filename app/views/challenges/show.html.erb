@@ -26,27 +26,29 @@
           <%= link_to "Participer au challenge", join_challenge_path(@challenge), data: { turbo_method: :post }, class: "btn btn-primary" %>
         <% end %>
       </div>
-      <div class="card d-flex mt-4">
-        <div class="detail-item">
-          <%= image_tag "icons/calendar.png", class: "me-3 icon-show", alt: "Calendrier" %>
-          <span>
-            Du
-            <% if @challenge.start_date.year == @challenge.end_date.year %>
-              <%= l(@challenge.start_date, format: "%d %B") %> au <%= l(@challenge.end_date, format: "%d %B %Y") %>
-            <% else %>
-              <%= l(@challenge.start_date, format: "%d %B %Y") %> au <%= l(@challenge.end_date, format: "%d %B %Y") %>
-            <% end %>
-          </span>
-        </div>
-        <div class="detail-item">
-          <%= image_tag "icons/goal.png", class: "me-3 icon-show", alt: "Objectif" %>
-          <span><%= @challenge.objective %></span>
-        </div>
-        <div>
-          <%= image_tag "icons/trophy_black.png", class: "me-3 icon-show", alt: "Trophée" %>
-          <span><%= @challenge.xp_reward %> XP</span>
-        </div>
-      </div>
+   <div class="card d-flex mt-4 flex-column gap-2">
+    <div class="detail-item d-flex align-items-center">
+      <%= image_tag "icons/calendar.png", class: "me-3 icon-show flex-shrink-0", alt: "Calendrier" %>
+      <span>
+        Du
+        <% if @challenge.start_date.year == @challenge.end_date.year %>
+          <%= l(@challenge.start_date, format: "%d %B") %> au <%= l(@challenge.end_date, format: "%d %B %Y") %>.
+        <% else %>
+          <%= l(@challenge.start_date, format: "%d %B %Y") %> au <%= l(@challenge.end_date, format: "%d %B %Y") %>.
+        <% end %>
+      </span>
+    </div>
+
+    <div class="detail-item d-flex align-items-center">
+      <%= image_tag "icons/goal.png", class: "me-3 icon-show flex-shrink-0", alt: "Objectif" %>
+      <span><%= @challenge.objective %></span>
+    </div>
+
+    <div class="detail-item d-flex align-items-center mb-0 ">
+      <%= image_tag "icons/trophy_black.png", class: "me-3 icon-show flex-shrink-0", alt: "Trophée" %>
+      <span><%= @challenge.xp_reward %> XP</span>
+    </div>
+   </div>
       <div>
         <h4 class="mt-4">Liste des participants :</h3>
         <div class="px-4">
