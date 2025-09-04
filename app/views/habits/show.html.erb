@@ -46,11 +46,13 @@
 
         <!-- Info cards row START -->
         <div class="row justify-content-between mx-0">
-          <div class="info-content col-5 bg-white rounded-5 justify-content-between shadow">
-            <i class="fa-solid fa-chart-column"></i>
-            <span>
-              <strong class="fs-3"><%= @habit.trackers.count %> </strong> jours consécutifs
-            </span>
+          <div class="info-content col-5 bg-white rounded-5 d-flex shadow">
+            <div class="justify-content-center align-content-center">
+              <i class="fa-solid fa-chart-column"></i>
+              <span>
+                <strong class="fs-3"><%= @habit.trackers.count %> </strong> jours consécutifs
+              </span>
+            </div>
           </div>
                     <!-- espace -->
           <!-- tracker individuel -->
@@ -72,10 +74,9 @@
                   <p class="mb-0 input_tracker">
                     <%= hf.hidden_field :habit_id, value: @habit.id %>
 
-                    <%= hf.number_field :value, value: value %>
-                  </p>
-                  <p>
-                    <%= @habit.habit_type.unit %>
+                    <%= hf.number_field :value, value: value, class:"input-show-tracker" %>
+
+                    <%= @habit.habit_type.unit.capitalize.first %>.
                   </p>
                   <% end %>
 
