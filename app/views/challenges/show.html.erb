@@ -15,8 +15,10 @@
     <div class="container pb-2">
       <div class="content-center">
         <h2 class="mb-0" style="padding-top: 75px"><%= @challenge.name %></h2>
-        <p class="mb-1"><%= @challenge.description %></p>
-        <p class="d-flex align-items-center gap-2 justify-content-center">
+        <p class="<%= @challenge.group.users.include?(@user) ? 'mb-0 mt-1' : 'my-1' %>">
+        <%= @challenge.description %>
+        </p>
+        <p class="d-flex align-items-center gap-2 justify-content-center <%= @challenge.group.users.include?(@user) ? 'my-3' : 'mb-4' %>">
           Organisé par :
           <% organizer = @challenge.group.users.first %>
           <%= image_tag("avatars/#{organizer.avatar}", class:"avatar-bordered w-8 h-8 rounded-full", alt: organizer.pseudo) %>
@@ -26,7 +28,7 @@
           <%= link_to "Participer au challenge", join_challenge_path(@challenge), data: { turbo_method: :post }, class: "btn btn-primary" %>
         <% end %>
       </div>
-   <div class="card d-flex mt-4 flex-column gap-2">
+   <div class="card d-flex flex-column gap-2 <%= @challenge.group.users.include?(@user) ? 'mt-0' : 'mt-4' %>">
     <div class="detail-item d-flex align-items-center">
       <%= image_tag "icons/calendar.png", class: "me-3 icon-show flex-shrink-0", alt: "Calendrier" %>
       <span>
