@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_09_04_160409) do
+ActiveRecord::Schema[7.1].define(version: 2025_09_04_192801) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -243,7 +243,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_04_160409) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "pseudo"
-    t.string "avatar"
+    t.string "avatar", default: "profile-user.png"
     t.integer "age"
     t.string "location"
     t.integer "xp_reward", default: 100
