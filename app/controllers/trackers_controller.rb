@@ -24,8 +24,9 @@ class TrackersController < ApplicationController
           habit_id: tracker.last.require(:habit_id),
           date: date_param
         )
-        if tracker
-          @user.gain_xp!
+        # if tracker
+        #   @user.gain_xp!
+        # end
       end
     end
 
