@@ -4,7 +4,6 @@ class TrackersController < ApplicationController
 
   def create
     date_param = params[:date].present? ? Date.parse(params[:date]) : Date.today
-
     trackers = tracker_params
     trackers.each do |tracker|
       Tracker.create!(
@@ -14,7 +13,11 @@ class TrackersController < ApplicationController
       )
     end
 
-    redirect_to root_path
+    respond_to do |format|
+      format.json { render json: trackers }
+      format.html { redirect_to root_path }
+    end
+
   end
 
   def show
