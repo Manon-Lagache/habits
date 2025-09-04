@@ -1,0 +1,20 @@
+.progress-bar-container {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  height: 8px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #00ff88, #00cc6a);
+  border-radius: 10px;
+  transition: width 0.8s ease-in-out;
+  animation: progressGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes progressGlow {
+  from { box-shadow: 0 0 5px rgba(0, 255, 136, 0.5); }
+  to { box-shadow: 0 0 15px rgba(0, 255, 136, 0.8); }
+}

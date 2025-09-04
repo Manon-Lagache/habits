@@ -13,7 +13,7 @@
         <svg class="mb-1" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path>
         </svg>
-        <div class="fw-bold">150</div>
+        <div class="fw-bold"><%= @user.xp_reward %></div>
         <div class="small">XP Total</div>
       </div>
       <div class="col-3">
@@ -35,14 +35,19 @@
         <div class="small">Badges</div>
       </div>
     </div>
-    <div class="mt-3">
-      <div class="d-flex justify-content-between small mb-3 mt-4">
-        <span>Progression vers le niveau suivant</span>
-        <span>200 XP</span>
+    <div class="mt-3" data-controller="xp-progress"
+     data-xp-progress-progress-value="<%= @user.xp_progress_percentage(500) %>">
+      <div class="d-flex justify-content-between mb-3 mt-2">
+        <span>Progression</span>
+        <span>  <%= 500 - @user.xp_reward %> xp / 500 xp</span>
       </div>
-      <div class="progress" style="height: 8px;">
-        <div class="progress-bar bg-light" role="progressbar" style="width: <%= 150 / 200 * 100 %>;" aria-valuenow="<%= 150 %>" aria-valuemin="0" aria-valuemax="<%= 200 %>"></div>
+      <div class="progress-bar-container">
+      <div class="progress-bar"
+           style="width: 0%;"
+           data-progress="<%= @user.xp_reward %>"
+           data-xp-progress-target="bar">
       </div>
+    </div>
     </div>
   </div>
 </div>

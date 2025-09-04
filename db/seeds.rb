@@ -14,7 +14,7 @@ user = User.create!(
   location: "Bordeaux",
   avatar: "aiony-haust-3TLl_97HNJo-unsplash.jpg",
   password: "123456",
-  xp_reward: 300
+  xp_reward: 100
 )
 
 categories = [
