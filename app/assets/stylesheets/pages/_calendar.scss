@@ -125,7 +125,7 @@
     border-radius: 12px;
     padding: 4px 12px;
     border: 2px solid var(--color-violet);
-    background-color: #fff;
+    background-color: var(--color-white);
     font-weight: 600;
     max-width: 140px;
 
@@ -137,7 +137,7 @@
     padding: 6px 16px;
     color: var(--color-violet);
     border: 2px solid var(--color-violet);
-    background: #fff;
+    background: var(--color-white);
     transition: all 0.25s ease;
 
   }
@@ -166,3 +166,77 @@ select[multiple] {
   overflow-y: auto;
 }
 
+/* Style propre de la modal */
+#dayModal .modal-dialog {
+  max-width: 400px;
+  width: 90%;
+  margin: auto;
+  display: flex;          /* empêche le 100% height */
+  align-items: center;    /* vrai centrage vertical */
+}
+
+#dayModal .modal-content {
+  max-height: 90vh;       /* limite la hauteur */
+  overflow-y: auto;       /* scroll interne si contenu trop grand */
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  border: none;
+}
+
+
+#dayModal .modal-header {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 10;
+  border-bottom: 1px solid #ddd;
+  padding: 12px;
+}
+
+/* Tracker cards */
+#dayModal .tracker-card {
+  background-color: var(--color-white);
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+}
+
+/* Boutons + / - */
+#dayModal .btn-tracker {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: var(--gradient-primary);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 18px;
+  cursor: pointer;
+  transition: transform 0.2s, filter 0.2s;
+}
+#dayModal .btn-tracker:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+/* Input compteur */
+#dayModal .tracker-input {
+  width: 50px;
+  text-align: center;
+  font-weight: bold;
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  margin: 0 4px;
+}
+
+/* Unités */
+#dayModal .unit-display {
+  font-weight: bold;
+  margin-left: 4px;
+}

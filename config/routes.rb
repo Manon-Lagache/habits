@@ -9,7 +9,14 @@ Rails.application.routes.draw do
       post :join
     end
   end
-  resources :calendar, only: [:index]
+
+  get "calendar", to: "calendar#index", as: :calendar_index
+
+  resources :calendar, only: [] do
+    collection do
+      get :day
+    end
+  end
 
   # Routes pour les erreurs
   # Utilisation de match pour get, post, patch, delete

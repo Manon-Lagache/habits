@@ -16,24 +16,48 @@ export default class extends Controller {
         this.openTrackerModalForDate(date)
       })
     }
+
+    document.addEventListener("turbo:before-stream-render", (e) => {
+      const template = e.target.querySelector("template")
+      if (!template) return
+      const modalEl = template.content.querySelector("#dayModal")
+      if (!modalEl) return
+
+      if (window.bootstrap && bootstrap.Modal) {
+        const modal = bootstrap.Modal.getOrCreateInstance(modalEl)
+        modal.show()
+      } else {
+        modalEl.classList.add('show')
+        modalEl.style.display = 'block'
+      }
+    })
+
+  }
+
+  selectMonth(event) {
+    event.preventDefault()
+    const month = parseInt(event.currentTarget.dataset.value, 10)
+    const year  = parseInt(this.element.dataset.calendarSelectedYear, 10)
+    if (this.hasMonthSelectTarget) {
+      this.monthSelectTarget.textContent = event.currentTarget.textContent.trim()
+    }
+    this.navigateTo(year, month, { scrollOnlyIfSameMonth: false })
+  }
+
+  selectYear(event) {
+    event.preventDefault()
+    const year  = parseInt(event.currentTarget.dataset.value, 10)
+    const month = parseInt(this.element.dataset.calendarSelectedMonth, 10)
+    if (this.hasYearSelectTarget) {
+      this.yearSelectTarget.textContent = String(year)
+    }
+    this.navigateTo(year, month, { scrollOnlyIfSameMonth: false })
   }
 
   goToday() {
     const today = new Date()
     const year = today.getFullYear()
     const month = today.getMonth() + 1
-    this.navigateTo(year, month, { scrollOnlyIfSameMonth: false })
-  }
-
-  changeMonth() {
-    const year = parseInt(this.yearSelectTarget.value, 10)
-    const month = parseInt(this.monthSelectTarget.value, 10)
-    this.navigateTo(year, month, { scrollOnlyIfSameMonth: false })
-  }
-
-  changeYear() {
-    const year = parseInt(this.yearSelectTarget.value, 10)
-    const month = parseInt(this.monthSelectTarget.value, 10)
     this.navigateTo(year, month, { scrollOnlyIfSameMonth: false })
   }
 
@@ -66,11 +90,26 @@ export default class extends Controller {
   }
 
   openTrackerModalForDate(date) {
-    const modalEl = document.getElementById("trackerFormModal")
-    if (!modalEl) return
-    const dateInput = modalEl.querySelector('input[name="date"]') || modalEl.querySelector('#tracker_date')
-    if (dateInput) dateInput.value = date
-    const modal = bootstrap.Modal.getOrCreateInstance(modalEl)
-    modal.show()
+    console.log("Ouverture modal pour la date:", date) 
+    const base = this.element.dataset.calendarIndexPath || "/calendar"
+    const url = `${base}/day?date=${encodeURIComponent(date)}`
+
+    fetch(url, {
+      method: "GET",
+      credentials: "same-origin",
+      headers: {
+        "Accept": "text/vnd.turbo-stream.html"
+      }
+    })
+      .then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`)
+        return r.text()
+      })
+      .then((html) => {
+        Turbo.renderStreamMessage(html)
+      })
+      .catch((err) => {
+        console.error("Erreur fetch /calendar/day :", err)
+      })
   }
 }

@@ -65,4 +65,46 @@ class CalendarController < ApplicationController
       end
     end
   end
+
+  def day
+    begin
+      @selected_date = Date.parse(params[:date]) rescue Date.today
+      habits = current_user.habits.includes(:category, :goal)
+      @habits_for_day = habits.select { |h| h.has_goal_for_date?(@selected_date) }
+      @trackers_by_habit = Tracker
+        .where(habit_id: @habits_for_day.map(&:id), date: @selected_date)
+        .group_by(&:habit_id)
+
+      respond_to do |format|
+        format.turbo_stream
+        format.html do
+          render partial: "calendar/day_modal",
+                locals: {
+                  selected_date: @selected_date,
+                  habits_for_day: @habits_for_day,
+                  trackers_by_habit: @trackers_by_habit
+                }
+        end
+      end
+    rescue => e
+      logger.error "[Calendar#day] #{e.class}: #{e.message}\n#{e.backtrace.first(10).join("\n")}"
+
+      respond_to do |format|
+        format.turbo_stream do
+          render inline: <<~ERB.html_safe, status: 500
+            <turbo-stream action="replace" target="dayModalContainer">
+              <template>
+                <div class="alert alert-danger">
+                  Erreur interne (Calendar#day): #{ERB::Util.html_escape(e.class.to_s)} — #{ERB::Util.html_escape(e.message)}
+                  <pre style="white-space:pre-wrap; max-height:200px; overflow:auto;">#{ERB::Util.html_escape(e.backtrace.first(10).join("\n"))}</pre>
+                </div>
+              </template>
+            </turbo-stream>
+          ERB
+        end
+        format.html { render plain: "Error: #{e.message}", status: 500 }
+      end
+    end
+  end
+
 end
