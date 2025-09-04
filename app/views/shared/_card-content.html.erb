@@ -1,7 +1,7 @@
 <div class="card d-flex justify-content-between">
   <h3 class="fw-bold"><%= habit.name %></h3>
   <% goal = Goal.find_by(habit: habit) %>
-  <p>Objectif: <%= goal.value %> <%= habit.habit_type.unit %> <%= goal.translate_frequency %> </p>
+  <p>Objectif : <%= goal.value %> <%= habit.habit_type.unit %> <%= goal.translate_frequency %> </p>
   <div class="d-flex bottom-card justify-content-start align-items-end gap-2">
     <div class="info-content col-8 bg-white rounded-5 justify-content-between shadow">
       <i class="fa-solid fa-chart-column"></i>
