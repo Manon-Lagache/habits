@@ -10,7 +10,6 @@
            data-date="<%= day %>">
         <div class="day-number"><%= day.day %></div>
 
-        <%# Indicateurs colorés par catégorie (un dot par catégorie active ce jour) %>
         <% if @habits_by_date[day].present? %>
           <div class="habit-indicators">
             <% @habits_by_date[day].uniq { |h| h.category_id }.each do |habit| %>
@@ -18,11 +17,6 @@
                     style="background-color:<%= habit.category&.color || '#999' %>"></span>
             <% end %>
           </div>
-        <% end %>
-
-        <%# (Optionnel) un second point si des trackers existent ce jour %>
-        <% if @trackers_by_date[day].present? %>
-          <div class="tracker-dot" title="Trackers enregistrés"></div>
         <% end %>
       </div>
     <% end %>
