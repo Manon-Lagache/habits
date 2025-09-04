@@ -44,6 +44,9 @@ class Habit < ApplicationRecord
     self.reminder_enabled = ActiveModel::Type::Boolean.new.cast(reminder_enabled)
   end
 
+  def has_goal_for_date?(date)
+    goal.present? && goal.active_on_date?(date)
+  end
 
   private
 
