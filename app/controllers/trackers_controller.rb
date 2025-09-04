@@ -3,20 +3,19 @@ class TrackersController < ApplicationController
   end
 
   def create
-    date_param = params[:date].present? ? Date.parse(params[:date]) : Date.today
-
     trackers = tracker_params
-    trackers.each do |tracker|
+
+    trackers.each do |_, tracker|
       Tracker.create!(
-        value: tracker.last.require(:value),
-        habit_id: tracker.last.require(:habit_id),
-        date: date_param
+        value: tracker[:value],
+        habit_id: tracker[:habit_id],
+        date: params[:date].present? ? Date.parse(params[:date]) : Date.today
       )
     end
 
-    redirect_to root_path
-
+    redirect_to root_path, notice: "Trackers enregistrés"
   end
+
 
   def show
   end
@@ -24,6 +23,12 @@ class TrackersController < ApplicationController
   private
 
   def tracker_params
-    params.require("[trackers]").permit!
+    if params[:trackers].present?
+      params.require(:trackers).permit!
+    elsif params[:"[trackers]"].present?
+      params.require("[trackers]").permit!
+    else
+      {}
+    end
   end
 end
