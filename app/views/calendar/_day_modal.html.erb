@@ -1,0 +1,50 @@
+<div class="modal fade" id="dayModal" tabindex="-1" aria-hidden="true" data-controller="tracker-form">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content">
+
+      <div class="modal-header d-flex flex-column align-items-center w-100">
+        <h5 class="modal-title text-center">
+          Habitudes & trackers<br>
+          <%= l(selected_date, format: "%d %B %Y") %>
+        </h5>
+        <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+
+      <div class="modal-body">
+        <% if habits_for_day.present? %>
+          <% habits_for_day.each do |habit| %>
+            <div class="tracker-card mb-3 p-3">
+              <h5 class="mb-2 d-flex align-items-center">
+                <span class="me-2" style="display:inline-block;width:10px;height:10px;border-radius:50%; background:<%= habit.category&.color || '#999' %>"></span>
+                <%= habit.name %>
+              </h5>
+
+              <% goal = habit.goal %>
+              <% if goal.present? %>
+                <% frequency_text = case goal.frequency.to_s.strip.downcase
+                     when "day", "daily" then "par jour"
+                     when "week", "weekly" then "par semaine"
+                     when "month", "monthly" then "par mois"
+                     else goal.frequency
+                   end %>
+                <p class="goal-info">
+                  Ton objectif : <strong><%= goal.value %> <%= habit.habit_type&.unit&.first %></strong> <strong><%= frequency_text %></strong>
+                </p>
+              <% end %>
+
+              <div class="d-flex justify-content-center align-items-center gap-2">
+                <button type="button" class="btn-tracker" data-action="click->tracker-form#decrement">-</button>
+                <input type="number" class="tracker-input text-center" value="<%= trackers_by_habit.dig(habit.id, 0)&.value || 0 %>" readonly>
+                <span class="unit-display"><%= habit.habit_type&.unit&.first %></span>
+                <button type="button" class="btn-tracker" data-action="click->tracker-form#increment">+</button>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <p class="text-center">Aucune habitude active ce jour-là.</p>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>

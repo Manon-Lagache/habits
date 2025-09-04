@@ -1,0 +1,26 @@
+<turbo-stream action="replace" target="dayModalContainer">
+  <template>
+    <%= render partial: "calendar/day_modal",
+           formats: [:html],
+           locals: {
+             selected_date: @selected_date,
+             habits_for_day: @habits_for_day,
+             trackers_by_habit: @trackers_by_habit
+           } %>
+  </template>
+</turbo-stream>
+
+<script>
+  document.addEventListener("turbo:before-stream-render", (e) => {
+    const template = e.target.querySelector("template")
+    if (!template) return
+    const modalEl = template.content.querySelector("#dayModal")
+    if (!modalEl) return
+
+    // Ouvre la modal avec Bootstrap uniquement
+    if (window.bootstrap && bootstrap.Modal) {
+      bootstrap.Modal.getOrCreateInstance(modalEl).show()
+    }
+  })
+</script>
+
