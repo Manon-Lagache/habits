@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   def home
     @categories = Category.all
     @habit_types = HabitType.all
-    @habits = current_user.habits
+    @habits = current_user.habits.order(created_at: :desc) 
     @user = current_user
     @tips = Tip.all
     @daily_tips = Tip.where(tip_type: "daily", habit: @habits) 
