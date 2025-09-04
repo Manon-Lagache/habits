@@ -24,14 +24,15 @@ class TrackersController < ApplicationController
           habit_id: tracker.last.require(:habit_id),
           date: date_param
         )
-        if tracker
-          @user.gain_xp!
+        # if tracker
+        #   @user.gain_xp!
+        # end
       end
     end
 
     respond_to do |format|
       format.json { render json: trackers }
-      format.html { root_path }
+      format.html { redirect_to root_path }
     end
 
   end

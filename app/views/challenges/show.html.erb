@@ -21,7 +21,10 @@
           <% organizer = @challenge.group.users.first %>
           <%= image_tag("avatars/#{organizer.avatar}", class:"avatar-bordered w-8 h-8 rounded-full", alt: organizer.pseudo) %>
         </p>
+        <% if @challenge.group.users.include?(@user) %>
+        <% else %>
           <%= link_to "Participer au challenge", join_challenge_path(@challenge), data: { turbo_method: :post }, class: "btn btn-primary" %>
+        <% end %>
       </div>
       <div class="card d-flex mt-4">
         <div class="detail-item">
@@ -63,7 +66,7 @@
             </div>
             <hr class="my-2"/>
           <% end %>
-         </div>
+        </div>
       </div>
     </div>
   </div>
