@@ -12,8 +12,9 @@ user = User.create!(
   email: "guillem@guillem.fr",
   age: 30,
   location: "Bordeaux",
-  avatar: "",
-  password: "123456"
+  avatar: "aiony-haust-3TLl_97HNJo-unsplash.jpg",
+  password: "123456",
+  xp_reward: 300
 )
 
 categories = [
@@ -280,7 +281,7 @@ puts "Creating groups..."
 # Create one group for each challenge
 
 Challenge.all.each do |challenge|
-  group = Group.create!(
+  Group.create!(
     challenge: challenge
   )
 
@@ -324,7 +325,7 @@ category = Category.find_by(name: "Santé")
 habit_type = HabitType.find_by(name: "Consommation d'eau")
 verb = Verb.find_by(name: "Suivre")
 
-habit = Habit.create!(
+habit_water = Habit.create!(
   name: "Boire de l'eau",
   visibility: "public",
   user: user,
@@ -333,11 +334,11 @@ habit = Habit.create!(
   verb: verb
 )
 
-puts "Habit créé avec l'ID: #{habit.id}" if habit.persisted?
+puts "Habit créé avec l'ID: #{habit_water.id}" if habit_water.persisted?
 
 
-goal = Goal.create(
-  habit_id: habit.id,
+goal_water = Goal.create(
+  habit_id: habit_water.id,
   value: 2,
   frequency: "daily",
   target_day: "indefinite",
@@ -347,35 +348,87 @@ goal = Goal.create(
   end_type: "indefinite"
 )
 
-p goal
+p goal_water
 
-Habit.all.each do |habit|
-  habit.trackers.destroy_all
-  8.times do |index|
-    Tracker.create(
-      date: Date.today - index.days,
-      value: habit.goal&.value&.to_i.nil? ? rand(1..3) : rand(1..3) + habit.goal&.value&.to_i,
-      habit: habit)
-  end
+category = Category.find_by(name: "Addictions")
+habit_type = HabitType.find_by(name: "Cigarette")
+verb = Verb.find_by(name: "Arrêter")
+
+habit_cigarette = Habit.create!(
+  name: "Arrêter la clope",
+  visibility: "public",
+  user: user,
+  category: category,
+  habit_type: habit_type,
+  verb: verb
+)
+
+puts "Habit créé avec l'ID: #{habit_cigarette.id}" if habit_cigarette.persisted?
+
+
+goal_cigarette = Goal.create(
+  habit_id: habit_cigarette.id,
+  value: 10,
+  frequency: "daily",
+  target_day: "20260101",
+  is_public: true,
+  start_date: nil,
+  end_date: nil,
+  end_type: "target_day"
+)
+
+p goal_cigarette
+
+
+habit_water.trackers.destroy_all
+8.times do |index|
+  Tracker.create(
+    date: Date.today - (index.days + 1),
+    value: rand(1..3),
+    habit: habit_water
+  )
+end
+
+habit_cigarette.trackers.destroy_all
+8.times do |index|
+  Tracker.create(
+    date: Date.today - (index.days + 1),
+    value: rand(9..18),
+    habit: habit_cigarette
+  )
 end
 
 
-
 Tip.create!(
-  habit: habit,
-  user: habit.user,
+  habit: habit_water,
+  user: habit_water.user,
   content: "Fixe des rappels pour boire 250 ml d'eau 8 fois par jour.",
   tip_type: "daily"
 )
 
 Tip.create!(
-  habit: habit,
-  user: habit.user,
+  habit: habit_cigarette,
+  user: habit_cigarette.user,
+  content: "Note chaque cigarette évitée, tu verras ton progrès grandir chaque jour",
+  tip_type: "daily"
+)
 
-  content: "Garde toujours une gourde à portée de main :
-  si elle est visible,
-  tu penseras plus souvent à boire et ton corps restera bien hydraté toute la journée.",
+Tip.create!(
+  habit: habit_water,
+  user: habit_water.user,
+  content: "Emporte une gourde de 500 ml partout avec toi :
+  une le matin, une à midi, une dans l’après-midi et une le soir.
+  En 4 étapes simples, tu atteins 2 litres par jour sans effort et restes bien hydraté",
   tip_type: "long"
 )
 
+Tip.create!(
+  habit: habit_cigarette,
+  user: habit_cigarette.user,
+  content: "Diminue doucement ta consommation :
+  commence par une cigarette de moins chaque jour,
+  puis augmente le rythme. Chaque petite victoire compte et te
+  rapproche d’un 1er janvier sans tabac",
+  tip_type: "long"
+)
 puts "\nSeeding completed successfully! 🎉"

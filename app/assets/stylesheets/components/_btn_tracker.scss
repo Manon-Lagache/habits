@@ -1,0 +1,28 @@
+.input-show-tracker::-webkit-outer-spin-button,
+.input-show-tracker::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Cacher les flèches sur Firefox */
+.input-show-tracker {
+  -moz-appearance: textfield;
+}
+
+.input_tracker input {
+    width:30%;
+    background: transparent;
+    border: transparent;
+}
+
+.input-show-tracker {
+  margin-bottom: 0;
+  width: 67px !important;
+  font-size: larger;
+  font-weight: bold;
+  padding-right: 0;
+  color: white;
+}
+// .color-white {
+
+// }
