@@ -1,4 +1,4 @@
-<div class="gradient-bg">
+<div class="gradient-bg position-relative">
   <div class="container-fluid">
     <div class="container py-4">
       <div class="header-show">
@@ -8,7 +8,7 @@
       </div>
     </div>
   </div>
-  <div class="chevauche-container">
+  <div class="chevauche-container ">
     <%= image_tag(@challenge.image, class: "chevauche-img")%>
   </div>
   <div class="container-fluid white-bg">
@@ -50,7 +50,7 @@
       <div>
         <h4 class="mt-4">Liste des participants :</h3>
         <div class="px-4">
-          <% @challenge.group.users.each do |user| %>
+          <% @challenge.group.users.sort_by { |u| -u.xp_reward }.each do |user| %>
             <div class="d-flex py-2" style="display: flex; justify-content: space-between; align-items: center">
               <div>
                 <div class="d-flex space-x-2" style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
