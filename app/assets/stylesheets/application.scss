@@ -61,7 +61,9 @@ body {
 }
 
 main {
-  padding-bottom: 60px;
+  // padding-bottom: 10px;
+  height: 84vh;
+  overflow-y: auto;
 }
 
 h1, h2, h3, h4, h5, h6 {
