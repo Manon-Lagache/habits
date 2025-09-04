@@ -78,7 +78,6 @@ export default class extends Controller {
     event.preventDefault()
     const month = parseInt(event.currentTarget.dataset.value, 10)
     const year = parseInt(this.element.dataset.calendarSelectedYear, 10)
-    // Mettre à jour le bouton visible
     const btn = this.monthSelectTarget
     btn.textContent = event.currentTarget.textContent
     this.navigateTo(year, month, { scrollOnlyIfSameMonth: false })
@@ -88,7 +87,6 @@ export default class extends Controller {
     event.preventDefault()
     const year = parseInt(event.currentTarget.dataset.value, 10)
     const month = parseInt(this.element.dataset.calendarSelectedMonth, 10)
-    // Mettre à jour le bouton visible
     const btn = this.yearSelectTarget
     btn.textContent = event.currentTarget.textContent
     this.navigateTo(year, month, { scrollOnlyIfSameMonth: false })

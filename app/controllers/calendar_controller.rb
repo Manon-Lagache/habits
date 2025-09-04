@@ -65,4 +65,29 @@ class CalendarController < ApplicationController
       end
     end
   end
+  
+  def day_trackers
+    date = params[:date].present? ? Date.parse(params[:date]) : Date.today
+
+    @trackers = current_user.habits.includes(:habit_type, :goal).select do |habit|
+      goal = habit.goal
+      next false unless goal
+
+      start_date = goal.start_date || habit.created_at.to_date
+      end_date   = goal.end_date   || (goal.end_type == "indefinite" ? start_date + 5.years : start_date)
+
+      date >= start_date && date <= end_date
+    end.map do |habit|
+      Tracker.find_or_initialize_by(habit: habit, date: date)
+    end
+
+    @date = date
+
+    respond_to do |format|
+      format.turbo_stream do
+        render partial: "calendar/day_trackers", locals: { trackers: @trackers, date: @date }
+      end
+    end
+  end
+
 end
