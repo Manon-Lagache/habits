@@ -50,4 +50,17 @@ class Goal < ApplicationRecord
     (start_d..end_d).to_a
   end
 
+  def active_on_date?(date)
+    case self.end_type
+    when "period"
+      date <= end_date && date >= start_date
+    when "target_date", "target_day"
+      date <= target_day && date >= habit.created_at.to_date
+    when "indefinite"
+      date >= habit.created_at.to_date
+    else
+      false
+    end
+  end
+
 end

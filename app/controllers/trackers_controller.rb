@@ -16,7 +16,6 @@ class TrackersController < ApplicationController
 
     redirect_to root_path
 
-    # redirect_to calendar_index_path(month: date_param.month, year: date_param.year), notice: "Trackers enregistrés !"
   end
 
   def show
