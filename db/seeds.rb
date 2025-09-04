@@ -409,7 +409,7 @@ Tip.create!(
 Tip.create!(
   habit: habit_cigarette,
   user: habit_cigarette.user,
-  content: "Note chaque cigarette évitée, tu verras ton progrès grandir chaque jour",
+  content: "Note chaque cigarette évitée, tu verras ton progrès grandir chaque jour.",
   tip_type: "daily"
 )
 
@@ -418,7 +418,7 @@ Tip.create!(
   user: habit_water.user,
   content: "Emporte une gourde de 500 ml partout avec toi :
   une le matin, une à midi, une dans l’après-midi et une le soir.
-  En 4 étapes simples, tu atteins 2 litres par jour sans effort et restes bien hydraté",
+  En 4 étapes simples, tu atteins 2 litres par jour sans effort et restes bien hydraté.",
   tip_type: "long"
 )
 
@@ -428,7 +428,7 @@ Tip.create!(
   content: "Diminue doucement ta consommation :
   commence par une cigarette de moins chaque jour,
   puis augmente le rythme. Chaque petite victoire compte et te
-  rapproche d’un 1er janvier sans tabac",
+  rapproche d’un 1er janvier sans tabac.",
   tip_type: "long"
 )
 puts "\nSeeding completed successfully! 🎉"
