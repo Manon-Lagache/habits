@@ -187,13 +187,9 @@ export default class extends Controller {
       container.appendChild(input);
 
       flatpickr(input, {
-        locale: "fr",
         dateFormat: "Y-m-d",
-        altInput: true,           // Affiche 25/12/2024 au lieu de 2024-12-25
-        altFormat: "d/m/Y",       // Format français pour l'utilisateur
         allowInput: true,
-        disableMobile: true,
-        firstDayOfWeek: 1         // Lundi en premier jour
+        disableMobile: true
       });
 
     } else if (type === "period") {
