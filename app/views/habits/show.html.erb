@@ -9,7 +9,7 @@
         <% end %>
         <h2 class="title-white"><%= @habit.name %></h2>
         <%= link_to habit_path(@habit), data: { turbo_method: :delete } do%>
-          <i class="fa-regular fa-trash-can"></i>
+          <i class="fa-regular fa-trash-can" id="trash"></i>
         <% end %>
       </div>
 
@@ -25,7 +25,7 @@
           <div class="info-content col-5 bg-white rounded-5 justify-content-between shadow">
             <i class="fa-solid fa-chart-column"></i>
             <span>
-              <strong class="fs-3">28</strong> jours consécutifs
+              <strong class="fs-3"><%= @habit.trackers.count %> </strong> jours consécutifs
             </span>
           </div>
                     <!-- espace -->

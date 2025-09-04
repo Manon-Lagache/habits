@@ -72,6 +72,14 @@
   flex: none !important;
 }
 
+#hourglass {
+  color: var(--color-red);
+}
+
+#check {
+  color: var(--color-validate);
+}
+
 @media (max-width: 768px) {
   .card.level-card {
     font-size: 0.85rem;

@@ -35,6 +35,10 @@ class LlmDailyTipJob < ApplicationJob
       - Date de fin : #{end_date.strftime("%d/%m/%Y") rescue 'indéfinie'}
       - Progression actuelle : #{goal.progress || 'non définie'}
 
+      Consignes de rédaction :
+      - Tutoies l'utilisateur.
+      - Ecris un maximum de 74 caractères.
+
       Format attendu : phrase simple en moins de 74 caractères, structurée et compréhensible par un utilisateur non expert
     PROMPT
 

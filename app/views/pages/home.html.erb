@@ -42,7 +42,7 @@
   <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#trackerFormModal">Mettre à jour</button>
 </div>
 <div class="dashboard-bottom">
-  <div class="tip-section mt-3 container-fluid">
+  <div class="tip-section mt-3">
     <% if @daily_tips.any? %>
       <% @daily_tips.each do |tip| %>
         <%= render 'shared/tip', tip: tip %>
