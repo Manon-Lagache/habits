@@ -32,7 +32,7 @@ class TrackersController < ApplicationController
 
     respond_to do |format|
       format.json { render json: trackers }
-      format.html { root_path }
+      format.html { redirect_to root_path }
     end
 
   end
