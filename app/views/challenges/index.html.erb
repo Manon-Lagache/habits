@@ -1,15 +1,15 @@
 <div class="container py-4">
   <div class="header-show-challenges d-flex align-items-center justify-content-between mb-4">
-  <div style="width: 40px;">
-    <%= link_to root_path do %>
-      <%= image_tag("icons/return_black.png", class: "icon-return")%>
-    <% end %>
+    <div style="width: 40px;">
+      <%= link_to root_path do %>
+        <%= image_tag("icons/return_black.png", class: "icon-return")%>
+      <% end %>
+    </div>
+    <div class="flex-grow-1 text-center">
+      <h2 class="mb-0">Challenges</h2>
+    </div>
+    <div style="width: 40px;"></div>
   </div>
-  <div class="flex-grow-1 text-center">
-    <h2 class="mb-0">Challenges</h2>
-  </div>
-  <div style="width: 40px;"></div>
-</div>
   <% @challenges.each do |challenge| %>
     <% organizer = challenge.group.users.first %>
     <%= link_to challenge_path(challenge), remote: true, class: "challenge-link" do %>
@@ -25,7 +25,7 @@
             <div class="d-flex justify-content-between align-items-center w-100">
               <div class="d-flex align-items-center gap-2">
                 <p class="mb-0">Par :</p>
-                <img src="<%= organizer.avatar %>" alt="<%= organizer.pseudo %>" class="avatar-bordered w-8 h-8 rounded-full">
+                <%= image_tag("avatars/#{organizer.avatar}", class:"avatar-bordered w-8 h-8 rounded-full", alt: organizer.pseudo) %>
               </div>
               <%= link_to "Participer", join_challenge_path(challenge), data: { turbo_method: :post }, class: "btn btn-primary ms-2" %>
             </div>
@@ -35,6 +35,5 @@
     <% end %>
   <% end %>
 </div>
-
 <!-- Pour afficher le formulaire du create -->
 <%= render 'habits/form', habit: @habit %>
