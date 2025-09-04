@@ -73,23 +73,5 @@ export default class extends Controller {
     const modal = bootstrap.Modal.getOrCreateInstance(modalEl)
     modal.show()
   }
-
-  selectMonth(event) {
-    event.preventDefault()
-    const month = parseInt(event.currentTarget.dataset.value, 10)
-    const year = parseInt(this.element.dataset.calendarSelectedYear, 10)
-    const btn = this.monthSelectTarget
-    btn.textContent = event.currentTarget.textContent
-    this.navigateTo(year, month, { scrollOnlyIfSameMonth: false })
-  }
-
-  selectYear(event) {
-    event.preventDefault()
-    const year = parseInt(event.currentTarget.dataset.value, 10)
-    const month = parseInt(this.element.dataset.calendarSelectedMonth, 10)
-    const btn = this.yearSelectTarget
-    btn.textContent = event.currentTarget.textContent
-    this.navigateTo(year, month, { scrollOnlyIfSameMonth: false })
-  }
-
 }
+
