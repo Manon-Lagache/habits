@@ -18,7 +18,7 @@
         <p class="mb-1"><%= @challenge.description %></p>
         <p class="d-flex align-items-center gap-2 justify-content-center">
           Organisé par :
-          <% organizer = @challenge.group.users.first %>
+          <% organizer = @challenge.group.users.where.not(id: current_user.id).first %>
           <%= image_tag("avatars/#{organizer.avatar}", class:"avatar-bordered w-8 h-8 rounded-full", alt: organizer.pseudo) %>
         </p>
         <% if @challenge.group.users.include?(@user) %>
