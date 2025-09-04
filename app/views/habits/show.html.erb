@@ -1,7 +1,6 @@
 <div class="gradient-bg">
   <div class="container-fluid">
     <div class="container py-4">
-
       <!-- Header -->
       <div class="header-show">
         <%= link_to root_path do %>
@@ -47,32 +46,44 @@
 
         <!-- Info cards row START -->
         <div class="row justify-content-between mx-0">
-          <div class="info-content col-5 bg-white rounded-5 justify-content-between shadow">
-            <i class="fa-solid fa-chart-column"></i>
-            <span>
-              <strong class="fs-3"><%= @habit.trackers.count %> </strong> jours consécutifs
-            </span>
+          <div class="info-content col-5 bg-white rounded-5 d-flex shadow">
+            <div class="justify-content-center align-content-center">
+              <i class="fa-solid fa-chart-column"></i>
+              <span>
+                <strong class="fs-3"><%= @habit.trackers.count %> </strong> jours consécutifs
+              </span>
+            </div>
           </div>
                     <!-- espace -->
           <!-- tracker individuel -->
           <div class="info-content col-6 input-pill rounded-5 shadow d-flex justify-content-center">
-            <div class="d-flex align-items-center d-flex justify-content-around w-100">
+            <div data-controller="tracker-show" data-tracker-show-url-value="<%= trackers_path %>" class="d-flex tracker-show align-items-center d-flex justify-content-around w-100">
               <button type="button"
                       class="btn-tracker center"
-                      data-action="click->tracker-form#decrement">
+                      data-action="click->tracker-show#decrement">
               -
               </button>
+              <%= form_with url: trackers_path, local: true do |f| %>
+                <% if @habit.trackers.where(date:Date.today).present? %>
+                  <% value = @habit.trackers.where(date:Date.today).last.value %>
+                <% else %>
+                  <% value = @habit.goal.value %>
+                <% end %>
 
-              <% if @habit.trackers.where(date:Date.today).present? %>
-                <% value = @habit.trackers.where(date:Date.today).last.value %>
-              <% else %>
-                <% value = @habit.goal.value %>
-              <% end %>
+                <%= f.fields_for :trackers,  @habit.trackers.where(date:Date.today).last || Tracker.new, index: 0 do |hf| %>
+                  <p class="mb-0 input_tracker">
+                    <%= hf.hidden_field :habit_id, value: @habit.id %>
 
-              <p class="mb-0"><%= value %> <%= @habit.habit_type.unit %></p>
+                    <%= hf.number_field :value, value: value, class:"input-show-tracker" %>
+
+                    <%= @habit.habit_type.unit.capitalize.first %>.
+                  </p>
+                  <% end %>
+
+                <% end %>
               <button type="button"
                       class="btn-tracker"
-                      data-action="click->tracker-form#increment">
+                      data-action="click->tracker-show#increment">
               +
               </button>
             </div>
@@ -86,11 +97,6 @@
   <!-- Section blanche en bas -->
   <div class="container-fluid white-bg">
     <div class="container pb-2">
-
-      <!-- Bouton principal -->
-      <div class="button d-flex justify-content-center">
-        <button class="btn btn-primary px-4 py-2 mt-3 mb-3">Mettre à jour</button>
-      </div>
 
       <!-- Infos générales -->
       <div class="row m-0">
