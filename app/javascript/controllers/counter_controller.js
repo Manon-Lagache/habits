@@ -5,7 +5,7 @@ export default class extends Controller {
   static targets = ["number"]
   static values = {
     end: Number,
-    duration: { type: Number, default: 1500 },
+    duration: { type: Number, default: 1200 },
     delay: { type: Number, default: 0 }
   }
 

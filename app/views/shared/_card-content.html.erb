@@ -2,7 +2,7 @@
   data-controller="counter"
   data-counter-end-value="<%= habit.trackers.count %>"
   data-counter-duration-value="2000"
-  data-counter-delay-value="<%= rand(0..500) %>">
+  data-counter-delay-value="500">
   <h3 class="fw-bold"><%= habit.name %></h3>
   <% goal = Goal.find_by(habit: habit) %>
   <p>Objectif : <%= goal.value %> <%= habit.habit_type.unit %> <%= goal.translate_frequency %>.</p>
