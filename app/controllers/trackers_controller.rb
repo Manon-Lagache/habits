@@ -5,6 +5,18 @@ class TrackersController < ApplicationController
   end
 
   def create
+
+    trackers = tracker_params
+
+    trackers.each do |_, tracker|
+      Tracker.create!(
+        value: tracker[:value],
+        habit_id: tracker[:habit_id],
+        date: params[:date].present? ? Date.parse(params[:date]) : Date.today
+      )
+    end
+
+    redirect_to root_path, notice: "Trackers enregistrés"
     @user = current_user
     date_param = params[:date].present? ? Date.parse(params[:date]) : Date.today
     trackers = tracker_params
@@ -34,8 +46,8 @@ class TrackersController < ApplicationController
       format.json { render json: trackers }
       format.html { redirect_to root_path }
     end
-
   end
+
 
   def show
   end
@@ -75,6 +87,12 @@ class TrackersController < ApplicationController
   private
 
   def tracker_params
-    params.require("[trackers]").permit!
+    if params[:trackers].present?
+      params.require(:trackers).permit!
+    elsif params[:"[trackers]"].present?
+      params.require("[trackers]").permit!
+    else
+      {}
+    end
   end
 end

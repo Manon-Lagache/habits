@@ -17,6 +17,13 @@
 .btn-secondary {
   background: var(--color-blue-light);
   color: var(--color-black);
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius);
+  font-weight: var(--font-weight-medium);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
 }
 
 .btn-outline {

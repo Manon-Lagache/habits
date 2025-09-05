@@ -1,4 +1,8 @@
-<div class="card d-flex justify-content-between">
+<div class="card d-flex justify-content-between"
+  data-controller="counter"
+  data-counter-end-value="<%= habit.trackers.count %>"
+  data-counter-duration-value="2000"
+  data-counter-delay-value="500">
   <h3 class="fw-bold"><%= habit.name %></h3>
   <% goal = Goal.find_by(habit: habit) %>
   <p>Objectif : <%= goal.value %> <%= habit.habit_type.unit %> <%= goal.translate_frequency %>.</p>
@@ -11,8 +15,11 @@
              days_since = (Date.today - last_valid_tracker.date).to_i
           %>
          <%# <%= days_since %><%= habit.trackers.count %> </strong>jours consécutifs</span>
+      <div class="streak-number" data-counter-target="number">
+        <strong class="fs-2"> 0 </strong>
+      </div>
+      <span>jours consécutifs</span>
     </div>
-    <%# Appliquer la couleur différente si tracker du jour rempli %>
   </div>
   <div class="checkbox text-end">
     <% if habit.trackers.where(date: Date.today).present? %>

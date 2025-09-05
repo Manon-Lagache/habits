@@ -76,7 +76,7 @@
                     <% value = (value.to_i == value ? value.to_i : value) %>
                     <%= hf.number_field :value, value: value, class:"input-show-tracker" %>
 
-                    <%= @habit.habit_type.unit.capitalize.first %>.
+                    <%# <%= @habit.habit_type.unit.capitalize.first %>
                   </p>
                   <% end %>
 

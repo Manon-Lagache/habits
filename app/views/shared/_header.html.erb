@@ -1,12 +1,12 @@
 <header class="site-header">
   <div class="container py-3 header">
-      <%= link_to root_path, class:"logo" do %>
-        <%= image_tag("logo-habits.png", class:"img-logo")%>
-        <h1 class="gradient-text text-logo" style="margin: 0;">Habits</h1>
-      <% end %>
-      <% if user_signed_in? %>
-        <%= link_to image_tag("avatars/#{@user.avatar}", class:"avatar-bordered w-8 h-8 rounded-full", alt: @user.pseudo,),
-         destroy_user_session_path, data: {turbo_method: :delete} %>
-      <% end %>
-  </div>
-</header>
+    <%= link_to root_path, class:"logo" do %>
+      <%= image_tag("logo-habits.png", class:"img-logo")%>
+      <h1 class="gradient-text text-logo" style="margin: 0;">Habits</h1>
+    <% end %>
+    <% if user_signed_in? %>
+        <%= link_to image_tag("avatars/#{@user.avatar}", class:"avatar-bordered w-8 h-8 rounded-full", alt: @user.pseudo),
+        destroy_user_session_path, data: {turbo_method: :delete} %>
+    <% end %>
+    </div>
+  </header>

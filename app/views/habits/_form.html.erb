@@ -17,7 +17,7 @@
                 </button>
 
                 <button type="button"
-                        class="btn-close-form"
+                        class="btn-secondary"
                         data-action="click->habit-form#closeForm"
                         data-habit-form-target="closeButton"
                         aria-label="Fermer">
@@ -154,7 +154,7 @@
                             id="visibility_<%= value %>"
                             value="<%= value %>"
                             <%= "checked" if @habit.visibility == value %>>
-                      <label class="btn btn-outline-primary" for="visibility_<%= value %>"><%= label %></label>
+                      <label class="btn card-option" for="visibility_<%= value %>"><%= label %></label>
                     <% end %>
                   </div>
                 </div>
