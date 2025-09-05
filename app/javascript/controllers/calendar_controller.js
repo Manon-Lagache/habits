@@ -93,7 +93,6 @@ export default class extends Controller {
     console.log("Ouverture modal pour la date:", date) 
     const base = this.element.dataset.calendarIndexPath || "/calendar"
     const url = `${base}/day?date=${encodeURIComponent(date)}`
-
     fetch(url, {
       method: "GET",
       credentials: "same-origin",
