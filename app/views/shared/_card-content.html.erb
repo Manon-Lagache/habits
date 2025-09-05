@@ -8,7 +8,13 @@
   <p>Objectif : <%= goal.value %> <%= habit.habit_type.unit %> <%= goal.translate_frequency %>.</p>
   <div class="d-flex bottom-card justify-content-start align-items-end gap-2">
     <div class="info-content col-8 bg-white rounded-5 justify-content-between shadow">
-      <i class="fa-solid fa-chart-column"></i>
+      <%= image_tag "icons/fire.png"%>
+      <span><strong class="fs-3">
+          <%# <%  last_valid_tracker = habit.trackers.where.not(value: [nil, 0]).last
+          raise
+             days_since = (Date.today - last_valid_tracker.date).to_i
+          %>
+         <%# <%= days_since %><%= habit.trackers.count %> </strong>jours consécutifs</span>
       <div class="streak-number" data-counter-target="number">
         <strong class="fs-2"> 0 </strong>
       </div>
