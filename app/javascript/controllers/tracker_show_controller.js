@@ -34,4 +34,10 @@ export default class extends Controller {
       }
     })
    }
+
+    clickOutside(event) {
+      if (event.target === event.currentTarget) {
+        this.close()
+      }
+  }
 }

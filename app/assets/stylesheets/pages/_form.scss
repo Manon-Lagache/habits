@@ -137,6 +137,7 @@
   cursor: pointer;
 }
 
+
 .habit-form-modal.hidden {
   display: none !important;
 }
@@ -244,39 +245,44 @@ label.form-check-label {
 
 
 .flatpickr-calendar {
-  background: var(--gradient-primary);
+  background: var(--color-white);
   border-radius: 1rem;
   border: none;
   box-shadow: 0 8px 25px var(--color-black);
   overflow: hidden;
   font-family: $body-font;
-  color: white;
+  color: var(--color-black);
 }
 
 .flatpickr-months {
-  background: var(--color-black);
+  background: var(--gradient-primary);
   padding: 0.5rem 0;
+}
+
+.flatpickr-monthDropdown-month {
+  color: var(--color-black);
+  background: var(--color-white);
 }
 
 .flatpickr-current-month {
   font-size: 1.1rem;
   font-weight: bold;
-  color: white;
+  color: var(--color-white);
 }
 
 .flatpickr-weekday {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--color-black);
   font-weight: 500;
 }
 
 .flatpickr-day {
   border-radius: 50%;
   transition: all 0.2s ease;
-  color: white;
+  color: var(--color-black);
 }
 
 .flatpickr-day.selected {
-  background: var(--color-pink);
-  color: white;
+  background: var(--color-lavender);
+  color: var(--color-black);
   font-weight: bold;
 }
