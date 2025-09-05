@@ -16,7 +16,6 @@ class TrackersController < ApplicationController
       )
     end
 
-    redirect_to root_path, notice: "Trackers enregistrés"
     @user = current_user
     date_param = params[:date].present? ? Date.parse(params[:date]) : Date.today
     trackers = tracker_params
