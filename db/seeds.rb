@@ -12,7 +12,7 @@ user = User.create!(
   email: "guillem@guillem.fr",
   age: 30,
   location: "Bordeaux",
-  avatar: "aiony-haust-3TLl_97HNJo-unsplash.jpg",
+  avatar: "leio-mclaren-L2dTmhQzx4Q-unsplash.jpg",
   password: "123456",
   xp_reward: 100
 )
@@ -320,6 +320,8 @@ Challenge.all.each do |challenge|
   group = challenge.group
   puts "#{challenge.name}: #{group.users.count} participants (created by #{challenge.user.pseudo})"
 end
+
+user.groups.destroy_all
 
 category = Category.find_by(name: "Santé")
 habit_type = HabitType.find_by(name: "Consommation d'eau")
