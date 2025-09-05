@@ -1,7 +1,17 @@
 .calendar-page {
   max-width: 480px;
   margin: 0 auto;
-  padding: 8px 12px;
+  padding: 0 12px;
+  position: fixed;
+  top: 70px;
+  bottom: 60px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-white);
+  color: var(--color-black);
+
 
   .calendar-stack {
     display: flex;
@@ -61,9 +71,9 @@
 
   .weekdays {
     position: sticky;
-    top: 124px;
+    top: 64px;
     background: var(--color-white);
-    z-index: 50;
+    z-index: 90;
     display: grid;
     text-align: center;
     grid-template-columns: repeat(7, 1fr);
@@ -79,11 +89,6 @@
     font-size: 12px;
   }
 
-.calendar-page {
-  position: relative;
-  color: var(--color-black);
-  padding-bottom: 60px;
-}
 
 .calendar-header .calendar-selects .calendar-dropdown {
   min-width: 120px;
@@ -98,10 +103,16 @@
   overflow-y: auto;
 }
 
+#calendar-container {
+  flex: 1;
+  height: calc(100% - 500px);
+  overflow-y: auto;
+  padding-bottom: 16px;
+}
 
 .calendar-header {
   position: sticky;
-  top: 65px;
+  top: 0px;
   z-index: 100;
   display: flex;
   justify-content: space-between;
@@ -166,18 +177,17 @@ select[multiple] {
   overflow-y: auto;
 }
 
-/* Style propre de la modal */
 #dayModal .modal-dialog {
   max-width: 400px;
   width: 90%;
   margin: auto;
-  display: flex;          /* empêche le 100% height */
-  align-items: center;    /* vrai centrage vertical */
+  display: flex;
+  align-items: center;
 }
 
 #dayModal .modal-content {
-  max-height: 90vh;       /* limite la hauteur */
-  overflow-y: auto;       /* scroll interne si contenu trop grand */
+  max-height: 90vh;
+  overflow-y: auto;
   border-radius: 16px;
   background: #fff;
   box-shadow: 0 8px 20px rgba(0,0,0,0.2);
@@ -194,7 +204,6 @@ select[multiple] {
   padding: 12px;
 }
 
-/* Tracker cards */
 #dayModal .tracker-card {
   background-color: var(--color-white);
   border-radius: 12px;
@@ -203,7 +212,6 @@ select[multiple] {
   box-shadow: 0 1px 6px rgba(0,0,0,0.1);
 }
 
-/* Boutons + / - */
 #dayModal .btn-tracker {
   width: 36px;
   height: 36px;
@@ -224,7 +232,6 @@ select[multiple] {
   filter: brightness(1.1);
 }
 
-/* Input compteur */
 #dayModal .tracker-input {
   width: 50px;
   text-align: center;
@@ -235,7 +242,6 @@ select[multiple] {
   margin: 0 4px;
 }
 
-/* Unités */
 #dayModal .unit-display {
   font-weight: bold;
   margin-left: 4px;
