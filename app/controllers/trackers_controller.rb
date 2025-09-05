@@ -4,17 +4,7 @@ class TrackersController < ApplicationController
   def new
   end
 
-  def create
-
-    trackers = tracker_params
-
-    trackers.each do |_, tracker|
-      Tracker.create!(
-        value: tracker[:value],
-        habit_id: tracker[:habit_id],
-        date: params[:date].present? ? Date.parse(params[:date]) : Date.today
-      )
-    end
+def create
 
     @user = current_user
     date_param = params[:date].present? ? Date.parse(params[:date]) : Date.today
@@ -22,13 +12,12 @@ class TrackersController < ApplicationController
     trackers.each do |tracker|
       habit = Habit.find(tracker.last["habit_id"])
       if habit && habit.has_tracker_for_date?(Date.today)
+        puts "Updating tracker for habit #{habit.id} on #{Date.today}"
         @tracker = habit.trackers.where("date = ?", Date.today).first
+        puts @tracker.value
+        puts "value: #{tracker.last.require(:value)}"
         @tracker.update(value: tracker.last.require(:value))
-        #  redirect_to habit_path(habit)
-        # respond_to do |format|
-        #   format.json { render json: trackers }
-        #   format.html { redirect_to habit_path(habit) }
-        # end
+        puts @tracker.value
       else
         Tracker.create!(
           value: tracker.last.require(:value),
