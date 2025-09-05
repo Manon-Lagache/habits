@@ -46,14 +46,12 @@
 
         <!-- Info cards row START -->
         <div class="row justify-content-between mx-0">
-          <div class="info-content col-5 bg-white rounded-5 d-flex shadow">
-            <div class="justify-content-center align-content-center">
+          <div class="info-content col-5 bg-white rounded-5 d-flex align-items-center gap-3 shadow p-3">
               <%= image_tag "icons/fire.png"%>
               <span>
                 <strong class="fs-3"><%= @habit.trackers.count %> </strong> jours consécutifs
               </span>
             </div>
-          </div>
                     <!-- espace -->
           <!-- tracker individuel -->
           <div class="info-content col-6 input-pill rounded-5 shadow d-flex justify-content-center">
@@ -71,10 +69,10 @@
                 <% end %>
 
                 <%= f.fields_for :trackers,  @habit.trackers.where(date:Date.today).last || Tracker.new, index: 0 do |hf| %>
-                  <p class="mb-0 input_tracker d-flex justify-content-center align-items-center color-white input-show-tracker">
+                  <p class="mb-0 input_tracker d-flex justify-content-center align-items-center color-white">
                     <%= hf.hidden_field :habit_id, value: @habit.id %>
                     <% value = (value.to_i == value ? value.to_i : value) %>
-                    <%= hf.number_field :value, value: value, class:"input-show-tracker" %>
+                    <%= hf.number_field :value, value: value, class:"input-show-tracker text-center"%>
 
                     <%# <%= @habit.habit_type.unit.capitalize.first %>
                   </p>
